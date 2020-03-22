@@ -1,19 +1,19 @@
-language: node_js
+anguage: node_js
+
 node_js: stable
 
 cache:
   directories:
-    - node_modules
+  - node_modules
 before_install:
-  - npm install hexo-cli -g
+
+  - npm install -g hexo-cli
 
 install:
   - npm install
-  - npm install hexo-deployer-git --save
 
 script:
-  - hexo clean
-  - hexo generate
+  - hexo g 
 
 after_script:
   - cd ./public
@@ -21,12 +21,16 @@ after_script:
   - git config user.name "Major9506"
   - git config user.email "1293963839@qq.com"
   - git add .
-  - git commit -m "Update docs"
-  - git push --force --quiet "https://${GH_TOKEN}@${GH_REF}" master:master
+  - git commit -m "TravisCI 自动部署"
+  # Github Pages
+  - git push --force --quiet "https://${githubblog}@${GH_REF}" master:master
 
-branches:
-  only:
-    - hexo
 env:
- global:
-   - GH_REF: github.com/Major9506/Major9506.github.io.git
+  global:
+    - GH_REF: github.com/Major9506/Major9506.github.io.git
+  
+notifications:
+  email:
+    - 1293963839@qq.com
+  on_success: change
+  on_failure: always
