@@ -8,11 +8,11 @@ tags: git
 
 图1：分支提交流程
 
-![git_1](git_1.png)
+![git_1](git/git_1.png)
 
 图2：分支合并流程
 
-![git_flow2](git_flow2.png)
+![git_flow2](git/git_flow2.png)
 
 
 
