@@ -194,37 +194,33 @@ profile:
   # Social Links
   social:
     links:
-      github: https://github.com/cofess
-      weibo: http://weibo.com/cofess
+      github: https://github.com/Major9506
+      weibo: https://weibo.com/youguke63347
       twitter: https://twitter.com/iwebued
       # facebook: /
       # dribbble: /
-      behance: https://www.behance.net/cofess
-      rss: atom.xml
+      behance: "#"
+      rss: "#"
     link_tooltip: true # enable the social link tooltip, options: true, false
   # My Skills 
   skills:
+    Javascript: ★★★★☆
+    Node: ★★★★☆
     Git: ★★★☆☆
-    Gulp: ★★★☆☆
-    Javascript: ★★★☆☆
-    HTML+CSS: ★★★☆☆
-    Bootstrap: ★★★☆☆
-    ThinkPHP: ★★★☆☆
+    Python: ★★★☆☆
     平面设计: ★★★☆☆
   # My Personal Links
   links:
-    Github: https://github.com/cofess
-    Blog: http://blog.cofess.com
-    微博: http://weibo.com/cofess
-    花瓣: http://huaban.com/cofess
-    Behance: https://www.behance.net/cofess
+    Github: https://github.com/Major9506
+    Blog: https://major9506.github.io
+    微博: https://weibo.com/youguke63347
+    花瓣: "#"
+    Behance: "#"
   # My Personal Labels
   labels:
-    - 前端
     - 前端开发
-    - 前端重构
-    - Web前端
-    - 网页重构
+    - Node中间件开发
+    - Python开发
   # My Personal Works
   works:
     name:
