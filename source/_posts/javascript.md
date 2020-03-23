@@ -1,6 +1,8 @@
 ---
 title: JavaScript & TS 编码风格指南
+categories: 编程规范
 tags: 编码风格指南
+date: 2018-03-22
 ---
 ## 1 前言
 虽然本文档是针对JavaScript设计的，但是在使用各种JavaScript的预编译语言时(如TypeScript等)时，适用的部分也应遵循本文档的约定。

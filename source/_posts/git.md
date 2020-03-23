@@ -1,6 +1,8 @@
 ---
 title: Git使用流程规范
 tags: git
+categories: 编程规范
+date: 2018-03-20
 ---
 
 团队开发中，遵循一个合理、清晰的Git使用流程，是非常重要的。
