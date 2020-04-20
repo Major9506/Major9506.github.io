@@ -47,9 +47,21 @@ console.log('mj-cli脚手架工具');
 4.mj init <template-name> <project> 创建项目模版
 ```
 ### 2.2 实现设计命令行
-1.项目结构   
-index.js代码
+1.项目结构
+```
+.
+├── README.md
+├── index.js // 入口
+├── lib
+│   ├── tplInit.js // init命令响应类
+│   └── tplList.js // 模版list数据
+├── package-lock.json
+└── package.json
 
+1 directory, 6 files
+```
+
+index.js代码
 ```javascript  
 const program = require('commander');
 const chalk = require('chalk');
