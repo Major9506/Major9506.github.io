@@ -1,6 +1,7 @@
 anguage: node_js
 
-node_js: stable
+node_js: 
+  - 10
 
 cache:
   directories:
