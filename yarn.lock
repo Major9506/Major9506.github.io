@@ -647,10 +647,10 @@ has-flag@^3.0.0:
   resolved "https://r.cnpmjs.org/has-flag/download/has-flag-3.0.0.tgz#b5d454dc2199ae225699f3467e5a07f3b955bafd"
   integrity sha1-tdRU3CGZriJWmfNGfloH87lVuv0=
 
-"hexo-asset-image@git+https://github.com/CodeFalling/hexo-asset-image.git":
-  version "0.0.5"
-  uid "3c114cf0c0343ab28469635085b225fcae7fb9d3"
-  resolved "git+https://github.com/CodeFalling/hexo-asset-image.git#3c114cf0c0343ab28469635085b225fcae7fb9d3"
+hexo-asset-image@^1.0.0:
+  version "1.0.0"
+  resolved "https://r2.cnpmjs.org/hexo-asset-image/-/hexo-asset-image-1.0.0.tgz#f229ad28b071a32b1d5b121f929a296e714fd24a"
+  integrity sha512-jkuUJNPRMH6v7HqzP2BAwEZavMzVxNWhl8jZl9BmFYB22/aq2+zixGIhV4vedI9cLPydjn9DfII41/MMXtzJTA==
   dependencies:
     cheerio "^0.19.0"
     entities "^1.1.2"
