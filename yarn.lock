@@ -91,6 +91,11 @@ asap@^2.0.3:
   resolved "https://r.cnpmjs.org/asap/download/asap-2.0.6.tgz#e50347611d7e690943208bbdafebcbc2fb866d46"
   integrity sha1-5QNHYR1+aQlDIIu9r+vLwvuGbUY=
 
+async@^3.2.3:
+  version "3.2.4"
+  resolved "https://registry.yarnpkg.com/async/-/async-3.2.4.tgz#2d22e00f8cddeb5fde5dd33522b56d1cf569a81c"
+  integrity sha512-iAB+JbDEGXhyIUavoDl9WP/Jj106Kz9DEn1DPgYw5ruDn0e3Wgi3sKFm55sASdGBNOQB8F59d9qQ7deqrHA8wQ==
+
 async@~0.2.6:
   version "0.2.10"
   resolved "https://r.cnpmjs.org/async/download/async-0.2.10.tgz#b6bbe0b0674b9d719708ca38de8c237cb526c3d1"
@@ -135,6 +140,13 @@ brace-expansion@^1.1.7:
   dependencies:
     balanced-match "^1.0.0"
     concat-map "0.0.1"
+
+brace-expansion@^2.0.1:
+  version "2.0.1"
+  resolved "https://registry.yarnpkg.com/brace-expansion/-/brace-expansion-2.0.1.tgz#1edc459e0f0c548486ecf9fc99f2221364b9a0ae"
+  integrity sha512-XnAIvQ8eM+kC6aULx6wuQiwVsnzsi9d3WxzV3FpWTGA19F621kwdbsAcFKXgKUHZWsy+mY6iL1sHTxWEFCytDA==
+  dependencies:
+    balanced-match "^1.0.0"
 
 braces@^3.0.1, braces@~3.0.2:
   version "3.0.2"
@@ -194,7 +206,7 @@ chalk@^3.0.0:
     ansi-styles "^4.1.0"
     supports-color "^7.1.0"
 
-chalk@^4.0.0:
+chalk@^4.0.0, chalk@^4.0.2:
   version "4.1.2"
   resolved "https://r2.cnpmjs.org/chalk/-/chalk-4.1.2.tgz#aac4e2b7734a740867aeb16bf02aad556a1e7a01"
   integrity sha512-oKnbhFyRIXpUuez8iBMmyEa4nbj4IOQyuhc/wy9kY7/WVPcwIO9VA668Pu8RkO7+0G76SLROeyw9CpQ061i4mA==
@@ -528,10 +540,12 @@ ee-first@1.1.1:
   resolved "https://r.cnpmjs.org/ee-first/download/ee-first-1.1.1.tgz#590c61156b0ae2f4f0255732a158b266bc56b21d"
   integrity sha1-WQxhFWsK4vTwJVcyoViyZrxWsh0=
 
-ejs@^2.6.1:
-  version "2.7.4"
-  resolved "https://r.cnpmjs.org/ejs/download/ejs-2.7.4.tgz#48661287573dcc53e366c7a1ae52c3a120eec9ba"
-  integrity sha1-SGYSh1c9zFPjZsehrlLDoSDuybo=
+ejs@^3.1.6:
+  version "3.1.8"
+  resolved "https://registry.yarnpkg.com/ejs/-/ejs-3.1.8.tgz#758d32910c78047585c7ef1f92f9ee041c1c190b"
+  integrity sha512-/sXZeMlhS0ArkfX2Aw780gJzXSMPnKjtspYZv+f3NiKLlubezAHDU5+9xz6gd3/NhG3txQCo6xlglmTS+oTGEQ==
+  dependencies:
+    jake "^10.8.5"
 
 encodeurl@~1.0.2:
   version "1.0.2"
@@ -543,7 +557,7 @@ entities@1.0:
   resolved "https://registry.yarnpkg.com/entities/-/entities-1.0.0.tgz#b2987aa3821347fcde642b24fdfc9e4fb712bf26"
   integrity sha1-sph6o4ITR/zeZCsk/fyeT7cSvyY=
 
-entities@^1.1.1, entities@^1.1.2, entities@~1.1.1:
+entities@^1.1.1, entities@~1.1.1:
   version "1.1.2"
   resolved "https://registry.yarnpkg.com/entities/-/entities-1.1.2.tgz#bdfa735299664dfafd34529ed4f8522a275fea56"
   integrity sha512-f2LZMYl1Fzu7YSBKg+RoROelpOaNrcGmE9AZubeDfrCEia483oW4MI4VyFd5VNHIgQ/7qm1I0wUHK1eJnn2y2w==
@@ -582,6 +596,13 @@ etag@~1.8.1:
   version "1.8.1"
   resolved "https://r.cnpmjs.org/etag/download/etag-1.8.1.tgz#41ae2eeb65efa62268aebfea83ac7d79299b0887"
   integrity sha1-Qa4u62XvpiJorr/qg6x9eSmbCIc=
+
+filelist@^1.0.1:
+  version "1.0.4"
+  resolved "https://registry.yarnpkg.com/filelist/-/filelist-1.0.4.tgz#f78978a1e944775ff9e62e744424f215e58352b5"
+  integrity sha512-w1cEuf3S+DrLCQL7ET6kz+gmlJdbq9J7yXCSjK/OZCPA+qEN1WyF4ZAf0YYJa4/shHJra2t/d/r8SV4Ji+x+8Q==
+  dependencies:
+    minimatch "^5.0.1"
 
 fill-range@^7.0.1:
   version "7.0.1"
@@ -675,13 +696,12 @@ has-flag@^4.0.0:
   resolved "https://r2.cnpmjs.org/has-flag/-/has-flag-4.0.0.tgz#944771fd9c81c81265c4d6941860da06bb59479b"
   integrity sha512-EykJT/Q1KjTWctppgIAgfSO0tKVuZUjhgMr17kqTumMl6Afv3EISleU7qZUzoXDFTAHTDC4NOoG/ZxU3EvlMPQ==
 
-hexo-asset-image@^1.0.0:
-  version "1.0.0"
-  resolved "https://r2.cnpmjs.org/hexo-asset-image/-/hexo-asset-image-1.0.0.tgz#f229ad28b071a32b1d5b121f929a296e714fd24a"
-  integrity sha512-jkuUJNPRMH6v7HqzP2BAwEZavMzVxNWhl8jZl9BmFYB22/aq2+zixGIhV4vedI9cLPydjn9DfII41/MMXtzJTA==
+hexo-asset-image@0.0.1:
+  version "0.0.1"
+  resolved "https://registry.yarnpkg.com/hexo-asset-image/-/hexo-asset-image-0.0.1.tgz#f60c4d97dc56cae4389e5cc6c14842be29b28ee0"
+  integrity sha512-OLKkevWIB3CdjYKlOH9tZik60b5aiCqz9RRQt16jympKzYLkVFERHFVi1HX5OAVi8G6w7ND4vYsmTlx6Xq8yXg==
   dependencies:
     cheerio "^0.19.0"
-    entities "^1.1.2"
 
 hexo-bunyan@^2.0.0:
   version "2.0.0"
@@ -806,12 +826,12 @@ hexo-pagination@1.0.0:
   resolved "https://r.cnpmjs.org/hexo-pagination/download/hexo-pagination-1.0.0.tgz#c9c0ca3665267b9e9d0a89fc3edcaf3276907dc1"
   integrity sha1-ycDKNmUme56dCon8PtyvMnaQfcE=
 
-hexo-renderer-ejs@^1.0.0:
-  version "1.0.0"
-  resolved "https://r2.cnpmjs.org/hexo-renderer-ejs/-/hexo-renderer-ejs-1.0.0.tgz#43c4de49eeae224036a457df860eb1c14c68b4b4"
-  integrity sha512-O925i69FG4NYO62oWORcPhRZZX0sPx1SXGKUS5DaR/lzajyiXH5i2sqnkj0ya0rNLXIy/D7Xmt7WbFyuQx/kKQ==
+hexo-renderer-ejs@^2.0.0:
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/hexo-renderer-ejs/-/hexo-renderer-ejs-2.0.0.tgz#56e0c3de5f6b0e1e68b923c65a7c8bfe9ff715eb"
+  integrity sha512-qCjE1IdwgDgv65qyb0KMVCwCdSVAkH0vwAe9XihjvaKWkmb9dtt8DgErOdqCXn0HReSyWiEVP2BrLRj3gyHwOQ==
   dependencies:
-    ejs "^2.6.1"
+    ejs "^3.1.6"
 
 hexo-renderer-marked@^2.0.0:
   version "2.0.0"
@@ -1060,6 +1080,16 @@ isobject@^4.0.0:
   resolved "https://r.cnpmjs.org/isobject/download/isobject-4.0.0.tgz#3f1c9155e73b192022a80819bacd0343711697b0"
   integrity sha1-PxyRVec7GSAiqAgZus0DQ3EWl7A=
 
+jake@^10.8.5:
+  version "10.8.5"
+  resolved "https://registry.yarnpkg.com/jake/-/jake-10.8.5.tgz#f2183d2c59382cb274226034543b9c03b8164c46"
+  integrity sha512-sVpxYeuAhWt0OTWITwT98oyV0GsXyMlXCF+3L1SuafBVUIr/uILGRB+NqwkzhgXKvoJpDIpQvqkUALgdmQsQxw==
+  dependencies:
+    async "^3.2.3"
+    chalk "^4.0.2"
+    filelist "^1.0.1"
+    minimatch "^3.0.4"
+
 js-yaml@^3.12.0, js-yaml@^3.13.1:
   version "3.13.1"
   resolved "https://r.cnpmjs.org/js-yaml/download/js-yaml-3.13.1.tgz#aff151b30bfdfa8e49e05da22e7415e9dfa37847"
@@ -1165,6 +1195,13 @@ min-indent@^1.0.0:
   integrity sha1-UWbihkV/AzBgZL5Ul+jbsMPTIIM=
   dependencies:
     brace-expansion "^1.1.7"
+
+minimatch@^5.0.1:
+  version "5.1.0"
+  resolved "https://registry.yarnpkg.com/minimatch/-/minimatch-5.1.0.tgz#1717b464f4971b144f6aabe8f2d0b8e4511e09c7"
+  integrity sha512-9TPBGGak4nHfGZsPBohm9AWg6NoT7QTCehS3BIJABslyZbzxfV78QM2Y6+i741OPZIafFAaiiEMh5OyIrJPgtg==
+  dependencies:
+    brace-expansion "^2.0.1"
 
 minimist@^1.2.0, minimist@^1.2.5:
   version "1.2.5"
