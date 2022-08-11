@@ -1,0 +1,702 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head>
+  <meta charset="utf-8">
+  
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="Cache-Control" content="no-transform" />
+  <meta http-equiv="Cache-Control" content="no-siteapp" />
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="format-detection" content="telephone=no,email=no,adress=no">
+  <!-- Color theme for statusbar -->
+  <meta name="theme-color" content="#000000" />
+  <!-- 强制页面在当前窗口以独立页面显示,防止别人在框架里调用页面 -->
+  <meta http-equiv="window-target" content="_top" />
+  
+  
+  <title>从零开始编写自己的JavaScript框架（二） | Hexo</title>
+  <meta name="description" content="2. &amp;#x6570;&amp;#x636E;&amp;#x7ED1;&amp;#x5B9A;2.1 &amp;#x6570;&amp;#x636E;&amp;#x7ED1;&amp;#x5B9A;&amp;#x7684;&amp;#x539F;&amp;#x7406;&amp;#x6570;&amp;#x636E;&amp;#x7ED1;&amp;#x5B9A;&amp;#x662F;&amp;#x4E00;&amp;#x79CD;&amp;#x5F88;&amp;#x4FBF;&amp;#x6377;&amp;#x7684;&amp;#x7279;&amp;#x6027;&amp;">
+<meta name="keywords" content="javascript">
+<meta property="og:type" content="article">
+<meta property="og:title" content="从零开始编写自己的JavaScript框架（二）">
+<meta property="og:url" content="https://major9506.github.io/2018/10/05/js_frame_02/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="2. &amp;#x6570;&amp;#x636E;&amp;#x7ED1;&amp;#x5B9A;2.1 &amp;#x6570;&amp;#x636E;&amp;#x7ED1;&amp;#x5B9A;&amp;#x7684;&amp;#x539F;&amp;#x7406;&amp;#x6570;&amp;#x636E;&amp;#x7ED1;&amp;#x5B9A;&amp;#x662F;&amp;#x4E00;&amp;#x79CD;&amp;#x5F88;&amp;#x4FBF;&amp;#x6377;&amp;#x7684;&amp;#x7279;&amp;#x6027;&amp;">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2022-08-11T07:24:22.405Z">
+<meta name="twitter:card" content="summary">
+  <!-- Canonical links -->
+  <link rel="canonical" href="https://major9506.github.io/2018/10/05/js_frame_02/index.html">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png" type="image/x-icon">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+  
+  
+    <link href="//cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.3.5/dist/jquery.fancybox.min.css" rel="stylesheet">
+  
+  
+</head>
+
+
+<body class="main-center" itemscope itemtype="http://schema.org/WebPage">
+  <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+  <div class="slimContent">
+    <div class="navbar-header">
+      
+      
+      <div class="profile-block text-center">
+        <a id="avatar" href="https://github.com/Major9506" target="_blank">
+          <img class="img-circle img-rotate" src="/images/avatar.png" width="200" height="200">
+        </a>
+        <h2 id="name" class="hidden-xs hidden-sm">Major_</h2>
+        <h3 id="title" class="hidden-xs hidden-sm hidden-md">前端/Node/Python</h3>
+        <small id="location" class="text-muted hidden-xs hidden-sm"><i class="icon icon-map-marker"></i> ChongQing, China</small>
+      </div>
+      
+      <div class="search" id="search-form-wrap">
+
+    <form class="search-form sidebar-form">
+        <div class="input-group">
+            <input type="text" class="search-form-input form-control" placeholder="搜索" />
+            <span class="input-group-btn">
+                <button type="submit" class="search-form-submit btn btn-flat" onclick="return false;"><i class="icon icon-search"></i></button>
+            </span>
+        </div>
+    </form>
+    <div class="ins-search">
+  <div class="ins-search-mask"></div>
+  <div class="ins-search-container">
+    <div class="ins-input-wrapper">
+      <input type="text" class="ins-search-input" placeholder="想要查找什么..." x-webkit-speech />
+      <button type="button" class="close ins-close ins-selectable" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+    </div>
+    <div class="ins-section-wrapper">
+      <div class="ins-section-container"></div>
+    </div>
+  </div>
+</div>
+
+
+</div>
+      <button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target="#main-navbar" aria-controls="main-navbar" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+    </div>
+    <nav id="main-navbar" class="collapse navbar-collapse" itemscope itemtype="http://schema.org/SiteNavigationElement" role="navigation">
+      <ul class="nav navbar-nav main-nav ">
+        
+        
+        <li class="menu-item menu-item-home">
+          <a href="/.">
+            
+            <i class="icon icon-home-fill"></i>
+            
+            <span class="menu-title">首页</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives">
+            
+            <i class="icon icon-archives-fill"></i>
+            
+            <span class="menu-title">归档</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories">
+            
+            <i class="icon icon-folder"></i>
+            
+            <span class="menu-title">分类</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags">
+            
+            <i class="icon icon-tags"></i>
+            
+            <span class="menu-title">标签</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-repository">
+          <a href="/repository">
+            
+            <i class="icon icon-project"></i>
+            
+            <span class="menu-title">项目</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-books">
+          <a href="/books">
+            
+            <i class="icon icon-book-fill"></i>
+            
+            <span class="menu-title">书单</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-links">
+          <a href="/links">
+            
+            <i class="icon icon-friendship"></i>
+            
+            <span class="menu-title">友链</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about">
+            
+            <i class="icon icon-cup-fill"></i>
+            
+            <span class="menu-title">关于</span>
+          </a>
+        </li>
+        
+      </ul>
+      
+	
+    <ul class="social-links">
+    	
+        <li><a href="https://github.com/Major9506" target="_blank" title="Github" data-toggle=tooltip data-placement=top><i class="icon icon-github"></i></a></li>
+        
+        <li><a href="https://weibo.com/youguke63347" target="_blank" title="Weibo" data-toggle=tooltip data-placement=top><i class="icon icon-weibo"></i></a></li>
+        
+        <li><a href="https://twitter.com/iwebued" target="_blank" title="Twitter" data-toggle=tooltip data-placement=top><i class="icon icon-twitter"></i></a></li>
+        
+        <li><a href="#" target="_blank" title="Behance" data-toggle=tooltip data-placement=top><i class="icon icon-behance"></i></a></li>
+        
+        <li><a href="#" target="_blank" title="Rss" data-toggle=tooltip data-placement=top><i class="icon icon-rss"></i></a></li>
+        
+    </ul>
+
+    </nav>
+  </div>
+</header>
+
+  
+    <aside class="sidebar" itemscope itemtype="http://schema.org/WPSideBar">
+  <div class="slimContent">
+    
+      <div class="widget">
+    <h3 class="widget-title">公告</h3>
+    <div class="widget-body">
+        <div id="board">
+            <div class="content">
+                <p>欢迎交流与分享经验!</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">分类</h3>
+    <div class="widget-body">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/">前端</a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%BC%96%E7%A8%8B%E8%A7%84%E8%8C%83/">编程规范</a><span class="category-list-count">6</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget-body">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/" rel="tag">git</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/javascript/" rel="tag">javascript</a><span class="tag-list-count">6</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/node/" rel="tag">node</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%BC%96%E7%A0%81%E9%A3%8E%E6%A0%BC%E6%8C%87%E5%8D%97/" rel="tag">编码风格指南</a><span class="tag-list-count">5</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget-body tagcloud">
+      <a href="/tags/git/" style="font-size: 13px;">git</a> <a href="/tags/javascript/" style="font-size: 14px;">javascript</a> <a href="/tags/node/" style="font-size: 13px;">node</a> <a href="/tags/%E7%BC%96%E7%A0%81%E9%A3%8E%E6%A0%BC%E6%8C%87%E5%8D%97/" style="font-size: 13.5px;">编码风格指南</a>
+    </div>
+  </div>
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget-body">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/08/">八月 2022</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/10/">十月 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/08/">八月 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/05/">五月 2019</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/03/">三月 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/">十月 2018</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/08/">八月 2018</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/05/">五月 2018</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">三月 2018</a><span class="archive-list-count">3</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget-body">
+      <ul class="recent-post-list list-unstyled no-thumbnail">
+        
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/%E7%BC%96%E7%A8%8B%E8%A7%84%E8%8C%83/">编程规范</a>
+              </p>
+              <p class="item-title">
+                <a href="/2022/08/11/high_quality_code/" class="title">如何编写高质量代码</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2022-08-10T16:00:00.000Z" itemprop="datePublished">2022-08-11</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/%E5%89%8D%E7%AB%AF/">前端</a>
+              </p>
+              <p class="item-title">
+                <a href="/2019/10/15/mj_cli/" class="title">打造自己的项目脚手架工具(@major_/cli)</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2019-10-14T16:00:00.000Z" itemprop="datePublished">2019-10-15</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/%E5%89%8D%E7%AB%AF/">前端</a>
+              </p>
+              <p class="item-title">
+                <a href="/2019/08/01/architecture/" class="title">前端架构那些事儿</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2019-07-31T16:00:00.000Z" itemprop="datePublished">2019-08-01</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/%E5%89%8D%E7%AB%AF/">前端</a>
+              </p>
+              <p class="item-title">
+                <a href="/2019/05/05/assembly_02/" class="title">Web应用的组件化开发（二）</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2019-05-04T16:00:00.000Z" itemprop="datePublished">2019-05-05</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/%E5%89%8D%E7%AB%AF/">前端</a>
+              </p>
+              <p class="item-title">
+                <a href="/2019/05/01/assembly_01/" class="title">Web应用的组件化开发（一）</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2019-04-30T16:00:00.000Z" itemprop="datePublished">2019-05-01</time>
+              </p>
+            </div>
+          </li>
+          
+      </ul>
+    </div>
+  </div>
+  
+
+    
+  </div>
+</aside>
+
+  
+  
+<main class="main" role="main">
+  <div class="content">
+  <article id="post-js_frame_02" class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
+    
+    <div class="article-header">
+      
+        
+  
+    <h1 class="article-title" itemprop="name">
+      从零开始编写自己的JavaScript框架（二）
+    </h1>
+  
+
+      
+      <div class="article-meta">
+        <span class="article-date">
+    <i class="icon icon-calendar-check"></i>
+	<a href="/2018/10/05/js_frame_02/" class="article-date">
+	  <time datetime="2018-10-04T16:00:00.000Z" itemprop="datePublished">2018-10-05</time>
+	</a>
+</span>
+        
+  <span class="article-category">
+    <i class="icon icon-folder"></i>
+    <a class="article-category-link" href="/categories/%E5%89%8D%E7%AB%AF/">前端</a>
+  </span>
+
+        
+  <span class="article-tag">
+    <i class="icon icon-tags"></i>
+	<a class="article-tag-link" href="/tags/javascript/" rel="tag">javascript</a>
+  </span>
+
+
+        
+
+        <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2018/10/05/js_frame_02/#comments" class="article-comment-link">评论</a></span>
+        
+      </div>
+    </div>
+    <div class="article-entry marked-body" itemprop="articleBody">
+      
+        <h1 id="2-&#x6570;&#x636E;&#x7ED1;&#x5B9A;"><a href="#2-&#x6570;&#x636E;&#x7ED1;&#x5B9A;" class="headerlink" title="2. &#x6570;&#x636E;&#x7ED1;&#x5B9A;"></a>2. &#x6570;&#x636E;&#x7ED1;&#x5B9A;</h1><h2 id="2-1-&#x6570;&#x636E;&#x7ED1;&#x5B9A;&#x7684;&#x539F;&#x7406;"><a href="#2-1-&#x6570;&#x636E;&#x7ED1;&#x5B9A;&#x7684;&#x539F;&#x7406;" class="headerlink" title="2.1 &#x6570;&#x636E;&#x7ED1;&#x5B9A;&#x7684;&#x539F;&#x7406;"></a>2.1 &#x6570;&#x636E;&#x7ED1;&#x5B9A;&#x7684;&#x539F;&#x7406;</h2><p>&#x6570;&#x636E;&#x7ED1;&#x5B9A;&#x662F;&#x4E00;&#x79CD;&#x5F88;&#x4FBF;&#x6377;&#x7684;&#x7279;&#x6027;&#xFF0C;&#x4E00;&#x4E9B;RIA&#x6846;&#x67B6;&#x5E26;&#x6709;&#x53CC;&#x5411;&#x7ED1;&#x5B9A;&#x529F;&#x80FD;&#xFF0C;&#x6BD4;&#x5982;Flex&#x548C;Silverlight&#xFF0C;&#x5F53;&#x67D0;&#x4E2A;&#x6570;&#x636E;&#x53D1;&#x751F;&#x53D8;&#x66F4;&#x65F6;&#xFF0C;&#x6240;&#x7ED1;&#x5B9A;&#x7684;&#x754C;&#x9762;&#x5143;&#x7D20;&#x4E5F;&#x53D1;&#x751F;&#x53D8;&#x66F4;&#xFF0C;&#x5F53;&#x754C;&#x9762;&#x5143;&#x7D20;&#x7684;&#x503C;&#x53D1;&#x751F;&#x53D8;&#x5316;&#x65F6;&#xFF0C;&#x6570;&#x636E;&#x4E5F;&#x8DDF;&#x7740;&#x53D8;&#x5316;&#xFF0C;&#x8FD9;&#x79CD;&#x529F;&#x80FD;&#x5728;&#x5904;&#x7406;&#x8868;&#x5355;&#x6570;&#x636E;&#x7684;&#x586B;&#x5145;&#x548C;&#x6536;&#x96C6;&#x65F6;&#xFF0C;&#x662F;&#x975E;&#x5E38;&#x6709;&#x7528;&#x7684;&#x3002;</p>
+<p>&#x5728;HTML&#x4E2D;&#xFF0C;&#x539F;&#x751F;&#x662F;&#x6CA1;&#x6709;&#x8FD9;&#x6837;&#x7684;&#x529F;&#x80FD;&#x7684;&#xFF0C;&#x4F46;&#x6709;&#x4E9B;&#x6846;&#x67B6;&#x505A;&#x5230;&#x4E86;&#xFF0C;&#x5B83;&#x4EEC;&#x662F;&#x600E;&#x4E48;&#x505A;&#x5230;&#x7684;&#x5462;&#xFF1F;&#x6211;&#x4EEC;&#x6765;&#x505A;&#x4E2A;&#x7B80;&#x5355;&#x7684;&#x8BD5;&#x8BD5;&#xFF0C;&#x987A;&#x4FBF;&#x63A2;&#x8BA8;&#x4E00;&#x4E0B;&#x5176;&#x4E2D;&#x539F;&#x7406;&#x3002;</p>
+<p>&#x5148;&#x770B;&#x6570;&#x636E;&#x5230;&#x754C;&#x9762;&#x4E0A;&#x7684;&#x7684;&#x7ED1;&#x5B9A;&#xFF0C;&#x6BD4;&#x5982;&#xFF1A;</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;input vm-value=<span class="string">&quot;name&quot;</span>/&gt;</span><br><span class="line"><span class="keyword">var</span> person = {</span><br><span class="line">    name: <span class="string">&quot;Tom&quot;</span></span><br><span class="line">};</span><br></pre></td></tr></table></figure>
+<p>&#x5982;&#x679C;&#x6211;&#x4EEC;&#x7ED9;name&#x91CD;&#x65B0;&#x8D4B;&#x503C;&#xFF0C;person.name = &#x201C;Jerry&#x201D;&#xFF0C;&#x600E;&#x4E48;&#x624D;&#x80FD;&#x8BA9;&#x754C;&#x9762;&#x5F97;&#x5230;&#x53D8;&#x66F4;&#xFF1F;<br>&#x4ECE;&#x76F4;&#x89C9;&#x6765;&#x8BF4;&#xFF0C;&#x6211;&#x4EEC;&#x9700;&#x8981;&#x5728;name&#x53D1;&#x751F;&#x6539;&#x53D8;&#x7684;&#x65F6;&#x5019;&#xFF0C;&#x89E6;&#x53D1;&#x4E00;&#x4E2A;&#x4E8B;&#x4EF6;&#xFF0C;&#x6216;&#x8005;&#x8C03;&#x7528;&#x67D0;&#x4E2A;&#x6307;&#x5B9A;&#x7684;&#x65B9;&#x6CD5;&#xFF0C;&#x7136;&#x540E;&#x624D;&#x597D;&#x7740;&#x624B;&#x505A;&#x540E;&#x9762;&#x7684;&#x4E8B;&#x60C5;&#xFF0C;&#x6BD4;&#x5982;&#xFF1A;</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> person = {</span><br><span class="line">    name: <span class="string">&quot;Tom&quot;</span>,</span><br><span class="line">    setName: <span class="function"><span class="keyword">function</span>(<span class="params">newName</span>) </span>{</span><br><span class="line">        <span class="keyword">this</span>.name = newName;</span><br><span class="line">        <span class="comment">//do something</span></span><br><span class="line">    }</span><br><span class="line">};</span><br></pre></td></tr></table></figure>
+<p>&#x8FD9;&#x6837;&#x6211;&#x4EEC;&#x53EF;&#x4EE5;&#x5728;setName&#x91CC;&#x9762;&#x53BB;&#x7ED9;input&#x8D4B;&#x503C;&#x3002;&#x63A8;&#x800C;&#x5E7F;&#x4E4B;&#xFF0C;&#x4E3A;&#x4E86;&#x4F7F;&#x5F97;&#x5B9E;&#x4F53;&#x5305;&#x542B;&#x7684;&#x591A;&#x4E2A;&#x5C5E;&#x6027;&#x90FD;&#x53EF;&#x4EE5;&#x8FD0;&#x4F5C;&#xFF0C;&#x53EF;&#x4EE5;&#x8FD9;&#x4E48;&#x505A;&#xFF1A;</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> person = {</span><br><span class="line">    name: <span class="string">&quot;Tom&quot;</span>,</span><br><span class="line">    gender: <span class="number">5</span></span><br><span class="line">    <span class="keyword">set</span>: function(key, value) {</span><br><span class="line">        <span class="keyword">this</span>[key] = value;</span><br><span class="line">        <span class="comment">//do something</span></span><br><span class="line">    }</span><br><span class="line">};</span><br></pre></td></tr></table></figure>
+<p>&#x6216;&#x8005;&#x5408;&#x5E76;&#x4E24;&#x4E2A;&#x65B9;&#x6CD5;&#xFF0C;&#x53EA;&#x5224;&#x65AD;&#x662F;&#x5426;&#x4F20;&#x4E86;&#x53C2;&#x6570;&#xFF1A;</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">Person.prototype.name = <span class="function"><span class="keyword">function</span>(<span class="params">value</span>) </span>{</span><br><span class="line">    <span class="keyword">if</span> (<span class="built_in">arguments</span>.length == <span class="number">0</span>) {</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">this</span>._name;</span><br><span class="line">    }</span><br><span class="line">    <span class="keyword">else</span> {</span><br><span class="line">        <span class="keyword">this</span>._name = value;</span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></table></figure>
+<p>&#x8FD9;&#x79CD;&#x60C5;&#x51B5;&#x4E0B;&#xFF0C;&#x8D4B;&#x503C;&#x7684;&#x65F6;&#x5019;&#x5C31;&#x662F;person.name(&#x201C;Tom&#x201D;)&#xFF0C;&#x53D6;&#x503C;&#x7684;&#x65F6;&#x5019;&#x5C31;&#x662F;var name = person.name()&#x4E86;&#x3002;</p>
+<p>&#x6709;&#x4E00;&#x4E9B;&#x6846;&#x67B6;&#x662F;&#x901A;&#x8FC7;&#x8FD9;&#x79CD;&#x65B9;&#x5F0F;&#x6765;&#x53D8;&#x901A;&#x5B9E;&#x73B0;&#x6570;&#x636E;&#x7ED1;&#x5B9A;&#x7684;&#xFF0C;&#x5BF9;&#x6570;&#x636E;&#x7684;&#x5199;&#x5165;&#x53EA;&#x80FD;&#x901A;&#x8FC7;&#x65B9;&#x6CD5;&#x8C03;&#x7528;&#x3002;&#x4F46;&#x8FD9;&#x79CD;&#x65B9;&#x5F0F;&#x5F88;&#x4E0D;&#x76F4;&#x63A5;&#xFF0C;&#x6211;&#x4EEC;&#x6765;&#x60F3;&#x70B9;&#x522B;&#x7684;&#x529E;&#x6CD5;&#x3002;</p>
+<p>&#x5728;C#&#x7B49;&#x4E00;&#x4E9B;&#x8BED;&#x8A00;&#x91CC;&#xFF0C;&#x6709;&#x4E00;&#x79CD;&#x4E1C;&#x897F;&#x53EB;&#x505A;&#x5B58;&#x53D6;&#x5668;&#xFF0C;&#x6BD4;&#x5982;&#x8BF4;&#xFF1A;</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Person</span></span></span><br><span class="line"><span class="class"></span>{</span><br><span class="line">    private string name;</span><br><span class="line"></span><br><span class="line">    public string Name</span><br><span class="line">    {</span><br><span class="line">        <span class="keyword">get</span></span><br><span class="line">        {</span><br><span class="line">            <span class="keyword">return</span> name;</span><br><span class="line">        }</span><br><span class="line">        <span class="keyword">set</span></span><br><span class="line">        {</span><br><span class="line">            name = value;</span><br><span class="line">        }</span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></table></figure>
+<p>&#x7528;&#x7684;&#x65F6;&#x5019;&#xFF0C;person.Name = &#x201C;Jerry&#x201D;&#xFF0C;&#x5C31;&#x4F1A;&#x8C03;&#x7528;&#x5230;set&#x91CC;&#xFF0C;&#x76F8;&#x5F53;&#x4E8E;&#x662F;&#x4E2A;&#x65B9;&#x6CD5;&#x3002;</p>
+<p>&#x8FD9;&#x4E00;&#x70B9;&#x975E;&#x5E38;&#x597D;&#xFF0C;&#x5F88;&#x7B26;&#x5408;&#x6211;&#x4EEC;&#x7684;&#x9700;&#x8981;&#xFF0C;&#x90A3;JavaScript&#x91CC;&#x9762;&#x6709;&#x6CA1;&#x6709;&#x7C7B;&#x4F3C;&#x5B58;&#x53D6;&#x5668;&#x7684;&#x7279;&#x6027;&#x5462;&#xFF1F;&#x8001;&#x65E9;&#x4EE5;&#x524D;&#x662F;&#x6CA1;&#x6709;&#x7684;&#xFF0C;&#x4F46;&#x73B0;&#x5728;&#x6709;&#x4E86;&#xFF0C;&#x90A3;&#x5C31;&#x662F;Object.defineProperty&#xFF0C;&#x5B83;&#x7684;&#x7B2C;&#x4E09;&#x4E2A;&#x53C2;&#x6570;&#x5C31;&#x662F;&#x53EF;&#x9009;&#x7684;&#x5B58;&#x53D6;&#x51FD;&#x6570;&#x3002;&#x6BD4;&#x5982;&#x8BF4;&#xFF1A;</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> person = {};</span><br><span class="line"></span><br><span class="line"><span class="comment">// Add an accessor property to the object.</span></span><br><span class="line"><span class="built_in">Object</span>.defineProperty(person, <span class="string">&quot;name&quot;</span>, {</span><br><span class="line">    <span class="keyword">set</span>: function (value) {</span><br><span class="line">        <span class="keyword">this</span>._name = value;</span><br><span class="line">        <span class="comment">//do something</span></span><br><span class="line">    },</span><br><span class="line">    <span class="keyword">get</span>: function () {</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">this</span>._name;</span><br><span class="line">    },</span><br><span class="line">    enumerable: <span class="literal">true</span>,</span><br><span class="line">    configurable: <span class="literal">true</span></span><br><span class="line">});</span><br></pre></td></tr></table></figure>
+<p>&#x8D4B;&#x503C;&#x7684;&#x65F6;&#x5019;&#xFF0C;person.name = &#x201C;Tom&#x201D;&#xFF0C;&#x53D6;&#x503C;&#x7684;&#x65F6;&#x5019;&#xFF0C;var name = person.name&#xFF0C;&#x7B80;&#x76F4;&#x592A;&#x7F8E;&#x5999;&#x4E86;&#x3002;&#x6CE8;&#x610F;&#x8FD9;&#x91CC;define&#x7684;&#x65F6;&#x5019;&#xFF0C;&#x662F;&#x5B9A;&#x4E49;&#x5728;&#x5B9E;&#x4F8B;&#x4E0A;&#x7684;&#xFF0C;&#x5982;&#x679C;&#x60F3;&#x8981;&#x5B9A;&#x4E49;&#x5230;&#x7C7B;&#x578B;&#x91CC;&#x9762;&#xFF0C;&#x53EF;&#x4EE5;&#x5728;&#x6784;&#x9020;&#x5668;&#x91CC;&#x9762;&#x5B9A;&#x4E49;&#x3002;</p>
+<p>&#x73B0;&#x5728;&#x6211;&#x4EEC;&#x4ECE;&#x6570;&#x636E;&#x5230;DOM&#x7684;&#x7ED1;&#x5B9A;&#x53EF;&#x4EE5;&#x89E3;&#x51B3;&#x6389;&#x4E86;&#xFF0C;&#x81F3;&#x5C11;&#x6211;&#x4EEC;&#x80FD;&#x591F;&#x5728;&#x53D8;&#x91CF;&#x88AB;&#x66F4;&#x6539;&#x7684;&#x65F6;&#x5019;&#x53BB;&#x505A;&#x4E00;&#x4E9B;&#x81EA;&#x5DF1;&#x7684;&#x4E8B;&#x60C5;&#xFF0C;&#x6BD4;&#x5982;&#x67E5;&#x627E;&#x8FD9;&#x4E2A;&#x5C5E;&#x6027;&#x88AB;&#x7ED1;&#x5B9A;&#x5230;&#x54EA;&#x4E9B;&#x63A7;&#x4EF6;&#x4E86;&#xFF0C;&#x7136;&#x540E;&#x6328;&#x4E2A;&#x5BF9;&#x5176;&#x8D4B;&#x503C;&#x3002;&#x6846;&#x67B6;&#x600E;&#x4E48;&#x77E5;&#x9053;&#x5C5E;&#x6027;&#x88AB;&#x7ED1;&#x5B9A;&#x5230;&#x54EA;&#x4E9B;&#x63A7;&#x4EF6;&#x4E86;&#x5462;&#xFF1F;&#x8FD9;&#x4E2A;&#x76F4;&#x63A5;&#x5728;&#x7B2C;&#x4E8C;&#x90E8;&#x5206;&#x7684;&#x5B9E;&#x73B0;&#x8FC7;&#x7A0B;&#x4E2D;&#x8BA8;&#x8BBA;&#x3002;</p>
+<p>&#x518D;&#x770B;&#x63A7;&#x4EF6;&#x5230;&#x6570;&#x636E;&#x7684;&#x7ED1;&#x5B9A;&#xFF0C;&#x8FD9;&#x4E2A;&#x5176;&#x5B9E;&#x5F88;&#x597D;&#x7406;&#x89E3;&#x3002;&#x65E0;&#x975E;&#x5C31;&#x662F;&#x7ED9;&#x63A7;&#x4EF6;&#x6DFB;&#x52A0;change&#x4E4B;&#x7C7B;&#x7684;&#x4E8B;&#x4EF6;&#x76D1;&#x542C;&#xFF0C;&#x5728;&#x8FD9;&#x91CC;&#x9762;&#x628A;&#x5173;&#x8054;&#x5230;&#x7684;&#x6570;&#x636E;&#x66F4;&#x65B0;&#x6389;&#x3002;&#x5230;&#x8FD9;&#x91CC;&#xFF0C;&#x6211;&#x4EEC;&#x5728;&#x539F;&#x7406;&#x65B9;&#x9762;&#x5DF2;&#x7ECF;&#x6CA1;&#x6709;&#x4EC0;&#x4E48;&#x95EE;&#x9898;&#x4E86;&#xFF0C;&#x73B0;&#x5728;&#x5F00;&#x59CB;&#x51C6;&#x5907;&#x628A;&#x5B83;&#x5199;&#x51FA;&#x6765;&#x3002;</p>
+<p>##2.2 &#x6570;&#x636E;&#x7ED1;&#x5B9A;&#x7684;&#x5B9E;&#x73B0;</p>
+<p>&#x6211;&#x4EEC;&#x7684;&#x6846;&#x67B6;&#x542F;&#x52A8;&#x4E4B;&#x540E;&#xFF0C;&#x8981;&#x5148;&#x628A;&#x524D;&#x9762;&#x6240;&#x8BF4;&#x7684;&#x8FD9;&#x79CD;&#x7ED1;&#x5B9A;&#x5173;&#x7CFB;&#x6536;&#x96C6;&#x8D77;&#x6765;&#xFF0C;&#x8FD9;&#x79CD;&#x5C5E;&#x6027;&#x4F1A;&#x5206;&#x5E03;&#x4E8E;DOM&#x7684;&#x5404;&#x4E2A;&#x89D2;&#x843D;&#xFF0C;&#x4E00;&#x4E2A;&#x5F88;&#x73B0;&#x5B9E;&#x7684;&#x505A;&#x6CD5;&#x662F;&#xFF0C;&#x9012;&#x5F52;&#x904D;&#x5386;&#x754C;&#x9762;&#x7684;&#x6BCF;&#x4E2A;DOM&#x8282;&#x70B9;&#xFF0C;&#x68C0;&#x6D4B;&#x8BE5;&#x5C5E;&#x6027;&#xFF0C;&#x4E8E;&#x662F;&#x6211;&#x4EEC;&#x4EE3;&#x7801;&#x7684;&#x7ED3;&#x6784;&#x5927;&#x81F4;&#x5982;&#x4E0B;&#x6240;&#x793A;&#x3002;</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">parseElement</span>(<span class="params">element</span>) </span>{</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">var</span> i=<span class="number">0</span>; i&lt;element.attributes.length; i++) {</span><br><span class="line">        parseAttribute(element.attributes[i]);</span><br><span class="line">    }</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">var</span> i=<span class="number">0</span>; i&lt;element.children.length; i++) {</span><br><span class="line">        parseElement(element.children[i]);</span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></table></figure>
+<p>&#x4F46;&#x662F;&#x6211;&#x4EEC;&#x8FD9;&#x65F6;&#x5019;&#x9762;&#x4E34;&#x4E00;&#x4E2A;&#x95EE;&#x9898;&#xFF0C;&#x6BD4;&#x5982;&#x4F60;&#x7684;&#x8F93;&#x5165;&#x6846;&#x7ED1;&#x5B9A;&#x5728;name&#x53D8;&#x91CF;&#x4E0A;&#xFF0C;&#x8FD9;&#x4E2A;name&#x5E94;&#x8BE5;&#x4ECE;&#x5C5E;&#x4E8E;&#x4EC0;&#x4E48;&#xFF1F;&#x5B83;&#x662F;&#x5168;&#x5C40;&#x53D8;&#x91CF;&#x5417;&#xFF1F;</p>
+<p>&#x6211;&#x4EEC;&#x5728;&#x5F00;&#x59CB;&#x505A;&#x8FD9;&#x4E2A;&#x6846;&#x67B6;&#x7684;&#x65F6;&#x5019;&#x5F3A;&#x8C03;&#x4E86;&#x4E00;&#x4E2A;&#x539F;&#x5219;&#xFF1A;&#x4E1A;&#x52A1;&#x6A21;&#x5757;&#x4E0D;&#x5141;&#x8BB8;&#x5B9A;&#x4E49;&#x5168;&#x5C40;&#x53D8;&#x91CF;&#xFF0C;&#x6846;&#x67B6;&#x5185;&#x90E8;&#x4E5F;&#x5C3D;&#x91CF;&#x5C11;&#x6709;&#x5168;&#x5C40;&#x4F5C;&#x7528;&#x57DF;&#xFF0C;&#x5230;&#x76EE;&#x524D;&#x4E3A;&#x6B62;&#xFF0C;&#x6211;&#x4EEC;&#x53EA;&#x66B4;&#x9732;&#x4E86;thin&#x4E00;&#x4E2A;&#x5168;&#x5C40;&#x5165;&#x53E3;&#xFF0C;&#x6240;&#x4EE5;&#x5728;&#x8FD9;&#x91CC;&#x4E0D;&#x80FD;&#x7834;&#x574F;&#x8FD9;&#x4E2A;&#x539F;&#x5219;&#x3002;</p>
+<p>&#x56E0;&#x6B64;&#xFF0C;&#x6211;&#x4EEC;&#x8981;&#x6C42;&#x4E1A;&#x52A1;&#x5F00;&#x53D1;&#x4EBA;&#x5458;&#x53BB;&#x5B9A;&#x4E49;&#x4E00;&#x4E2A;&#x89C6;&#x56FE;&#x6A21;&#x578B;&#xFF0C;&#x628A;&#x53D8;&#x91CF;&#x5305;&#x88C5;&#x8D77;&#x6765;&#xFF0C;&#x6240;&#x5305;&#x88C5;&#x7684;&#x4E0D;&#x9650;&#x4E8E;&#x53D8;&#x91CF;&#xFF0C;&#x4E5F;&#x53EF;&#x4EE5;&#x6709;&#x65B9;&#x6CD5;&#x3002;&#x6BD4;&#x5982;&#x4E0B;&#x9762;&#xFF0C;&#x6211;&#x4EEC;&#x5B9A;&#x4E49;&#x4E86;&#x4E00;&#x4E2A;&#x5B9E;&#x4F53;&#x53EB;Person&#xFF0C;&#x5E26;&#x4E24;&#x4E2A;&#x53D8;&#x91CF;&#xFF0C;&#x4E24;&#x4E2A;&#x65B9;&#x6CD5;&#xFF0C;&#x540E;&#x9762;&#x6211;&#x4EEC;&#x6765;&#x6F14;&#x793A;&#x4E00;&#x4E0B;&#x600E;&#x4E48;&#x628A;&#x5B83;&#x4EEC;&#x7ED1;&#x5B9A;&#x5230;HTML&#x754C;&#x9762;&#x3002;</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">thin.define(<span class="string">&quot;Person&quot;</span>, [], <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>{</span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">Person</span>(<span class="params"></span>) </span>{</span><br><span class="line">        <span class="keyword">this</span>.name = <span class="string">&quot;Tom&quot;</span>;</span><br><span class="line">        <span class="keyword">this</span>.age = <span class="number">5</span>;</span><br><span class="line">    }</span><br><span class="line"></span><br><span class="line">    Person.prototype = {</span><br><span class="line">        growUp: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>{</span><br><span class="line">            <span class="keyword">this</span>.age++;</span><br><span class="line">        }</span><br><span class="line">    };</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> Person;</span><br><span class="line">});</span><br></pre></td></tr></table></figure>
+<p>&#x6A21;&#x578B;&#x65B9;&#x9762;&#x90FD;&#x51C6;&#x5907;&#x597D;&#x4E86;&#xFF0C;&#x73B0;&#x5728;&#x6765;&#x770B;&#x754C;&#x9762;&#xFF1A;</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;div vm-model=<span class="string">&quot;Person&quot;</span>&gt;</span><br><span class="line">    &lt;input type=<span class="string">&quot;text&quot;</span> vm-value=<span class="string">&quot;name&quot;</span>/&gt;</span><br><span class="line">    &lt;input type=<span class="string">&quot;text&quot;</span> vm-value=<span class="string">&quot;age&quot;</span>/&gt;</span><br><span class="line">    &lt;input type=<span class="string">&quot;button&quot;</span> vm-click=<span class="string">&quot;growUp&quot;</span> value=<span class="string">&quot;Grow Up&quot;</span>/&gt;</span><br><span class="line">&lt;<span class="regexp">/div&gt;</span></span><br></pre></td></tr></table></figure>
+<p>&#x4E3A;&#x4E86;&#x4F7F;&#x5F97;&#x7ED3;&#x6784;&#x66F4;&#x52A0;&#x5BB9;&#x6613;&#x770B;&#xFF0C;&#x6211;&#x4EEC;&#x628A;&#x754C;&#x9762;&#x7684;&#x65E0;&#x5173;&#x5C5E;&#x6027;&#x6BD4;&#x5982;&#x6837;&#x5F0F;&#x4E4B;&#x7C7B;&#x90FD;&#x53BB;&#x6389;&#x4E86;&#xFF0C;&#x53EA;&#x7559;&#x4E0B;&#x4E0D;&#x80FD;&#x518D;&#x51CF;&#x5C11;&#x7684;&#x8FD9;&#x4E48;&#x4E00;&#x6BB5;&#x3002;&#x73B0;&#x5728;&#x6211;&#x4EEC;&#x53EF;&#x4EE5;&#x770B;&#x5230;&#xFF0C;&#x5728;&#x754C;&#x9762;&#x7684;&#x9876;&#x5C42;&#x5B9A;&#x4E49;&#x4E00;&#x4E2A;vm-model&#x5C5E;&#x6027;&#xFF0C;&#x503C;&#x4E3A;&#x5B9E;&#x4F53;&#x7684;&#x540D;&#x79F0;&#x3002;&#x4E24;&#x4E2A;&#x8F93;&#x5165;&#x6846;&#x901A;&#x8FC7;vm-value&#x6765;&#x7ED1;&#x5B9A;&#x5230;&#x5B9E;&#x4F8B;&#x5C5E;&#x6027;&#xFF0C;vm-init&#x7ED1;&#x5B9A;&#x754C;&#x9762;&#x7684;&#x521D;&#x59CB;&#x5316;&#x65B9;&#x6CD5;&#xFF0C;vm-click&#x7ED1;&#x5B9A;&#x6309;&#x94AE;&#x7684;&#x70B9;&#x51FB;&#x4E8B;&#x4EF6;&#x3002;</p>
+<p>&#x597D;&#x4E86;&#xFF0C;&#x73B0;&#x5728;&#x6211;&#x4EEC;&#x53EF;&#x4EE5;&#x6765;&#x626B;&#x63CF;&#x8FD9;&#x4E2A;&#x7B80;&#x5355;&#x7684;DOM&#x7ED3;&#x6784;&#x4E86;&#x3002;&#x60F3;&#x8981;&#x505A;&#x8FD9;&#x4E48;&#x4E00;&#x4E2A;&#x7ED1;&#x5B9A;&#xFF0C;&#x9996;&#x5148;&#x8981;&#x8003;&#x8651;&#x6570;&#x636E;&#x4ECE;&#x54EA;&#x91CC;&#x6765;&#xFF1F;&#x5728;&#x7ED1;&#x5B9A;name&#x548C;code&#x5C5E;&#x6027;&#x4E4B;&#x524D;&#xFF0C;&#x6BEB;&#x65E0;&#x7591;&#x95EE;&#xFF0C;&#x5E94;&#x5F53;&#x5148;&#x5B9E;&#x4F8B;&#x5316;&#x4E00;&#x4E2A;Person&#xFF0C;&#x6211;&#x4EEC;&#x600E;&#x4E48;&#x624D;&#x80FD;&#x77E5;&#x9053;&#x9700;&#x8981;&#x628A;Person&#x6A21;&#x5757;&#x5B9E;&#x4F8B;&#x5316;&#x5462;&#xFF1F;</p>
+<p>&#x5F53;&#x626B;&#x63CF;&#x5230;&#x4E00;&#x4E2A;DOM&#x5143;&#x7D20;&#x7684;&#x65F6;&#x5019;&#xFF0C;&#x6211;&#x4EEC;&#x8981;&#x5148;&#x68C0;&#x6D4B;&#x5B83;&#x7684;vm-model&#x5C5E;&#x6027;&#xFF0C;&#x5982;&#x679C;&#x6709;&#x503C;&#xFF0C;&#x5C31;&#x53D6;&#x8FD9;&#x4E2A;&#x503C;&#x6765;&#x5B9E;&#x4F8B;&#x5316;&#xFF0C;&#x7136;&#x540E;&#xFF0C;&#x628A;&#x8FD9;&#x4E2A;&#x503C;&#x4E00;&#x76F4;&#x4F20;&#x9012;&#x4E0B;&#x53BB;&#xFF0C;&#x5728;&#x626B;&#x63CF;&#x5176;&#x4ED6;&#x5C5E;&#x6027;&#x6216;&#x8005;&#x4E0B;&#x5C5E;DOM&#x5143;&#x7D20;&#x7684;&#x65F6;&#x5019;&#x90FD;&#x5E26;&#x8FDB;&#x53BB;&#x3002;&#x8FD9;&#x4E48;&#x4E00;&#x6765;&#xFF0C;parseElement&#x5C31;&#x53D8;&#x6210;&#x4E00;&#x4E2A;&#x9012;&#x5F52;&#x4E86;&#xFF0C;&#x4E8E;&#x662F;&#x5B83;&#x53EA;&#x597D;&#x6709;&#x4E24;&#x4E2A;&#x53C2;&#x6570;&#xFF0C;&#x53D8;&#x6210;&#x4E86;&#x8FD9;&#x6837;&#xFF1A;</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">parseElement</span>(<span class="params">element, vm</span>) </span>{</span><br><span class="line">    <span class="keyword">var</span> model = vm;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (element.getAttribute(<span class="string">&quot;vm-model&quot;</span>)) {</span><br><span class="line">        model = bindModel(element.getAttribute(<span class="string">&quot;vm-model&quot;</span>));</span><br><span class="line">    }</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">var</span> i=<span class="number">0</span>; i&lt;element.attributes.length; i++) {</span><br><span class="line">        parseAttribute(element, element.attributes[i], model);</span><br><span class="line">    }</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">var</span> i=<span class="number">0</span>; i&lt;element.children.length; i++) {</span><br><span class="line">        parseElement(element.children[i], model);</span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></table></figure>
+<p>&#x770B;&#x770B;&#x6211;&#x4EEC;&#x6253;&#x7B97;&#x600E;&#x4E48;&#x6765;&#x5B9E;&#x4F8B;&#x5316;&#x8FD9;&#x4E2A;&#x6A21;&#x578B;&#xFF0C;&#x8FD9;&#x4E2A;bindModel&#x65B9;&#x6CD5;&#x7684;&#x53C2;&#x6570;&#x662F;&#x6A21;&#x5757;&#x540D;&#xFF0C;&#x4E8E;&#x662F;&#x6211;&#x4EEC;&#x5148;&#x53BB;use&#x4E00;&#x4E0B;&#xFF0C;&#x4ECE;&#x5DE5;&#x5382;&#x91CC;&#x751F;&#x6210;&#x51FA;&#x6765;&#xFF0C;&#x7136;&#x540E;new&#x4E00;&#x4E0B;&#xFF0C;&#x5148;&#x8FD9;&#x4E48;return&#x51FA;&#x53BB;&#x5427;&#x3002;</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">bindModel</span>(<span class="params">modelName</span>) </span>{</span><br><span class="line">    thin.log(<span class="string">&quot;model&quot;</span> + modelName);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">var</span> model = thin.use(modelName, <span class="literal">true</span>);</span><br><span class="line">    <span class="keyword">var</span> instance = <span class="keyword">new</span> model();</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> instance;</span><br><span class="line">}</span><br></pre></td></tr></table></figure>
+<p>&#x73B0;&#x5728;&#x6211;&#x4EEC;&#x5F00;&#x59CB;&#x5173;&#x6CE8;parseAttribute&#x51FD;&#x6570;&#xFF0C;&#x53EF;&#x80FD;&#x7684;attribute&#x6709;&#x54EA;&#x4E9B;&#x79CD;&#x7C7B;&#x5462;&#xFF1F;&#x6211;&#x5217;&#x4E3E;&#x4E86;&#x4E00;&#x4E9B;&#x5F88;&#x5E38;&#x7528;&#x7684;&#xFF1A;</p>
+<ul>
+<li>init&#xFF0C;&#x7528;&#x4E8E;&#x7ED1;&#x5B9A;&#x521D;&#x59CB;&#x5316;&#x65B9;&#x6CD5;</li>
+<li>click&#xFF0C;&#x7528;&#x4E8E;&#x7ED1;&#x5B9A;&#x70B9;&#x51FB;</li>
+<li>value&#xFF0C;&#x7ED1;&#x5B9A;&#x53D8;&#x91CF;</li>
+<li>enable&#x548C;disable&#xFF0C;&#x7ED1;&#x5B9A;&#x53EF;&#x7528;&#x72B6;&#x6001;</li>
+<li>visible&#x548C;invisible&#xFF0C;&#x7ED1;&#x5B9A;&#x53EF;&#x89C1;&#x72B6;&#x6001;</li>
+</ul>
+<p>&#x7136;&#x540E;&#x5C31;&#x53EF;&#x4EE5;&#x5B9E;&#x73B0;&#x6211;&#x4EEC;parseAttribute&#x51FD;&#x6570;&#x4E86;&#xFF1A;</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">parseAttribute</span>(<span class="params">element, attr, model</span>) </span>{</span><br><span class="line">    <span class="keyword">if</span> (attr.name.indexOf(<span class="string">&quot;vm-&quot;</span>) == <span class="number">0</span>) {</span><br><span class="line">        <span class="keyword">var</span> type = attr.name.slice(<span class="number">3</span>);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">switch</span> (type) {</span><br><span class="line">            <span class="keyword">case</span> <span class="string">&quot;init&quot;</span>:</span><br><span class="line">                bindInit(element, attr.value, model);</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            <span class="keyword">case</span> <span class="string">&quot;value&quot;</span>:</span><br><span class="line">                bindValue(element, attr.value, model);</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            <span class="keyword">case</span> <span class="string">&quot;click&quot;</span>:</span><br><span class="line">                bindClick(element, attr.value, model);</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            <span class="keyword">case</span> <span class="string">&quot;enable&quot;</span>:</span><br><span class="line">                bindEnable(element, attr.value, model, <span class="literal">true</span>);</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            <span class="keyword">case</span> <span class="string">&quot;disable&quot;</span>:</span><br><span class="line">                bindEnable(element, attr.value, model, <span class="literal">false</span>);</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            <span class="keyword">case</span> <span class="string">&quot;visible&quot;</span>:</span><br><span class="line">                bindVisible(element, attr.value, model, <span class="literal">true</span>);</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            <span class="keyword">case</span> <span class="string">&quot;invisible&quot;</span>:</span><br><span class="line">                bindVisible(element, attr.value, model, <span class="literal">false</span>);</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            <span class="keyword">case</span> <span class="string">&quot;element&quot;</span>:</span><br><span class="line">                model[attr.value] = element;</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">        }</span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></table></figure>
+<p>&#x6CE8;&#x610F;&#x5230;&#x6700;&#x540E;&#x8FD8;&#x6709;&#x4E2A;element&#x7C7B;&#x578B;&#xFF0C;&#x672C;&#x6765;&#x53EF;&#x4EE5;&#x4E0D;&#x8981;&#x8FD9;&#x4E2A;&#xFF0C;&#x4F46;&#x6211;&#x4EEC;&#x8003;&#x8651;&#x5230;&#x5C06;&#x6765;&#xFF0C;&#x4E00;&#x5207;&#x90FD;&#x662F;&#x7EC4;&#x4EF6;&#x5316;&#x7684;&#x65F6;&#x5019;&#xFF0C;&#x754C;&#x9762;&#x4E0A;&#x6253;&#x7B97;&#x4E0D;&#x5199;id&#xFF0C;&#x4E5F;&#x4E0D;&#x4F9D;&#x9760;&#x9009;&#x62E9;&#x5668;&#xFF0C;&#x800C;&#x662F;&#x7528;&#x67D0;&#x4E2A;&#x6807;&#x5FD7;&#x6765;&#x5B9A;&#x4F4D;&#x5143;&#x7D20;&#xFF0C;&#x6240;&#x4EE5;&#x52A0;&#x4E0A;&#x4E86;&#x8FD9;&#x4E2A;&#xFF0C;&#x6587;&#x7AE0;&#x6700;&#x540E;&#x7684;&#x793A;&#x4F8B;&#x4E2D;&#x4F7F;&#x7528;&#x4E86;&#x5B83;&#x3002;</p>
+<p>&#x8FD9;&#x4E48;&#x591A;&#x7ED1;&#x5B9A;&#xFF0C;&#x4E0D;&#x6253;&#x7B97;&#x90FD;&#x8BB2;&#xFF0C;&#x7528;bindValue&#x51FD;&#x6570;&#x6765;&#x8BF4;&#x660E;&#x4E00;&#x4E0B;&#x5427;&#xFF1A;</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">bindValue</span>(<span class="params">element, key, vm</span>) </span>{</span><br><span class="line">    thin.log(<span class="string">&quot;binding value: &quot;</span> + key);</span><br><span class="line"></span><br><span class="line">    vm.$watch(key, <span class="function"><span class="keyword">function</span> (<span class="params">value, oldValue</span>) </span>{</span><br><span class="line">        element.value = value || <span class="string">&quot;&quot;</span>;</span><br><span class="line">    });</span><br><span class="line"></span><br><span class="line">    element.onkeyup = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>{</span><br><span class="line">        vm[key] = element.value;</span><br><span class="line">    };</span><br><span class="line"></span><br><span class="line">    element.onpaste = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>{</span><br><span class="line">        vm[key] = element.value;</span><br><span class="line">    };</span><br><span class="line">}</span><br></pre></td></tr></table></figure>
+<p>&#x6211;&#x4EEC;&#x5047;&#x5B9A;&#x6BCF;&#x4E2A;&#x6A21;&#x578B;&#x5B9E;&#x4F8B;&#x4E0A;&#x5E26;&#x6709;&#x4E00;&#x4E2A;$watch&#x65B9;&#x6CD5;&#xFF0C;&#x7528;&#x4E8E;&#x76D1;&#x63A7;&#x67D0;&#x53D8;&#x91CF;&#x7684;&#x53D8;&#x5316;&#xFF0C;&#x53EF;&#x4EE5;&#x4F20;&#x5165;&#x4E00;&#x4E2A;&#x76D1;&#x542C;&#x51FD;&#x6570;&#xFF0C;&#x5F53;&#x53D8;&#x91CF;&#x53D8;&#x5316;&#x7684;&#x65F6;&#x5019;&#xFF0C;&#x81EA;&#x52A8;&#x8C03;&#x7528;&#x8FD9;&#x4E2A;&#x51FD;&#x6570;&#xFF0C;&#x5E76;&#x4E14;&#x628A;&#x65B0;&#x65E7;&#x4E24;&#x4E2A;&#x503C;&#x4F20;&#x56DE;&#x6765;&#x3002;</p>
+<p>&#x5728;&#x8FD9;&#x4E2A;&#x4EE3;&#x7801;&#x91CC;&#xFF0C;&#x6211;&#x4EEC;&#x4F7F;&#x7528;$watch&#x65B9;&#x6CD5;&#x7ED9;&#x4F20;&#x5165;&#x7684;key&#x6DFB;&#x52A0;&#x4E00;&#x4E2A;&#x76D1;&#x542C;&#xFF0C;&#x76D1;&#x542C;&#x5668;&#x91CC;&#x9762;&#x7ED9;&#x76D1;&#x542C;&#x5143;&#x7D20;&#x8D4B;&#x503C;&#x3002;&#x6211;&#x4EEC;&#x8FD9;&#x91CC;&#x5077;&#x61D2;&#x4E86;&#x4E00;&#x4E0B;&#xFF0C;&#x5047;&#x5B9A;&#x6240;&#x6709;&#x7684;&#x7ED1;&#x5B9A;&#x5143;&#x7D20;&#x90FD;&#x662F;&#x8F93;&#x5165;&#x6846;&#xFF0C;&#x6240;&#x4EE5;&#x76F4;&#x63A5;&#x7ED9;element.value&#x8BBE;&#x7F6E;&#x503C;&#xFF0C;&#x4E3A;&#x4E86;&#x9632;&#x6B62;&#x503C;&#x4E3A;&#x7A7A;&#x5BFC;&#x81F4;&#x663E;&#x793A;undefined&#xFF0C;&#x628A;&#x503C;&#x8DDF;&#x7A7A;&#x5B57;&#x7B26;&#x4E32;&#x7528;&#x77ED;&#x8DEF;&#x8868;&#x8FBE;&#x5F0F;&#x505A;&#x4E86;&#x4E2A;&#x8F6C;&#x6362;&#x3002;</p>
+<p>&#x63A5;&#x4E0B;&#x6765;&#xFF0C;&#x4E5F;&#x5BF9;element&#x7684;&#x51E0;&#x4E2A;&#x53EF;&#x80FD;&#x5BFC;&#x81F4;&#x503C;&#x53D8;&#x5316;&#x7684;&#x4E8B;&#x4EF6;&#x8FDB;&#x884C;&#x4E86;&#x76D1;&#x542C;&#xFF0C;&#x5728;&#x91CC;&#x9762;&#x628A;&#x6A21;&#x578B;&#x4E0A;&#x5BF9;&#x5E94;&#x7684;&#x503C;&#x66F4;&#x65B0;&#x6389;&#x3002;&#x8FD9;&#x6837;&#x53CC;&#x5411;&#x7ED1;&#x5B9A;&#x5C31;&#x505A;&#x597D;&#x4E86;&#x3002;</p>
+<p>&#x7136;&#x540E;&#x56DE;&#x5934;&#x6765;&#x770B;$watch&#x7684;&#x5B9E;&#x73B0;&#x3002;&#x5F88;&#x663E;&#x7136;&#x8FD9;&#x91CC;&#x4E5F;&#x8981;&#x4E00;&#x4E2A;map&#xFF0C;&#x6211;&#x4EEC;&#x7ED9;&#x5B83;&#x53D6;&#x540D;&#x4E3A;$watchers&#xFF0C;&#x5B58;&#x653E;&#x5C5E;&#x6027;&#x7684;&#x7ED1;&#x5B9A;&#x5173;&#x7CFB;&#xFF0C;&#x5BF9;&#x4E8E;&#x6BCF;&#x4E2A;&#x5C5E;&#x6027;&#xFF0C;&#x5B83;&#x7684;&#x503C;&#x9700;&#x8981;&#x4FDD;&#x5B58;&#x4E00;&#x4EFD;&#xFF0C;&#x4F9B;getter&#x83B7;&#x53D6;&#xFF0C;&#x540C;&#x65F6;&#x8FD8;&#x6709;&#x4E00;&#x4E2A;&#x6570;&#x7EC4;&#xFF0C;&#x5B58;&#x653E;&#x4E86;&#x8BE5;&#x5C5E;&#x6027;&#x7ED1;&#x5B9A;&#x7684;&#x5904;&#x7406;&#x51FD;&#x6570;&#x3002;&#x5F53;&#x5C5E;&#x6027;&#x53D1;&#x751F;&#x53D8;&#x66F4;&#x7684;&#x65F6;&#x5019;&#xFF0C;&#x53BB;&#x6328;&#x4E2A;&#x628A;&#x5B83;&#x4EEC;&#x8C03;&#x7528;&#x4E00;&#x4E0B;&#x3002;</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> Binder = {</span><br><span class="line">    $watch: <span class="function"><span class="keyword">function</span> (<span class="params">key, watcher</span>) </span>{</span><br><span class="line">        <span class="keyword">if</span> (!<span class="keyword">this</span>.$watchers[key]) {</span><br><span class="line">            <span class="keyword">this</span>.$watchers[key] = {</span><br><span class="line">                value: <span class="keyword">this</span>[key],</span><br><span class="line">                list: []</span><br><span class="line">            };</span><br><span class="line"></span><br><span class="line">            <span class="built_in">Object</span>.defineProperty(<span class="keyword">this</span>, key, {</span><br><span class="line">                <span class="keyword">set</span>: function (val) {</span><br><span class="line">                    <span class="keyword">var</span> oldValue = <span class="keyword">this</span>.$watchers[key].value;</span><br><span class="line">                    <span class="keyword">this</span>.$watchers[key].value = val;</span><br><span class="line"></span><br><span class="line">                    <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; <span class="keyword">this</span>.$watchers[key].list.length; i++) {</span><br><span class="line">                        <span class="keyword">this</span>.$watchers[key].list[i](val, oldValue);</span><br><span class="line">                    }</span><br><span class="line">                },</span><br><span class="line"></span><br><span class="line">                <span class="keyword">get</span>: function () {</span><br><span class="line">                    <span class="keyword">return</span> <span class="keyword">this</span>.$watchers[key].value;</span><br><span class="line">                }</span><br><span class="line">            });</span><br><span class="line">        }</span><br><span class="line"></span><br><span class="line">        <span class="keyword">this</span>.$watchers[key].list.push(watcher);</span><br><span class="line">    }</span><br><span class="line">};</span><br></pre></td></tr></table></figure>
+<p>&#x4F46;&#x662F;vm&#x600E;&#x4E48;&#x5C31;&#x6709;$watch&#x5462;&#xFF0C;&#x6BCF;&#x4E2A;&#x5730;&#x65B9;&#x90FD;&#x53BB;&#x5224;&#x65AD;&#x4E00;&#x4E0B;&#x975E;&#x7A7A;&#x7136;&#x540E;&#x518D;&#x53BB;&#x521B;&#x5EFA;&#x5176;&#x5B9E;&#x633A;&#x9EBB;&#x70E6;&#x7684;&#xFF0C;&#x6240;&#x4EE5;&#xFF0C;&#x8FD9;&#x4E2A;&#x5C5E;&#x6027;&#x6211;&#x4EEC;&#x53EF;&#x4EE5;&#x76F4;&#x63A5;&#x5728;&#x5B9E;&#x4F8B;&#x5316;&#x6A21;&#x578B;&#x7684;&#x65F6;&#x5019;&#x521B;&#x5EFA;&#x51FA;&#x6765;&#x3002;</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">bindModel</span>(<span class="params">name</span>) </span>{</span><br><span class="line">    thin.log(<span class="string">&quot;binding model: &quot;</span> + name);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">var</span> model = thin.use(name, <span class="literal">true</span>);</span><br><span class="line">    <span class="keyword">var</span> instance = <span class="keyword">new</span> model().extend(Binder);</span><br><span class="line">    instance.$watchers = {};</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> instance;</span><br><span class="line">}</span><br></pre></td></tr></table></figure>
+<p>&#x770B;&#x770B;&#x8FD9;&#x91CC;&#x7684;&#x5199;&#x6CD5;&#xFF0C;&#x4E3A;&#x4EC0;&#x4E48;$watchers&#x8981;&#x989D;&#x5916;&#x8BBE;&#x7F6E;&#xFF0C;&#x800C;$watch&#x5C31;&#x53EF;&#x4EE5;&#x653E;&#x5728;Binder&#x91CC;&#x9762;&#x6765;extend&#x5462;&#xFF1F;</p>
+<p>&#x5148;&#x89E3;&#x91CA;extend&#x5E72;&#x4E86;&#x4EC0;&#x4E48;&#xFF0C;&#x5B83;&#x505A;&#x7684;&#x662F;&#x4E00;&#x4E2A;&#x5BF9;&#x8C61;&#x7684;&#x6D45;&#x62F7;&#x8D1D;&#xFF0C;&#x4E5F;&#x5C31;&#x662F;&#x8BF4;&#xFF0C;&#x628A;Binder&#x7684;&#x5C5E;&#x6027;&#x548C;&#x65B9;&#x6CD5;&#x90FD;&#x590D;&#x5236;&#x7ED9;&#x4E86;&#x521B;&#x5EFA;&#x51FA;&#x6765;&#x7684;model&#x5B9E;&#x4F8B;&#xFF0C;&#x6CE8;&#x610F;&#xFF0C;&#x8FD9;&#x4E2A;&#x6240;&#x8C13;&#x7684;&#x590D;&#x5236;&#xFF0C;&#x5982;&#x679C;&#x662F;&#x7B80;&#x5355;&#x7C7B;&#x578B;&#xFF0C;&#x90A3;&#x786E;&#x5B9E;&#x590D;&#x5236;&#x4E86;&#xFF0C;&#x5982;&#x679C;&#x662F;&#x5F15;&#x7528;&#x7C7B;&#x578B;&#xFF0C;&#x90A3;&#x590D;&#x5236;&#x7684;&#x5176;&#x5B9E;&#x53EA;&#x662F;&#x4E00;&#x4E2A;&#x5F15;&#x7528;&#xFF0C;&#x6240;&#x4EE5;&#x5982;&#x679C;$watchers&#x4E5F;&#x653E;&#x5728;Binder&#x91CC;&#xFF0C;&#x4E0D;&#x540C;&#x7684;instance&#x5C31;&#x5171;&#x4EAB;&#x4E00;&#x4E2A;$watchers&#xFF0C;&#x903B;&#x8F91;&#x5C31;&#x662F;&#x9519;&#x8BEF;&#x7684;&#x3002;&#x90A3;&#x4E3A;&#x4EC0;&#x4E48;$watch&#x53C8;&#x53EF;&#x4EE5;&#x653E;&#x5728;&#x8FD9;&#x91CC;&#x590D;&#x5236;&#x5462;&#xFF1F;&#x56E0;&#x4E3A;&#x5B83;&#x662F;&#x51FD;&#x6570;&#xFF0C;&#x5B83;&#x7684;this&#x59CB;&#x7EC8;&#x6307;&#x5411;&#x5F53;&#x524D;&#x7684;&#x6267;&#x884C;&#x4E3B;&#x4F53;&#xFF0C;&#x4E5F;&#x5C31;&#x662F;&#x8BF4;&#xFF0C;&#x5982;&#x679C;&#x653E;&#x5728;instance1&#x4E0A;&#x6267;&#x884C;&#xFF0C;&#x6307;&#x5411;&#x7684;&#x5C31;&#x662F;instance1&#xFF0C;&#x653E;&#x5728;instance2&#x4E0A;&#x6267;&#x884C;&#xFF0C;&#x6307;&#x5411;&#x7684;&#x5C31;&#x662F;instance2&#xFF0C;&#x6211;&#x4EEC;&#x5229;&#x7528;&#x8FD9;&#x4E00;&#x70B9;&#xFF0C;&#x5C31;&#x53EF;&#x4EE5;&#x4E0D;&#x7528;&#x8BA9;&#x6BCF;&#x4E2A;&#x5B9E;&#x4F8B;&#x90FD;&#x521B;&#x5EFA;&#x4E00;&#x4EFD;$watch&#x65B9;&#x6CD5;&#xFF0C;&#x800C;&#x662F;&#x5171;&#x7528;&#x540C;&#x4E00;&#x4E2A;&#x3002;</p>
+<p>&#x540C;&#x7406;&#xFF0C;&#x6211;&#x4EEC;&#x53EF;&#x4EE5;&#x628A;enable&#xFF0C;visible&#xFF0C;init&#xFF0C;click&#x8FD9;&#x4E9B;&#x90FD;&#x505A;&#x8D77;&#x6765;&#xFF0C;init&#x7684;&#x6267;&#x884C;&#x65F6;&#x95F4;&#x653E;&#x5728;&#x626B;&#x63CF;&#x5B8C;vm-model&#x90A3;&#x4E2A;element&#x4E4B;&#x4E0B;&#x7684;&#x6240;&#x6709;DOM&#x8282;&#x70B9;&#x4E4B;&#x540E;&#x3002;</p>
+<p>&#x55EF;&#xFF0C;&#x6211;&#x4EEC;&#x662F;&#x4E0D;&#x662F;&#x53EF;&#x4EE5;&#x8BD5;&#x4E00;&#x4E0B;&#x4E86;&#xFF1F;&#x6765;&#x5199;&#x4E2A;&#x4EE3;&#x7801;&#xFF1A;</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html&gt;</span><br><span class="line">&lt;head&gt;</span><br><span class="line">    &lt;title&gt;Simple binding demo&lt;<span class="regexp">/title&gt;</span></span><br><span class="line"><span class="regexp">    &lt;meta charset=&quot;utf-8&quot;&gt;</span></span><br><span class="line"><span class="regexp">    &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0&quot;&gt;</span></span><br><span class="line"><span class="regexp">    &lt;meta name=&quot;description&quot; content=&quot;binding&quot;&gt;</span></span><br><span class="line"><span class="regexp">    &lt;meta name=&quot;author&quot; content=&quot;xu.fei@outlook.com&quot;&gt;</span></span><br><span class="line"><span class="regexp">    &lt;script type=&quot;text/</span>javascript<span class="string">&quot; src=&quot;</span>../js/thin.js<span class="string">&quot;&gt;&lt;/script&gt;</span></span><br><span class="line"><span class="string">&lt;/head&gt;</span></span><br><span class="line"><span class="string">&lt;body&gt;</span></span><br><span class="line"><span class="string">&lt;div vm-model=&quot;</span>test.Person<span class="string">&quot;&gt;</span></span><br><span class="line"><span class="string">    &lt;input type=&quot;</span>text<span class="string">&quot; vm-value=&quot;</span>name<span class="string">&quot;/&gt;</span></span><br><span class="line"><span class="string">    &lt;input type=&quot;</span>text<span class="string">&quot; vm-value=&quot;</span>age<span class="string">&quot;/&gt;</span></span><br><span class="line"><span class="string">    &lt;input type=&quot;</span>text<span class="string">&quot; vm-value=&quot;</span>age<span class="string">&quot;/&gt;</span></span><br><span class="line"><span class="string">    &lt;input type=&quot;</span>button<span class="string">&quot; vm-click=&quot;</span>growUp<span class="string">&quot; value=&quot;</span>Grow Up<span class="string">&quot;/&gt;</span></span><br><span class="line"><span class="string">&lt;/div&gt;</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">&lt;div vm-model=&quot;</span>test.Person<span class="string">&quot; vm-init=&quot;</span>init<span class="string">&quot;&gt;</span></span><br><span class="line"><span class="string">    &lt;input type=&quot;</span>text<span class="string">&quot; vm-value=&quot;</span>name<span class="string">&quot;/&gt;</span></span><br><span class="line"><span class="string">    &lt;input type=&quot;</span>text<span class="string">&quot; vm-value=&quot;</span>age<span class="string">&quot;/&gt;</span></span><br><span class="line"><span class="string">    &lt;input type=&quot;</span>button<span class="string">&quot; vm-click=&quot;</span>growUp<span class="string">&quot; value=&quot;</span>Grow Up<span class="string">&quot;/&gt;</span></span><br><span class="line"><span class="string">&lt;/div&gt;</span></span><br><span class="line"><span class="string">&lt;script type=&quot;</span>text/javascript<span class="string">&quot;&gt;</span></span><br><span class="line"><span class="string">    thin.define(&quot;</span>test.Person<span class="string">&quot;, [], function () {</span></span><br><span class="line"><span class="string">        function Person() {</span></span><br><span class="line"><span class="string">            this.name = &quot;</span>Tom<span class="string">&quot;;</span></span><br><span class="line"><span class="string">            this.age = 5;</span></span><br><span class="line"><span class="string">        }</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">        Person.prototype = {</span></span><br><span class="line"><span class="string">            init: function () {</span></span><br><span class="line"><span class="string">                this.name = &quot;</span>Jerry<span class="string">&quot;;</span></span><br><span class="line"><span class="string">                this.age = 3;</span></span><br><span class="line"><span class="string">            },</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">            growUp: function () {</span></span><br><span class="line"><span class="string">                this.age++;</span></span><br><span class="line"><span class="string">            }</span></span><br><span class="line"><span class="string">        };</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">        return Person;</span></span><br><span class="line"><span class="string">    });</span></span><br><span class="line"><span class="string">&lt;/script&gt;</span></span><br><span class="line"><span class="string">&lt;/body&gt;</span></span><br><span class="line"><span class="string">&lt;/html&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>&#x4EE5;&#x521A;&#x624D;&#x6587;&#x7AE0;&#x63D0;&#x5230;&#x7684;&#x5185;&#x5BB9;&#xFF0C;&#x8FD8;&#x4E0D;&#x80FD;&#x5B8C;&#x5168;&#x89E3;&#x91CA;&#x8FD9;&#x4E2A;&#x4F8B;&#x5B50;&#x7684;&#x6548;&#x679C;&#xFF0C;&#x56E0;&#x4E3A;&#x6CA1;&#x770B;&#x5230;&#x5728;&#x54EA;&#x91CC;&#x8C03;&#x7528;parseElement&#x7684;&#x3002;&#x8BF4;&#x6765;&#x4E5F;&#x7B80;&#x5355;&#xFF0C;&#x5C31;&#x5728;thin.js&#x91CC;&#x9762;&#xFF0C;&#x76F4;&#x63A5;&#x5199;&#x4E86;&#x4E00;&#x4E2A;thin.ready&#xFF0C;&#x5728;&#x90A3;&#x8FB9;&#x8C03;&#x7528;&#x4E86;&#x8FD9;&#x4E2A;&#x51FD;&#x6570;&#xFF0C;&#x53BB;&#x89E3;&#x6790;&#x4E86;document.body&#xFF0C;&#x4E8E;&#x662F;&#x6D4B;&#x8BD5;&#x9875;&#x9762;&#x91CC;&#x9762;&#x624D;&#x53EF;&#x4EE5;&#x53EA;&#x5199;&#x7ED1;&#x5B9A;&#x548C;&#x89C6;&#x56FE;&#x6A21;&#x578B;&#x3002;</p>
+<h2 id="2-3-&#x5C0F;&#x7ED3;"><a href="#2-3-&#x5C0F;&#x7ED3;" class="headerlink" title="2.3 &#x5C0F;&#x7ED3;"></a>2.3 &#x5C0F;&#x7ED3;</h2><p>&#x5230;&#x6B64;&#x4E3A;&#x6B62;&#xFF0C;&#x6211;&#x4EEC;&#x7684;&#x7ED1;&#x5B9A;&#x6846;&#x67B6;&#x52C9;&#x5F3A;&#x80FD;&#x591F;&#x8FD0;&#x884C;&#x8D77;&#x6765;&#x4E86;&#xFF01;&#x867D;&#x7136;&#x5F88;&#x7B80;&#x964B;&#xFF0C;&#x800C;&#x4E14;&#x8981;&#x6BD4;&#x8F83;&#x65B0;&#x7684;&#x6D4F;&#x89C8;&#x5668;&#x624D;&#x80FD;&#x8DD1;&#xFF0C;&#x4F46;&#x6BD5;&#x7ADF;&#x662F;&#x8DD1;&#x8D77;&#x6765;&#x4E86;&#x3002;</p>
+<p>&#x6CE8;&#x610F;Object.defineProperty&#x4EC5;&#x5728;Chrome&#x7B49;&#x6D4F;&#x89C8;&#x5668;&#x4E2D;&#x53EF;&#x7528;&#xFF0C;IE&#x9700;&#x8981;9&#x4EE5;&#x4E0A;&#x624D;&#x6BD4;&#x8F83;&#x6B63;&#x5E38;&#x3002;&#x5728;&#x53F8;&#x5F92;&#x6B63;&#x7F8E;&#x7684;avalon&#x6846;&#x67B6;&#x4E2D;&#xFF0C;&#x5DE7;&#x5999;&#x4F7F;&#x7528;VBScript&#x7ED5;&#x8FC7;&#x8FD9;&#x4E00;&#x9650;&#x5236;&#xFF0C;&#x5229;&#x7528;vbs&#x7684;property&#x548C;&#x4E24;&#x79CD;&#x8BED;&#x8A00;&#x7684;&#x4E92;&#x901A;&#xFF0C;&#x5B9E;&#x73B0;&#x4E86;&#x4F4E;&#x7248;&#x672C;IE&#x7684;&#x517C;&#x5BB9;&#x3002;&#x6211;&#x4EEC;&#x8FD9;&#x4E2A;&#x6846;&#x67B6;&#x7684;&#x76EE;&#x6807;&#x4E0D;&#x662F;&#x517C;&#x5BB9;&#xFF0C;&#x800C;&#x662F;&#x4E3A;&#x4E86;&#x8BF4;&#x660E;&#x539F;&#x7406;&#xFF0C;&#x6240;&#x4EE5;&#x611F;&#x5174;&#x8DA3;&#x7684;&#x670B;&#x53CB;&#x53EF;&#x4EE5;&#x53BB;&#x770B;&#x770B;avalon&#x7684;&#x6E90;&#x7801;&#x3002; </p>
+
+      
+    </div>
+    <div class="article-footer">
+      <blockquote class="mt-2x">
+  <ul class="post-copyright list-unstyled">
+    
+    <li class="post-copyright-link hidden-xs">
+      <strong>本文链接：</strong>
+      <a href="https://major9506.github.io/2018/10/05/js_frame_02/" title="从零开始编写自己的JavaScript框架（二）" target="_blank" rel="external">https://major9506.github.io/2018/10/05/js_frame_02/</a>
+    </li>
+    
+    <li class="post-copyright-license">
+      <strong>版权声明： </strong> 本博客所有文章除特别声明外，均采用 <a href="http://creativecommons.org/licenses/by/4.0/deed.zh" target="_blank" rel="external">CC BY 4.0 CN协议</a> 许可协议。转载请注明出处！
+    </li>
+  </ul>
+</blockquote>
+
+
+<div class="panel panel-default panel-badger">
+  <div class="panel-body">
+    <figure class="media">
+      <div class="media-left">
+        <a href="https://github.com/Major9506" target="_blank" class="img-burn thumb-sm visible-lg">
+          <img src="/images/avatar.png" class="img-rounded w-full" alt="">
+        </a>
+      </div>
+      <div class="media-body">
+        <h3 class="media-heading"><a href="https://github.com/Major9506" target="_blank"><span class="text-dark">Major_</span><small class="ml-1x">前端/Node/Python</small></a></h3>
+        <div>年轻无为，卖马为生</div>
+      </div>
+    </figure>
+  </div>
+</div>
+
+
+    </div>
+  </article>
+  
+    
+  <section id="comments">
+  	
+      <div id="vcomments"></div>
+    
+  </section>
+
+
+  
+</div>
+
+  <nav class="bar bar-footer clearfix" data-stick-bottom>
+  <div class="bar-inner">
+  
+  <ul class="pager pull-left">
+    
+    <li class="prev">
+      <a href="/2019/03/15/js_mvc/" title="前端MV*框架的意义"><i class="icon icon-angle-left" aria-hidden="true"></i><span>&nbsp;&nbsp;上一篇</span></a>
+    </li>
+    
+    
+    <li class="next">
+      <a href="/2018/10/01/js_frame/" title="从零开始编写自己的JavaScript框架（一）"><span>下一篇&nbsp;&nbsp;</span><i class="icon icon-angle-right" aria-hidden="true"></i></a>
+    </li>
+    
+    
+  </ul>
+  
+  
+  <!-- Button trigger modal -->
+  <button type="button" class="btn btn-fancy btn-donate pop-onhover bg-gradient-warning" data-toggle="modal" data-target="#donateModal"><span>赏</span></button>
+  <!-- <div class="wave-icon wave-icon-danger btn-donate" data-toggle="modal" data-target="#donateModal">
+    <div class="wave-circle"><span class="icon"><i class="icon icon-bill"></i></span></div>
+  </div> -->
+  
+  
+  <div class="bar-right">
+    
+    <div class="share-component" data-sites="weibo,qq,wechat,facebook,twitter" data-mobile-sites="weibo,qq,qzone"></div>
+    
+  </div>
+  </div>
+</nav>
+  
+<!-- Modal -->
+<div class="modal modal-center modal-small modal-xs-full fade" id="donateModal" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content donate">
+      <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+      <div class="modal-body">
+        <div class="donate-box">
+          <div class="donate-head">
+            <p>感谢您的支持，我会继续努力的!</p>
+          </div>
+          <div class="tab-content">
+            <div role="tabpanel" class="tab-pane fade active in" id="alipay">
+              <div class="donate-payimg">
+                <img src="/images/donate/alipayimg.jpg" alt="扫码支持" title="扫一扫" />
+              </div>
+              <p class="text-muted mv">扫码打赏，你说多少就多少</p>
+              <p class="text-grey">打开支付宝扫一扫，即可进行扫码打赏哦</p>
+            </div>
+            <div role="tabpanel" class="tab-pane fade" id="wechatpay">
+              <div class="donate-payimg">
+                <img src="/images/donate/wechatpayimg.jpg" alt="扫码支持" title="扫一扫" />
+              </div>
+              <p class="text-muted mv">扫码打赏，你说多少就多少</p>
+              <p class="text-grey">打开微信扫一扫，即可进行扫码打赏哦</p>
+            </div>
+          </div>
+          <div class="donate-footer">
+            <ul class="nav nav-tabs nav-justified" role="tablist">
+              <li role="presentation" class="active">
+                <a href="#alipay" id="alipay-tab" role="tab" data-toggle="tab" aria-controls="alipay" aria-expanded="true"><i class="icon icon-alipay"></i> 支付宝</a>
+              </li>
+              <li role="presentation" class="">
+                <a href="#wechatpay" role="tab" id="wechatpay-tab" data-toggle="tab" aria-controls="wechatpay" aria-expanded="false"><i class="icon icon-wepay"></i> 微信支付</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+</main>
+
+  <footer class="footer" itemscope itemtype="http://schema.org/WPFooter">
+	
+	
+    <ul class="social-links">
+    	
+        <li><a href="https://github.com/Major9506" target="_blank" title="Github" data-toggle=tooltip data-placement=top><i class="icon icon-github"></i></a></li>
+        
+        <li><a href="https://weibo.com/youguke63347" target="_blank" title="Weibo" data-toggle=tooltip data-placement=top><i class="icon icon-weibo"></i></a></li>
+        
+        <li><a href="https://twitter.com/iwebued" target="_blank" title="Twitter" data-toggle=tooltip data-placement=top><i class="icon icon-twitter"></i></a></li>
+        
+        <li><a href="#" target="_blank" title="Behance" data-toggle=tooltip data-placement=top><i class="icon icon-behance"></i></a></li>
+        
+        <li><a href="#" target="_blank" title="Rss" data-toggle=tooltip data-placement=top><i class="icon icon-rss"></i></a></li>
+        
+    </ul>
+
+    <div class="copyright">
+    	
+        <div class="publishby">
+        	Theme by <a href="https://github.com/cofess" target="_blank"> cofess </a>base on <a href="https://github.com/cofess/hexo-theme-pure" target="_blank">pure</a>.
+        </div>
+    </div>
+</footer>
+  <script src="//cdn.jsdelivr.net/npm/jquery@1.12.4/dist/jquery.min.js"></script>
+<script>
+window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>')
+</script>
+<script src="/js/plugin.min.js"></script>
+<script src="/js/application.js"></script>
+
+    <script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: '文章',
+            PAGES: '页面',
+            CATEGORIES: '分类',
+            TAGS: '标签',
+            UNTITLED: '(未命名)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+<script src="/js/insight.js"></script>
+
+
+
+
+
+   
+
+
+
+
+   
+    
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/valine"></script>
+  <script type="text/javascript">
+  var GUEST = ['nick', 'mail', 'link'];
+  var meta = 'nick,mail,link';
+  meta = meta.split(',').filter(function(item) {
+    return GUEST.indexOf(item) > -1;
+  });
+  new Valine({
+    el: '#vcomments',
+    verify: false,
+    notify: false,
+    appId: '',
+    appKey: '',
+    placeholder: 'Just go go',
+    avatar: 'mm',
+    meta: meta,
+    pageSize: '10' || 10,
+    visitor: false
+  });
+  </script>
+
+     
+
+
+
+  <script src="//cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.3.5/dist/jquery.fancybox.min.js"></script>
+  <script>
+  //利用 FancyBox 实现点击图片放大
+  $(document).ready(function() {
+    $('article img').not('[hidden]').not('.panel-body img').each(function() {
+      var $image = $(this);
+      var imageCaption = $image.attr('alt');
+      var $imageWrapLink = $image.parent('a');
+      if ($imageWrapLink.length < 1) {
+        var src = this.getAttribute('src');
+        var idx = src.lastIndexOf('?');
+        if (idx != -1) {
+          src = src.substring(0, idx);
+        }
+        $imageWrapLink = $image.wrap('<a href="' + src + '"></a>').parent('a');
+      }
+      $imageWrapLink.attr('data-fancybox', 'images');
+      if (imageCaption) {
+        $imageWrapLink.attr('data-caption', imageCaption);
+      }
+    });
+    $().fancybox({
+      selector: '[data-fancybox="images"]',
+      hash: false,
+      loop: false,
+    });
+  });
+  </script>
+
+
+
+
+
+</body>
+</html>

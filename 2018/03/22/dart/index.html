@@ -1,0 +1,825 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head>
+  <meta charset="utf-8">
+  
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="Cache-Control" content="no-transform" />
+  <meta http-equiv="Cache-Control" content="no-siteapp" />
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="format-detection" content="telephone=no,email=no,adress=no">
+  <!-- Color theme for statusbar -->
+  <meta name="theme-color" content="#000000" />
+  <!-- 强制页面在当前窗口以独立页面显示,防止别人在框架里调用页面 -->
+  <meta http-equiv="window-target" content="_top" />
+  
+  
+  <title>Dart &amp; flutter 编码风格指南 | Hexo</title>
+  <meta name="description" content="&amp;#x4EE3;&amp;#x7801;&amp;#x98CE;&amp;#x683C;&amp;#x6807;&amp;#x8BC6;&amp;#x7B26;&amp;#x4E09;&amp;#x79CD;&amp;#x7C7B;&amp;#x578B;&amp;#x5927;&amp;#x9A7C;&amp;#x5CF0;&amp;#x7C7B;&amp;#x3001;&amp;#x679A;&amp;#x4E3E;&amp;#x3001;typedef &amp;#x548C;&amp;#x7C7B;&amp;#x578B;&amp;#x53C2;&amp;#x6570;">
+<meta name="keywords" content="编码风格指南">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Dart &amp; flutter 编码风格指南">
+<meta property="og:url" content="https://major9506.github.io/2018/03/22/dart/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="&amp;#x4EE3;&amp;#x7801;&amp;#x98CE;&amp;#x683C;&amp;#x6807;&amp;#x8BC6;&amp;#x7B26;&amp;#x4E09;&amp;#x79CD;&amp;#x7C7B;&amp;#x578B;&amp;#x5927;&amp;#x9A7C;&amp;#x5CF0;&amp;#x7C7B;&amp;#x3001;&amp;#x679A;&amp;#x4E3E;&amp;#x3001;typedef &amp;#x548C;&amp;#x7C7B;&amp;#x578B;&amp;#x53C2;&amp;#x6570;">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2022-08-11T07:24:22.401Z">
+<meta name="twitter:card" content="summary">
+  <!-- Canonical links -->
+  <link rel="canonical" href="https://major9506.github.io/2018/03/22/dart/index.html">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png" type="image/x-icon">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+  
+  
+    <link href="//cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.3.5/dist/jquery.fancybox.min.css" rel="stylesheet">
+  
+  
+</head>
+
+
+<body class="main-center" itemscope itemtype="http://schema.org/WebPage">
+  <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+  <div class="slimContent">
+    <div class="navbar-header">
+      
+      
+      <div class="profile-block text-center">
+        <a id="avatar" href="https://github.com/Major9506" target="_blank">
+          <img class="img-circle img-rotate" src="/images/avatar.png" width="200" height="200">
+        </a>
+        <h2 id="name" class="hidden-xs hidden-sm">Major_</h2>
+        <h3 id="title" class="hidden-xs hidden-sm hidden-md">前端/Node/Python</h3>
+        <small id="location" class="text-muted hidden-xs hidden-sm"><i class="icon icon-map-marker"></i> ChongQing, China</small>
+      </div>
+      
+      <div class="search" id="search-form-wrap">
+
+    <form class="search-form sidebar-form">
+        <div class="input-group">
+            <input type="text" class="search-form-input form-control" placeholder="搜索" />
+            <span class="input-group-btn">
+                <button type="submit" class="search-form-submit btn btn-flat" onclick="return false;"><i class="icon icon-search"></i></button>
+            </span>
+        </div>
+    </form>
+    <div class="ins-search">
+  <div class="ins-search-mask"></div>
+  <div class="ins-search-container">
+    <div class="ins-input-wrapper">
+      <input type="text" class="ins-search-input" placeholder="想要查找什么..." x-webkit-speech />
+      <button type="button" class="close ins-close ins-selectable" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+    </div>
+    <div class="ins-section-wrapper">
+      <div class="ins-section-container"></div>
+    </div>
+  </div>
+</div>
+
+
+</div>
+      <button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target="#main-navbar" aria-controls="main-navbar" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+    </div>
+    <nav id="main-navbar" class="collapse navbar-collapse" itemscope itemtype="http://schema.org/SiteNavigationElement" role="navigation">
+      <ul class="nav navbar-nav main-nav ">
+        
+        
+        <li class="menu-item menu-item-home">
+          <a href="/.">
+            
+            <i class="icon icon-home-fill"></i>
+            
+            <span class="menu-title">首页</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives">
+            
+            <i class="icon icon-archives-fill"></i>
+            
+            <span class="menu-title">归档</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories">
+            
+            <i class="icon icon-folder"></i>
+            
+            <span class="menu-title">分类</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags">
+            
+            <i class="icon icon-tags"></i>
+            
+            <span class="menu-title">标签</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-repository">
+          <a href="/repository">
+            
+            <i class="icon icon-project"></i>
+            
+            <span class="menu-title">项目</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-books">
+          <a href="/books">
+            
+            <i class="icon icon-book-fill"></i>
+            
+            <span class="menu-title">书单</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-links">
+          <a href="/links">
+            
+            <i class="icon icon-friendship"></i>
+            
+            <span class="menu-title">友链</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about">
+            
+            <i class="icon icon-cup-fill"></i>
+            
+            <span class="menu-title">关于</span>
+          </a>
+        </li>
+        
+      </ul>
+      
+	
+    <ul class="social-links">
+    	
+        <li><a href="https://github.com/Major9506" target="_blank" title="Github" data-toggle=tooltip data-placement=top><i class="icon icon-github"></i></a></li>
+        
+        <li><a href="https://weibo.com/youguke63347" target="_blank" title="Weibo" data-toggle=tooltip data-placement=top><i class="icon icon-weibo"></i></a></li>
+        
+        <li><a href="https://twitter.com/iwebued" target="_blank" title="Twitter" data-toggle=tooltip data-placement=top><i class="icon icon-twitter"></i></a></li>
+        
+        <li><a href="#" target="_blank" title="Behance" data-toggle=tooltip data-placement=top><i class="icon icon-behance"></i></a></li>
+        
+        <li><a href="#" target="_blank" title="Rss" data-toggle=tooltip data-placement=top><i class="icon icon-rss"></i></a></li>
+        
+    </ul>
+
+    </nav>
+  </div>
+</header>
+
+  
+    <aside class="sidebar" itemscope itemtype="http://schema.org/WPSideBar">
+  <div class="slimContent">
+    
+      <div class="widget">
+    <h3 class="widget-title">公告</h3>
+    <div class="widget-body">
+        <div id="board">
+            <div class="content">
+                <p>欢迎交流与分享经验!</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">分类</h3>
+    <div class="widget-body">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/">前端</a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%BC%96%E7%A8%8B%E8%A7%84%E8%8C%83/">编程规范</a><span class="category-list-count">6</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget-body">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/" rel="tag">git</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/javascript/" rel="tag">javascript</a><span class="tag-list-count">6</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/node/" rel="tag">node</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%BC%96%E7%A0%81%E9%A3%8E%E6%A0%BC%E6%8C%87%E5%8D%97/" rel="tag">编码风格指南</a><span class="tag-list-count">5</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget-body tagcloud">
+      <a href="/tags/git/" style="font-size: 13px;">git</a> <a href="/tags/javascript/" style="font-size: 14px;">javascript</a> <a href="/tags/node/" style="font-size: 13px;">node</a> <a href="/tags/%E7%BC%96%E7%A0%81%E9%A3%8E%E6%A0%BC%E6%8C%87%E5%8D%97/" style="font-size: 13.5px;">编码风格指南</a>
+    </div>
+  </div>
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget-body">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/08/">八月 2022</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/10/">十月 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/08/">八月 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/05/">五月 2019</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/03/">三月 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/">十月 2018</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/08/">八月 2018</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/05/">五月 2018</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">三月 2018</a><span class="archive-list-count">3</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget-body">
+      <ul class="recent-post-list list-unstyled no-thumbnail">
+        
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/%E7%BC%96%E7%A8%8B%E8%A7%84%E8%8C%83/">编程规范</a>
+              </p>
+              <p class="item-title">
+                <a href="/2022/08/11/high_quality_code/" class="title">如何编写高质量代码</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2022-08-10T16:00:00.000Z" itemprop="datePublished">2022-08-11</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/%E5%89%8D%E7%AB%AF/">前端</a>
+              </p>
+              <p class="item-title">
+                <a href="/2019/10/15/mj_cli/" class="title">打造自己的项目脚手架工具(@major_/cli)</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2019-10-14T16:00:00.000Z" itemprop="datePublished">2019-10-15</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/%E5%89%8D%E7%AB%AF/">前端</a>
+              </p>
+              <p class="item-title">
+                <a href="/2019/08/01/architecture/" class="title">前端架构那些事儿</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2019-07-31T16:00:00.000Z" itemprop="datePublished">2019-08-01</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/%E5%89%8D%E7%AB%AF/">前端</a>
+              </p>
+              <p class="item-title">
+                <a href="/2019/05/05/assembly_02/" class="title">Web应用的组件化开发（二）</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2019-05-04T16:00:00.000Z" itemprop="datePublished">2019-05-05</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/%E5%89%8D%E7%AB%AF/">前端</a>
+              </p>
+              <p class="item-title">
+                <a href="/2019/05/01/assembly_01/" class="title">Web应用的组件化开发（一）</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2019-04-30T16:00:00.000Z" itemprop="datePublished">2019-05-01</time>
+              </p>
+            </div>
+          </li>
+          
+      </ul>
+    </div>
+  </div>
+  
+
+    
+  </div>
+</aside>
+
+  
+  
+<main class="main" role="main">
+  <div class="content">
+  <article id="post-dart" class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
+    
+    <div class="article-header">
+      
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Dart &amp; flutter 编码风格指南
+    </h1>
+  
+
+      
+      <div class="article-meta">
+        <span class="article-date">
+    <i class="icon icon-calendar-check"></i>
+	<a href="/2018/03/22/dart/" class="article-date">
+	  <time datetime="2018-03-21T16:00:00.000Z" itemprop="datePublished">2018-03-22</time>
+	</a>
+</span>
+        
+  <span class="article-category">
+    <i class="icon icon-folder"></i>
+    <a class="article-category-link" href="/categories/%E7%BC%96%E7%A8%8B%E8%A7%84%E8%8C%83/">编程规范</a>
+  </span>
+
+        
+  <span class="article-tag">
+    <i class="icon icon-tags"></i>
+	<a class="article-tag-link" href="/tags/%E7%BC%96%E7%A0%81%E9%A3%8E%E6%A0%BC%E6%8C%87%E5%8D%97/" rel="tag">编码风格指南</a>
+  </span>
+
+
+        
+
+        <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2018/03/22/dart/#comments" class="article-comment-link">评论</a></span>
+        
+      </div>
+    </div>
+    <div class="article-entry marked-body" itemprop="articleBody">
+      
+        <h2 id="&#x4EE3;&#x7801;&#x98CE;&#x683C;"><a href="#&#x4EE3;&#x7801;&#x98CE;&#x683C;" class="headerlink" title="&#x4EE3;&#x7801;&#x98CE;&#x683C;"></a>&#x4EE3;&#x7801;&#x98CE;&#x683C;</h2><h3 id="&#x6807;&#x8BC6;&#x7B26;&#x4E09;&#x79CD;&#x7C7B;&#x578B;"><a href="#&#x6807;&#x8BC6;&#x7B26;&#x4E09;&#x79CD;&#x7C7B;&#x578B;" class="headerlink" title="&#x6807;&#x8BC6;&#x7B26;&#x4E09;&#x79CD;&#x7C7B;&#x578B;"></a>&#x6807;&#x8BC6;&#x7B26;&#x4E09;&#x79CD;&#x7C7B;&#x578B;</h3><h4 id="&#x5927;&#x9A7C;&#x5CF0;"><a href="#&#x5927;&#x9A7C;&#x5CF0;" class="headerlink" title="&#x5927;&#x9A7C;&#x5CF0;"></a>&#x5927;&#x9A7C;&#x5CF0;</h4><p>&#x7C7B;&#x3001;&#x679A;&#x4E3E;&#x3001;typedef &#x548C;&#x7C7B;&#x578B;&#x53C2;&#x6570;</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">SliderMenu</span> </span>{ ... }</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">HttpRequest</span> </span>{ ... }</span><br><span class="line"></span><br><span class="line"><span class="keyword">typedef</span> Predicate = <span class="built_in">bool</span> <span class="built_in">Function</span>&lt;T&gt;(T value);</span><br></pre></td></tr></table></figure>
+
+<p>&#x5305;&#x62EC;&#x7528;&#x4E8E;&#x5143;&#x6570;&#x636E;&#x6CE8;&#x91CA;&#x7684;&#x7C7B;</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Foo</span> </span>{</span><br><span class="line">  <span class="keyword">const</span> Foo([arg]);</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="meta">@Foo</span>(anArg)</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">A</span> </span>{ ... }</span><br><span class="line"></span><br><span class="line"><span class="meta">@Foo</span>()</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">B</span> </span>{ ... }</span><br></pre></td></tr></table></figure>
+
+<h4 id="&#x4F7F;&#x7528;&#x5C0F;&#x5199;&#x52A0;&#x4E0B;&#x5212;&#x7EBF;&#x6765;&#x547D;&#x540D;&#x5E93;&#x548C;&#x6E90;&#x6587;&#x4EF6;"><a href="#&#x4F7F;&#x7528;&#x5C0F;&#x5199;&#x52A0;&#x4E0B;&#x5212;&#x7EBF;&#x6765;&#x547D;&#x540D;&#x5E93;&#x548C;&#x6E90;&#x6587;&#x4EF6;" class="headerlink" title="&#x4F7F;&#x7528;&#x5C0F;&#x5199;&#x52A0;&#x4E0B;&#x5212;&#x7EBF;&#x6765;&#x547D;&#x540D;&#x5E93;&#x548C;&#x6E90;&#x6587;&#x4EF6;"></a>&#x4F7F;&#x7528;&#x5C0F;&#x5199;&#x52A0;&#x4E0B;&#x5212;&#x7EBF;&#x6765;&#x547D;&#x540D;&#x5E93;&#x548C;&#x6E90;&#x6587;&#x4EF6;</h4><figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">library</span> peg_parser.source_scanner;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> <span class="string">&apos;file_system.dart&apos;</span>;</span><br><span class="line"><span class="keyword">import</span> <span class="string">&apos;slider_menu.dart&apos;</span>;</span><br></pre></td></tr></table></figure>
+
+<p>&#x4E0D;&#x63A8;&#x8350;&#x5982;&#x4E0B;&#x5199;&#x6CD5;&#xFF1A;</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">library</span> pegparser.SourceScanner;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> <span class="string">&apos;file-system.dart&apos;</span>;</span><br><span class="line"><span class="keyword">import</span> <span class="string">&apos;SliderMenu.dart&apos;</span>;</span><br></pre></td></tr></table></figure>
+
+<h4 id="&#x4F7F;&#x7528;&#x5C0F;&#x5199;&#x52A0;&#x4E0B;&#x5212;&#x7EBF;&#x6765;&#x547D;&#x540D;&#x5BFC;&#x5165;&#x524D;&#x7F00;"><a href="#&#x4F7F;&#x7528;&#x5C0F;&#x5199;&#x52A0;&#x4E0B;&#x5212;&#x7EBF;&#x6765;&#x547D;&#x540D;&#x5BFC;&#x5165;&#x524D;&#x7F00;" class="headerlink" title="&#x4F7F;&#x7528;&#x5C0F;&#x5199;&#x52A0;&#x4E0B;&#x5212;&#x7EBF;&#x6765;&#x547D;&#x540D;&#x5BFC;&#x5165;&#x524D;&#x7F00;"></a>&#x4F7F;&#x7528;&#x5C0F;&#x5199;&#x52A0;&#x4E0B;&#x5212;&#x7EBF;&#x6765;&#x547D;&#x540D;&#x5BFC;&#x5165;&#x524D;&#x7F00;</h4><figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> <span class="string">&apos;dart:math&apos;</span> <span class="keyword">as</span> math;</span><br><span class="line"><span class="keyword">import</span> <span class="string">&apos;package:angular_components/angular_components&apos;</span></span><br><span class="line">    <span class="keyword">as</span> angular_components;</span><br><span class="line"><span class="keyword">import</span> <span class="string">&apos;package:js/js.dart&apos;</span> <span class="keyword">as</span> js;</span><br></pre></td></tr></table></figure>
+
+<p>&#x4E0D;&#x63A8;&#x8350;&#x5982;&#x4E0B;&#x5199;&#x6CD5;&#xFF1A;</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> <span class="string">&apos;dart:math&apos;</span> <span class="keyword">as</span> Math;</span><br><span class="line"><span class="keyword">import</span> <span class="string">&apos;package:angular_components/angular_components&apos;</span></span><br><span class="line">    <span class="keyword">as</span> angularComponents;</span><br><span class="line"><span class="keyword">import</span> <span class="string">&apos;package:js/js.dart&apos;</span> <span class="keyword">as</span> JS;</span><br></pre></td></tr></table></figure>
+
+<h4 id="&#x4F7F;&#x7528;&#x5C0F;&#x9A7C;&#x5CF0;&#x6CD5;&#x547D;&#x540D;&#x5176;&#x4ED6;&#x6807;&#x8BC6;&#x7B26;"><a href="#&#x4F7F;&#x7528;&#x5C0F;&#x9A7C;&#x5CF0;&#x6CD5;&#x547D;&#x540D;&#x5176;&#x4ED6;&#x6807;&#x8BC6;&#x7B26;" class="headerlink" title="&#x4F7F;&#x7528;&#x5C0F;&#x9A7C;&#x5CF0;&#x6CD5;&#x547D;&#x540D;&#x5176;&#x4ED6;&#x6807;&#x8BC6;&#x7B26;"></a>&#x4F7F;&#x7528;&#x5C0F;&#x9A7C;&#x5CF0;&#x6CD5;&#x547D;&#x540D;&#x5176;&#x4ED6;&#x6807;&#x8BC6;&#x7B26;</h4><figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> item;</span><br><span class="line"></span><br><span class="line">HttpRequest httpRequest;</span><br><span class="line"></span><br><span class="line"><span class="keyword">void</span> align(<span class="built_in">bool</span> clearItems) {</span><br><span class="line">  <span class="comment">// ...</span></span><br><span class="line">}</span><br></pre></td></tr></table></figure>
+
+<h4 id="&#x4F18;&#x5148;&#x4F7F;&#x7528;&#x5C0F;&#x9A7C;&#x5CF0;&#x6CD5;&#x4F5C;&#x4E3A;&#x5E38;&#x91CF;&#x547D;&#x540D;"><a href="#&#x4F18;&#x5148;&#x4F7F;&#x7528;&#x5C0F;&#x9A7C;&#x5CF0;&#x6CD5;&#x4F5C;&#x4E3A;&#x5E38;&#x91CF;&#x547D;&#x540D;" class="headerlink" title="&#x4F18;&#x5148;&#x4F7F;&#x7528;&#x5C0F;&#x9A7C;&#x5CF0;&#x6CD5;&#x4F5C;&#x4E3A;&#x5E38;&#x91CF;&#x547D;&#x540D;"></a>&#x4F18;&#x5148;&#x4F7F;&#x7528;&#x5C0F;&#x9A7C;&#x5CF0;&#x6CD5;&#x4F5C;&#x4E3A;&#x5E38;&#x91CF;&#x547D;&#x540D;</h4><figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> pi = <span class="number">3.14</span>;</span><br><span class="line"><span class="keyword">const</span> defaultTimeout = <span class="number">1000</span>;</span><br><span class="line"><span class="keyword">final</span> urlScheme = <span class="built_in">RegExp</span>(<span class="string">&apos;^([a-z]+):&apos;</span>);</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Dice</span> </span>{</span><br><span class="line">  <span class="keyword">static</span> <span class="keyword">final</span> numberGenerator = Random();</span><br><span class="line">}</span><br></pre></td></tr></table></figure>
+
+<p>&#x4E0D;&#x63A8;&#x8350;&#x5982;&#x4E0B;&#x5199;&#x6CD5;&#xFF1A;</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> PI = <span class="number">3.14</span>;</span><br><span class="line"><span class="keyword">const</span> DefaultTimeout = <span class="number">1000</span>;</span><br><span class="line"><span class="keyword">final</span> URL_SCHEME = <span class="built_in">RegExp</span>(<span class="string">&apos;^([a-z]+):&apos;</span>);</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Dice</span> </span>{</span><br><span class="line">  <span class="keyword">static</span> <span class="keyword">final</span> NUMBER_GENERATOR = Random();</span><br><span class="line">}</span><br></pre></td></tr></table></figure>
+
+<h4 id="&#x4E0D;&#x4F7F;&#x7528;&#x524D;&#x7F00;&#x5B57;&#x6BCD;"><a href="#&#x4E0D;&#x4F7F;&#x7528;&#x524D;&#x7F00;&#x5B57;&#x6BCD;" class="headerlink" title="&#x4E0D;&#x4F7F;&#x7528;&#x524D;&#x7F00;&#x5B57;&#x6BCD;"></a>&#x4E0D;&#x4F7F;&#x7528;&#x524D;&#x7F00;&#x5B57;&#x6BCD;</h4><p>&#x56E0;&#x4E3A; Dart &#x53EF;&#x4EE5;&#x544A;&#x8BC9;&#x60A8;&#x58F0;&#x660E;&#x7684;&#x7C7B;&#x578B;&#x3001;&#x8303;&#x56F4;&#x3001;&#x53EF;&#x53D8;&#x6027;&#x548C;&#x5176;&#x4ED6;&#x5C5E;&#x6027;&#xFF0C;&#x6240;&#x4EE5;&#x6CA1;&#x6709;&#x7406;&#x7531;&#x5C06;&#x8FD9;&#x4E9B;&#x5C5E;&#x6027;&#x7F16;&#x7801;&#x4E3A;&#x6807;&#x8BC6;&#x7B26;&#x540D;&#x79F0;&#x3002;</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">defaultTimeout</span><br></pre></td></tr></table></figure>
+
+<p>&#x4E0D;&#x63A8;&#x8350;&#x5982;&#x4E0B;&#x5199;&#x6CD5;&#xFF1A;</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kDefaultTimeout</span><br></pre></td></tr></table></figure>
+
+<h3 id="&#x6392;&#x5E8F;"><a href="#&#x6392;&#x5E8F;" class="headerlink" title="&#x6392;&#x5E8F;"></a>&#x6392;&#x5E8F;</h3><p>&#x4E3A;&#x4E86;&#x4F7F;&#x4F60;&#x7684;&#x6587;&#x4EF6;&#x524D;&#x8A00;&#x4FDD;&#x6301;&#x6574;&#x6D01;&#xFF0C;&#x6211;&#x4EEC;&#x6709;&#x89C4;&#x5B9A;&#x7684;&#x547D;&#x4EE4;&#xFF0C;&#x6307;&#x793A;&#x5E94;&#x8BE5;&#x51FA;&#x73B0;&#x5728;&#x5176;&#x4E2D;&#x3002;&#x6BCF;&#x4E2A;&#x201C;&#x90E8;&#x5206;&#x201D;&#x5E94;&#x8BE5;&#x7528;&#x7A7A;&#x884C;&#x5206;&#x9694;&#x3002;</p>
+<h4 id="&#x5728;&#x5176;&#x4ED6;&#x5F15;&#x5165;&#x4E4B;&#x524D;&#x5F15;&#x5165;&#x6240;&#x9700;&#x7684;-dart-&#x5E93;"><a href="#&#x5728;&#x5176;&#x4ED6;&#x5F15;&#x5165;&#x4E4B;&#x524D;&#x5F15;&#x5165;&#x6240;&#x9700;&#x7684;-dart-&#x5E93;" class="headerlink" title="&#x5728;&#x5176;&#x4ED6;&#x5F15;&#x5165;&#x4E4B;&#x524D;&#x5F15;&#x5165;&#x6240;&#x9700;&#x7684; dart &#x5E93;"></a>&#x5728;&#x5176;&#x4ED6;&#x5F15;&#x5165;&#x4E4B;&#x524D;&#x5F15;&#x5165;&#x6240;&#x9700;&#x7684; dart &#x5E93;</h4><figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> <span class="string">&apos;dart:async&apos;</span>;</span><br><span class="line"><span class="keyword">import</span> <span class="string">&apos;dart:html&apos;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> <span class="string">&apos;package:bar/bar.dart&apos;</span>;</span><br><span class="line"><span class="keyword">import</span> <span class="string">&apos;package:foo/foo.dart&apos;</span>;</span><br></pre></td></tr></table></figure>
+
+<h4 id="&#x5728;&#x76F8;&#x5BF9;&#x5F15;&#x5165;&#x4E4B;&#x524D;&#x5148;&#x5F15;&#x5165;&#x5728;&#x5305;&#x4E2D;&#x7684;&#x5E93;"><a href="#&#x5728;&#x76F8;&#x5BF9;&#x5F15;&#x5165;&#x4E4B;&#x524D;&#x5148;&#x5F15;&#x5165;&#x5728;&#x5305;&#x4E2D;&#x7684;&#x5E93;" class="headerlink" title="&#x5728;&#x76F8;&#x5BF9;&#x5F15;&#x5165;&#x4E4B;&#x524D;&#x5148;&#x5F15;&#x5165;&#x5728;&#x5305;&#x4E2D;&#x7684;&#x5E93;"></a>&#x5728;&#x76F8;&#x5BF9;&#x5F15;&#x5165;&#x4E4B;&#x524D;&#x5148;&#x5F15;&#x5165;&#x5728;&#x5305;&#x4E2D;&#x7684;&#x5E93;</h4><figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> <span class="string">&apos;package:bar/bar.dart&apos;</span>;</span><br><span class="line"><span class="keyword">import</span> <span class="string">&apos;package:foo/foo.dart&apos;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> <span class="string">&apos;util.dart&apos;</span>;</span><br></pre></td></tr></table></figure>
+
+<h4 id="&#x7B2C;&#x4E09;&#x65B9;&#x5305;&#x7684;&#x5BFC;&#x5165;&#x5148;&#x4E8E;&#x5176;&#x4ED6;&#x5305;"><a href="#&#x7B2C;&#x4E09;&#x65B9;&#x5305;&#x7684;&#x5BFC;&#x5165;&#x5148;&#x4E8E;&#x5176;&#x4ED6;&#x5305;" class="headerlink" title="&#x7B2C;&#x4E09;&#x65B9;&#x5305;&#x7684;&#x5BFC;&#x5165;&#x5148;&#x4E8E;&#x5176;&#x4ED6;&#x5305;"></a>&#x7B2C;&#x4E09;&#x65B9;&#x5305;&#x7684;&#x5BFC;&#x5165;&#x5148;&#x4E8E;&#x5176;&#x4ED6;&#x5305;</h4><figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> <span class="string">&apos;package:bar/bar.dart&apos;</span>;</span><br><span class="line"><span class="keyword">import</span> <span class="string">&apos;package:foo/foo.dart&apos;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> <span class="string">&apos;package:my_package/util.dart&apos;</span>;</span><br></pre></td></tr></table></figure>
+
+<h4 id="&#x5728;&#x6240;&#x6709;&#x5BFC;&#x5165;&#x4E4B;&#x540E;&#xFF0C;&#x5728;&#x5355;&#x72EC;&#x7684;&#x90E8;&#x5206;&#x4E2D;&#x6307;&#x5B9A;&#x5BFC;&#x51FA;"><a href="#&#x5728;&#x6240;&#x6709;&#x5BFC;&#x5165;&#x4E4B;&#x540E;&#xFF0C;&#x5728;&#x5355;&#x72EC;&#x7684;&#x90E8;&#x5206;&#x4E2D;&#x6307;&#x5B9A;&#x5BFC;&#x51FA;" class="headerlink" title="&#x5728;&#x6240;&#x6709;&#x5BFC;&#x5165;&#x4E4B;&#x540E;&#xFF0C;&#x5728;&#x5355;&#x72EC;&#x7684;&#x90E8;&#x5206;&#x4E2D;&#x6307;&#x5B9A;&#x5BFC;&#x51FA;"></a>&#x5728;&#x6240;&#x6709;&#x5BFC;&#x5165;&#x4E4B;&#x540E;&#xFF0C;&#x5728;&#x5355;&#x72EC;&#x7684;&#x90E8;&#x5206;&#x4E2D;&#x6307;&#x5B9A;&#x5BFC;&#x51FA;</h4><figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> <span class="string">&apos;src/error.dart&apos;</span>;</span><br><span class="line"><span class="keyword">import</span> <span class="string">&apos;src/foo_bar.dart&apos;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="string">&apos;src/error.dart&apos;</span>;</span><br></pre></td></tr></table></figure>
+
+<p>&#x4E0D;&#x63A8;&#x8350;&#x5982;&#x4E0B;&#x5199;&#x6CD5;&#xFF1A;</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> <span class="string">&apos;src/error.dart&apos;</span>;</span><br><span class="line"><span class="keyword">export</span> <span class="string">&apos;src/error.dart&apos;</span>;</span><br><span class="line"><span class="keyword">import</span> <span class="string">&apos;src/foo_bar.dart&apos;</span>;</span><br></pre></td></tr></table></figure>
+
+<h3 id="&#x6240;&#x6709;&#x6D41;&#x63A7;&#x5236;&#x7ED3;&#x6784;&#xFF0C;&#x8BF7;&#x4F7F;&#x7528;&#x5927;&#x62EC;&#x53F7;"><a href="#&#x6240;&#x6709;&#x6D41;&#x63A7;&#x5236;&#x7ED3;&#x6784;&#xFF0C;&#x8BF7;&#x4F7F;&#x7528;&#x5927;&#x62EC;&#x53F7;" class="headerlink" title="&#x6240;&#x6709;&#x6D41;&#x63A7;&#x5236;&#x7ED3;&#x6784;&#xFF0C;&#x8BF7;&#x4F7F;&#x7528;&#x5927;&#x62EC;&#x53F7;"></a>&#x6240;&#x6709;&#x6D41;&#x63A7;&#x5236;&#x7ED3;&#x6784;&#xFF0C;&#x8BF7;&#x4F7F;&#x7528;&#x5927;&#x62EC;&#x53F7;</h3><p>&#x8FD9;&#x6837;&#x505A;&#x53EF;&#x4EE5;&#x907F;&#x514D;&#x60AC;&#x6D6E;&#x7684; else &#x95EE;&#x9898;</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (isWeekDay) {</span><br><span class="line">  <span class="built_in">print</span>(<span class="string">&apos;Bike to work!&apos;</span>);</span><br><span class="line">} <span class="keyword">else</span> {</span><br><span class="line">  <span class="built_in">print</span>(<span class="string">&apos;Go dancing or read a book!&apos;</span>);</span><br><span class="line">}</span><br></pre></td></tr></table></figure>
+
+<h4 id="&#x4F8B;&#x5916;"><a href="#&#x4F8B;&#x5916;" class="headerlink" title="&#x4F8B;&#x5916;"></a>&#x4F8B;&#x5916;</h4><p>&#x4E00;&#x4E2A; if &#x8BED;&#x53E5;&#x6CA1;&#x6709; else &#x5B50;&#x53E5;&#xFF0C;&#x5176;&#x4E2D;&#x6574;&#x4E2A; if &#x8BED;&#x53E5;&#x548C; then &#x4E3B;&#x4F53;&#x90FD;&#x9002;&#x5408;&#x4E00;&#x884C;&#x3002;&#x5728;&#x8FD9;&#x79CD;&#x60C5;&#x51B5;&#x4E0B;&#xFF0C;&#x5982;&#x679C;&#x4F60;&#x559C;&#x6B22;&#x7684;&#x8BDD;&#xFF0C;&#x4F60;&#x53EF;&#x4EE5;&#x53BB;&#x6389;&#x5927;&#x62EC;&#x53F7;</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (arg == <span class="keyword">null</span>) <span class="keyword">return</span> defaultValue;</span><br></pre></td></tr></table></figure>
+
+<p>&#x5982;&#x679C;&#x6D41;&#x7A0B;&#x4F53;&#x8D85;&#x51FA;&#x4E86;&#x4E00;&#x884C;&#x9700;&#x8981;&#x5206;&#x5212;&#x8BF7;&#x4F7F;&#x7528;&#x5927;&#x62EC;&#x53F7;&#xFF1A;</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (overflowChars != other.overflowChars) {</span><br><span class="line">  <span class="keyword">return</span> overflowChars &lt; other.overflowChars;</span><br><span class="line">}</span><br></pre></td></tr></table></figure>
+
+<p>&#x4E0D;&#x63A8;&#x8350;&#x5982;&#x4E0B;&#x5199;&#x6CD5;&#xFF1A;</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (overflowChars != other.overflowChars)</span><br><span class="line">  <span class="keyword">return</span> overflowChars &lt; other.overflowChars;</span><br></pre></td></tr></table></figure>
+
+<h2 id="&#x6CE8;&#x91CA;"><a href="#&#x6CE8;&#x91CA;" class="headerlink" title="&#x6CE8;&#x91CA;"></a>&#x6CE8;&#x91CA;</h2><h3 id="&#x8981;&#x50CF;&#x53E5;&#x5B50;&#x4E00;&#x6837;&#x683C;&#x5F0F;&#x5316;"><a href="#&#x8981;&#x50CF;&#x53E5;&#x5B50;&#x4E00;&#x6837;&#x683C;&#x5F0F;&#x5316;" class="headerlink" title="&#x8981;&#x50CF;&#x53E5;&#x5B50;&#x4E00;&#x6837;&#x683C;&#x5F0F;&#x5316;"></a>&#x8981;&#x50CF;&#x53E5;&#x5B50;&#x4E00;&#x6837;&#x683C;&#x5F0F;&#x5316;</h3><p>&#x9664;&#x975E;&#x662F;&#x533A;&#x5206;&#x5927;&#x5C0F;&#x5199;&#x7684;&#x6807;&#x8BC6;&#x7B26;&#xFF0C;&#x5426;&#x5219;&#x7B2C;&#x4E00;&#x4E2A;&#x5355;&#x8BCD;&#x8981;&#x5927;&#x5199;&#x3002;&#x4EE5;&#x53E5;&#x53F7;&#x7ED3;&#x5C3E;(&#x6216;&#x201C;!&#x201D;&#x6216;&#x201C;?&#x201D;)&#x3002;&#x5BF9;&#x4E8E;&#x6240;&#x6709;&#x7684;&#x6CE8;&#x91CA;&#x90FD;&#x662F;&#x5982;&#x6B64;&#xFF1A;doc &#x6CE8;&#x91CA;&#x3001;&#x5185;&#x8054;&#x5185;&#x5BB9;&#xFF0C;&#x751A;&#x81F3; TODOs&#x3002;&#x5373;&#x4F7F;&#x662F;&#x4E00;&#x4E2A;&#x53E5;&#x5B50;&#x7247;&#x6BB5;&#x3002;</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">greet(name) {</span><br><span class="line">  <span class="comment">// Assume we have a valid name.</span></span><br><span class="line">  <span class="built_in">print</span>(<span class="string">&apos;Hi, <span class="subst">$name</span>!&apos;</span>);</span><br><span class="line">}</span><br></pre></td></tr></table></figure>
+
+<p>&#x4E0D;&#x63A8;&#x8350;&#x5982;&#x4E0B;&#x5199;&#x6CD5;&#xFF1A;</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">greet(name) {</span><br><span class="line">  <span class="comment">/* Assume we have a valid name. */</span></span><br><span class="line">  <span class="built_in">print</span>(<span class="string">&apos;Hi, <span class="subst">$name</span>!&apos;</span>);</span><br><span class="line">}</span><br></pre></td></tr></table></figure>
+
+<p>&#x53EF;&#x4EE5;&#x4F7F;&#x7528;&#x5757;&#x6CE8;&#x91CA;(/&#x2026;/)&#x4E34;&#x65F6;&#x6CE8;&#x91CA;&#x6389;&#x4E00;&#x6BB5;&#x4EE3;&#x7801;&#xFF0C;&#x4F46;&#x662F;&#x6240;&#x6709;&#x5176;&#x4ED6;&#x6CE8;&#x91CA;&#x90FD;&#x5E94;&#x8BE5;&#x4F7F;&#x7528;//</p>
+<h3 id="Doc-&#x6CE8;&#x91CA;"><a href="#Doc-&#x6CE8;&#x91CA;" class="headerlink" title="Doc &#x6CE8;&#x91CA;"></a>Doc &#x6CE8;&#x91CA;</h3><p>&#x4F7F;&#x7528;///&#x6587;&#x6863;&#x6CE8;&#x91CA;&#x6765;&#x8BB0;&#x5F55;&#x6210;&#x5458;&#x548C;&#x7C7B;&#x578B;&#x3002;</p>
+<p>&#x4F7F;&#x7528; doc &#x6CE8;&#x91CA;&#x800C;&#x4E0D;&#x662F;&#x5E38;&#x89C4;&#x6CE8;&#x91CA;&#xFF0C;&#x53EF;&#x4EE5;&#x8BA9; dartdoc &#x627E;&#x5230;&#x5E76;&#x751F;&#x6210;&#x6587;&#x6863;&#x3002;</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/// <span class="markdown">The number of characters in this chunk when unsplit.</span></span></span><br><span class="line"><span class="built_in">int</span> <span class="keyword">get</span> length =&gt; ...</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>&#x7531;&#x4E8E;&#x5386;&#x53F2;&#x539F;&#x56E0;&#xFF0C;&#x8FBE;&#x7279;&#x8305;&#x65AF;&#x5B66;&#x9662;&#x652F;&#x6301;&#x9053;&#x683C;&#x8BC4;&#x8BBA;&#x7684;&#x4E24;&#x79CD;&#x8BED;&#x6CD5;:///(&#x201C;C#&#x98CE;&#x683C;&#x201D;)&#x548C;/<strong>&#x2026;* /(&#x201C;JavaDoc &#x98CE;&#x683C;&#x201D;)&#x3002;&#x6211;&#x4EEC;&#x66F4;&#x559C;&#x6B22;/// &#x56E0;&#x4E3A;&#x5B83;&#x66F4;&#x7D27;&#x51D1;&#x3002;/</strong>&#x548C;<em>/&#x5728;&#x591A;&#x884C;&#x6587;&#x6863;&#x6CE8;&#x91CA;&#x4E2D;&#x6DFB;&#x52A0;&#x4E24;&#x4E2A;&#x65E0;&#x5185;&#x5BB9;&#x7684;&#x884C;&#x3002;&#x5728;&#x67D0;&#x4E9B;&#x60C5;&#x51B5;&#x4E0B;&#xFF0C;///&#x8BED;&#x6CD5;&#x4E5F;&#x66F4;&#x5BB9;&#x6613;&#x9605;&#x8BFB;&#xFF0C;&#x4F8B;&#x5982;&#x6587;&#x6863;&#x6CE8;&#x91CA;&#x5305;&#x542B;&#x4F7F;&#x7528;</em>&#x6807;&#x8BB0;&#x5217;&#x8868;&#x9879;&#x7684;&#x9879;&#x76EE;&#x7B26;&#x53F7;&#x5217;&#x8868;&#x3002;</p>
+</blockquote>
+<h3 id="&#x8003;&#x8651;&#x4E3A;&#x79C1;&#x6709;-api-&#x7F16;&#x5199;&#x6587;&#x6863;&#x6CE8;&#x91CA;"><a href="#&#x8003;&#x8651;&#x4E3A;&#x79C1;&#x6709;-api-&#x7F16;&#x5199;&#x6587;&#x6863;&#x6CE8;&#x91CA;" class="headerlink" title="&#x8003;&#x8651;&#x4E3A;&#x79C1;&#x6709; api &#x7F16;&#x5199;&#x6587;&#x6863;&#x6CE8;&#x91CA;"></a>&#x8003;&#x8651;&#x4E3A;&#x79C1;&#x6709; api &#x7F16;&#x5199;&#x6587;&#x6863;&#x6CE8;&#x91CA;</h3><p>Doc &#x6CE8;&#x91CA;&#x5E76;&#x4E0D;&#x4EC5;&#x4EC5;&#x9488;&#x5BF9;&#x5E93;&#x7684;&#x516C;&#x5171; API &#x7684;&#x5916;&#x90E8;&#x4F7F;&#x7528;&#x8005;&#x3002;&#x5B83;&#x4EEC;&#x8FD8;&#x6709;&#x52A9;&#x4E8E;&#x7406;&#x89E3;&#x4ECE;&#x5E93;&#x7684;&#x5176;&#x4ED6;&#x90E8;&#x5206;&#x8C03;&#x7528;&#x7684;&#x79C1;&#x6709;&#x6210;&#x5458;</p>
+<h4 id="&#x7528;&#x4E00;&#x53E5;&#x8BDD;&#x603B;&#x7ED3;&#x5F00;&#x59CB;-doc-&#x6CE8;&#x91CA;"><a href="#&#x7528;&#x4E00;&#x53E5;&#x8BDD;&#x603B;&#x7ED3;&#x5F00;&#x59CB;-doc-&#x6CE8;&#x91CA;" class="headerlink" title="&#x7528;&#x4E00;&#x53E5;&#x8BDD;&#x603B;&#x7ED3;&#x5F00;&#x59CB; doc &#x6CE8;&#x91CA;"></a>&#x7528;&#x4E00;&#x53E5;&#x8BDD;&#x603B;&#x7ED3;&#x5F00;&#x59CB; doc &#x6CE8;&#x91CA;</h4><p>&#x4EE5;&#x7B80;&#x77ED;&#x7684;&#x3001;&#x4EE5;&#x7528;&#x6237;&#x4E3A;&#x4E2D;&#x5FC3;&#x7684;&#x63CF;&#x8FF0;&#x5F00;&#x59CB;&#x4F60;&#x7684;&#x6587;&#x6863;&#x6CE8;&#x91CA;&#xFF0C;&#x4EE5;&#x53E5;&#x53F7;&#x7ED3;&#x5C3E;&#x3002;</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/// <span class="markdown">Deletes the file at [path] from the file system.</span></span></span><br><span class="line"><span class="keyword">void</span> delete(<span class="built_in">String</span> path) {</span><br><span class="line">  ...</span><br><span class="line">}</span><br></pre></td></tr></table></figure>
+
+<p>&#x4E0D;&#x63A8;&#x8350;&#x5982;&#x4E0B;&#x5199;&#x6CD5;&#xFF1A;</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/// <span class="markdown">Depending on the state of the file system and the user&apos;s permissions,</span></span></span><br><span class="line"><span class="comment">/// <span class="markdown">certain operations may or may not be possible. If there is no file at</span></span></span><br><span class="line"><span class="comment">/// <span class="markdown">[path] or it can&apos;t be accessed, this function throws either [IOError]</span></span></span><br><span class="line"><span class="comment">/// <span class="markdown">or [PermissionError], respectively. Otherwise, this deletes the file.</span></span></span><br><span class="line"><span class="keyword">void</span> delete(<span class="built_in">String</span> path) {</span><br><span class="line">  ...</span><br><span class="line">}</span><br></pre></td></tr></table></figure>
+
+<h4 id="&#x201C;doc-&#x6CE8;&#x91CA;&#x201D;&#x7684;&#x7B2C;&#x4E00;&#x53E5;&#x8BDD;&#x5206;&#x9694;&#x6210;&#x81EA;&#x5DF1;&#x7684;&#x6BB5;&#x843D;"><a href="#&#x201C;doc-&#x6CE8;&#x91CA;&#x201D;&#x7684;&#x7B2C;&#x4E00;&#x53E5;&#x8BDD;&#x5206;&#x9694;&#x6210;&#x81EA;&#x5DF1;&#x7684;&#x6BB5;&#x843D;" class="headerlink" title="&#x201C;doc &#x6CE8;&#x91CA;&#x201D;&#x7684;&#x7B2C;&#x4E00;&#x53E5;&#x8BDD;&#x5206;&#x9694;&#x6210;&#x81EA;&#x5DF1;&#x7684;&#x6BB5;&#x843D;"></a>&#x201C;doc &#x6CE8;&#x91CA;&#x201D;&#x7684;&#x7B2C;&#x4E00;&#x53E5;&#x8BDD;&#x5206;&#x9694;&#x6210;&#x81EA;&#x5DF1;&#x7684;&#x6BB5;&#x843D;</h4><p>&#x5728;&#x7B2C;&#x4E00;&#x4E2A;&#x53E5;&#x5B50;&#x4E4B;&#x540E;&#x6DFB;&#x52A0;&#x4E00;&#x4E2A;&#x7A7A;&#x884C;&#xFF0C;&#x628A;&#x5B83;&#x5206;&#x6210;&#x81EA;&#x5DF1;&#x7684;&#x6BB5;&#x843D;</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/// <span class="markdown">Deletes the file at [path].</span></span></span><br><span class="line"><span class="comment">///</span></span><br><span class="line"><span class="comment">/// <span class="markdown">Throws an [IOError] if the file could not be found. Throws a</span></span></span><br><span class="line"><span class="comment">/// <span class="markdown">[PermissionError] if the file is present but could not be deleted.</span></span></span><br><span class="line"><span class="keyword">void</span> delete(<span class="built_in">String</span> path) {</span><br><span class="line">  ...</span><br><span class="line">}</span><br></pre></td></tr></table></figure>
+
+<h2 id="Flutter-&#x4EE3;&#x7801;&#x53C2;&#x8003;"><a href="#Flutter-&#x4EE3;&#x7801;&#x53C2;&#x8003;" class="headerlink" title="Flutter &#x4EE3;&#x7801;&#x53C2;&#x8003;"></a>Flutter &#x4EE3;&#x7801;&#x53C2;&#x8003;</h2><h3 id="&#x5E93;&#x7684;&#x5F15;&#x7528;"><a href="#&#x5E93;&#x7684;&#x5F15;&#x7528;" class="headerlink" title="&#x5E93;&#x7684;&#x5F15;&#x7528;"></a>&#x5E93;&#x7684;&#x5F15;&#x7528;</h3><p>flutter &#x4E2D;&#xFF0C;&#x5BFC;&#x5165; lib &#x4E0B;&#x6587;&#x4EF6;&#x5E93;&#xFF0C;&#x7EDF;&#x4E00;&#x6307;&#x5B9A;&#x62A5;&#x540D;&#xFF0C;&#x907F;&#x514D;&#x8FC7;&#x591A;&#x7684;<code>../../</code></p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">package:flutter/xx</span><br></pre></td></tr></table></figure>
+
+<h3 id="&#x5B57;&#x7B26;&#x4E32;&#x7684;&#x4F7F;&#x7528;"><a href="#&#x5B57;&#x7B26;&#x4E32;&#x7684;&#x4F7F;&#x7528;" class="headerlink" title="&#x5B57;&#x7B26;&#x4E32;&#x7684;&#x4F7F;&#x7528;"></a>&#x5B57;&#x7B26;&#x4E32;&#x7684;&#x4F7F;&#x7528;</h3><h4 id="&#x4F7F;&#x7528;&#x76F8;&#x90BB;&#x5B57;&#x7B26;&#x4E32;&#x8FDE;&#x63A5;&#x5B57;&#x7B26;&#x4E32;&#x6587;&#x5B57;"><a href="#&#x4F7F;&#x7528;&#x76F8;&#x90BB;&#x5B57;&#x7B26;&#x4E32;&#x8FDE;&#x63A5;&#x5B57;&#x7B26;&#x4E32;&#x6587;&#x5B57;" class="headerlink" title="&#x4F7F;&#x7528;&#x76F8;&#x90BB;&#x5B57;&#x7B26;&#x4E32;&#x8FDE;&#x63A5;&#x5B57;&#x7B26;&#x4E32;&#x6587;&#x5B57;"></a>&#x4F7F;&#x7528;&#x76F8;&#x90BB;&#x5B57;&#x7B26;&#x4E32;&#x8FDE;&#x63A5;&#x5B57;&#x7B26;&#x4E32;&#x6587;&#x5B57;</h4><p>&#x5982;&#x679C;&#x6709;&#x4E24;&#x4E2A;&#x5B57;&#x7B26;&#x4E32;&#x5B57;&#x9762;&#x503C;(&#x4E0D;&#x662F;&#x503C;&#xFF0C;&#x800C;&#x662F;&#x5B9E;&#x9645;&#x5F15;&#x7528;&#x7684;&#x5B57;&#x9762;&#x503C;)&#xFF0C;&#x5219;&#x4E0D;&#x9700;&#x8981;&#x4F7F;&#x7528;+&#x8FDE;&#x63A5;&#x5B83;&#x4EEC;&#x3002;&#x5C31;&#x50CF;&#x5728; C &#x548C; c++&#x4E2D;&#xFF0C;&#x7B80;&#x5355;&#x5730;&#x628A;&#x5B83;&#x4EEC;&#x653E;&#x5728;&#x4E00;&#x8D77;&#x5C31;&#x80FD;&#x505A;&#x5230;&#x3002;&#x8FD9;&#x662F;&#x521B;&#x5EFA;&#x4E00;&#x4E2A;&#x957F;&#x5B57;&#x7B26;&#x4E32;&#x5F88;&#x597D;&#x7684;&#x65B9;&#x6CD5;&#x4F46;&#x662F;&#x4E0D;&#x9002;&#x7528;&#x4E8E;&#x5355;&#x72EC;&#x4E00;&#x884C;&#x3002;</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">raiseAlarm(</span><br><span class="line">    <span class="string">&apos;ERROR: Parts of the spaceship are on fire. Other &apos;</span></span><br><span class="line">    <span class="string">&apos;parts are overrun by martians. Unclear which are which.&apos;</span>);</span><br></pre></td></tr></table></figure>
+
+<p>&#x4E0D;&#x63A8;&#x8350;&#x5982;&#x4E0B;&#x5199;&#x6CD5;:</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">raiseAlarm(<span class="string">&apos;ERROR: Parts of the spaceship are on fire. Other &apos;</span> +</span><br><span class="line">    <span class="string">&apos;parts are overrun by martians. Unclear which are which.&apos;</span>);</span><br></pre></td></tr></table></figure>
+
+<h4 id="&#x4F18;&#x5148;&#x4F7F;&#x7528;&#x6A21;&#x677F;&#x5B57;&#x7B26;&#x4E32;"><a href="#&#x4F18;&#x5148;&#x4F7F;&#x7528;&#x6A21;&#x677F;&#x5B57;&#x7B26;&#x4E32;" class="headerlink" title="&#x4F18;&#x5148;&#x4F7F;&#x7528;&#x6A21;&#x677F;&#x5B57;&#x7B26;&#x4E32;"></a>&#x4F18;&#x5148;&#x4F7F;&#x7528;&#x6A21;&#x677F;&#x5B57;&#x7B26;&#x4E32;</h4><figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">&apos;Hello, <span class="subst">$name</span>! You are <span class="subst">${year - birth}</span> years old.&apos;</span>;</span><br></pre></td></tr></table></figure>
+
+<h4 id="&#x5728;&#x4E0D;&#x9700;&#x8981;&#x7684;&#x65F6;&#x5019;&#xFF0C;&#x907F;&#x514D;&#x4F7F;&#x7528;&#x82B1;&#x62EC;&#x53F7;"><a href="#&#x5728;&#x4E0D;&#x9700;&#x8981;&#x7684;&#x65F6;&#x5019;&#xFF0C;&#x907F;&#x514D;&#x4F7F;&#x7528;&#x82B1;&#x62EC;&#x53F7;" class="headerlink" title="&#x5728;&#x4E0D;&#x9700;&#x8981;&#x7684;&#x65F6;&#x5019;&#xFF0C;&#x907F;&#x514D;&#x4F7F;&#x7528;&#x82B1;&#x62EC;&#x53F7;"></a>&#x5728;&#x4E0D;&#x9700;&#x8981;&#x7684;&#x65F6;&#x5019;&#xFF0C;&#x907F;&#x514D;&#x4F7F;&#x7528;&#x82B1;&#x62EC;&#x53F7;</h4><figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">&apos;Hi, <span class="subst">$name</span>!&apos;</span></span><br><span class="line"><span class="string">&quot;Wear your wildest <span class="subst">$decade</span>&apos;s outfit.&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p>&#x4E0D;&#x63A8;&#x8350;&#x5982;&#x4E0B;&#x5199;&#x6CD5;&#xFF1A;</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">&apos;Hello, &apos;</span> + name + <span class="string">&apos;! You are &apos;</span> + (year - birth).toString() + <span class="string">&apos; y...&apos;</span>;</span><br></pre></td></tr></table></figure>
+
+<p>&#x4E0D;&#x63A8;&#x8350;&#x5982;&#x4E0B;&#x5199;&#x6CD5;&#xFF1A;</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">&apos;Hi, <span class="subst">${name}</span>!&apos;</span></span><br><span class="line"><span class="string">&quot;Wear your wildest <span class="subst">${decade}</span>&apos;s outfit.&quot;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="&#x96C6;&#x5408;"><a href="#&#x96C6;&#x5408;" class="headerlink" title="&#x96C6;&#x5408;"></a>&#x96C6;&#x5408;</h3><h4 id="&#x5C3D;&#x53EF;&#x80FD;&#x4F7F;&#x7528;&#x96C6;&#x5408;&#x5B57;&#x9762;&#x91CF;"><a href="#&#x5C3D;&#x53EF;&#x80FD;&#x4F7F;&#x7528;&#x96C6;&#x5408;&#x5B57;&#x9762;&#x91CF;" class="headerlink" title="&#x5C3D;&#x53EF;&#x80FD;&#x4F7F;&#x7528;&#x96C6;&#x5408;&#x5B57;&#x9762;&#x91CF;"></a>&#x5C3D;&#x53EF;&#x80FD;&#x4F7F;&#x7528;&#x96C6;&#x5408;&#x5B57;&#x9762;&#x91CF;</h4><p>&#x5982;&#x679C;&#x8981;&#x521B;&#x5EFA;&#x4E00;&#x4E2A;&#x4E0D;&#x53EF;&#x589E;&#x957F;&#x7684;&#x5217;&#x8868;&#xFF0C;&#x6216;&#x8005;&#x5176;&#x4ED6;&#x4E00;&#x4E9B;&#x81EA;&#x5B9A;&#x4E49;&#x96C6;&#x5408;&#x7C7B;&#x578B;&#xFF0C;&#x90A3;&#x4E48;&#x65E0;&#x8BBA;&#x5982;&#x4F55;&#xFF0C;&#x90FD;&#x8981;&#x4F7F;&#x7528;&#x6784;&#x9020;&#x51FD;&#x6570;&#x3002;</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> points = [];</span><br><span class="line"><span class="keyword">var</span> addresses = {};</span><br><span class="line"><span class="keyword">var</span> lines = &lt;Lines&gt;[];</span><br></pre></td></tr></table></figure>
+
+<p>&#x4E0D;&#x63A8;&#x8350;&#x5982;&#x4E0B;&#x5199;&#x6CD5;&#xFF1A;</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> points = <span class="built_in">List</span>();</span><br><span class="line"><span class="keyword">var</span> addresses = <span class="built_in">Map</span>();</span><br></pre></td></tr></table></figure>
+
+<h4 id="&#x4E0D;&#x8981;&#x4F7F;&#x7528;-length-&#x67E5;&#x770B;&#x96C6;&#x5408;&#x662F;&#x5426;&#x4E3A;&#x7A7A;"><a href="#&#x4E0D;&#x8981;&#x4F7F;&#x7528;-length-&#x67E5;&#x770B;&#x96C6;&#x5408;&#x662F;&#x5426;&#x4E3A;&#x7A7A;" class="headerlink" title="&#x4E0D;&#x8981;&#x4F7F;&#x7528;.length &#x67E5;&#x770B;&#x96C6;&#x5408;&#x662F;&#x5426;&#x4E3A;&#x7A7A;"></a>&#x4E0D;&#x8981;&#x4F7F;&#x7528;.length &#x67E5;&#x770B;&#x96C6;&#x5408;&#x662F;&#x5426;&#x4E3A;&#x7A7A;</h4><figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (lunchBox.isEmpty) <span class="keyword">return</span> <span class="string">&apos;so hungry...&apos;</span>;</span><br><span class="line"><span class="keyword">if</span> (words.isNotEmpty) <span class="keyword">return</span> words.join(<span class="string">&apos; &apos;</span>);</span><br></pre></td></tr></table></figure>
+
+<p>&#x4E0D;&#x63A8;&#x8350;&#x5982;&#x4E0B;&#x5199;&#x6CD5;&#xFF1A;</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (lunchBox.length == <span class="number">0</span>) <span class="keyword">return</span> <span class="string">&apos;so hungry...&apos;</span>;</span><br><span class="line"><span class="keyword">if</span> (!words.isEmpty) <span class="keyword">return</span> words.join(<span class="string">&apos; &apos;</span>);</span><br></pre></td></tr></table></figure>
+
+<h4 id="&#x8003;&#x8651;&#x4F7F;&#x7528;&#x9AD8;&#x9636;&#x65B9;&#x6CD5;&#x8F6C;&#x6362;&#x5E8F;&#x5217;"><a href="#&#x8003;&#x8651;&#x4F7F;&#x7528;&#x9AD8;&#x9636;&#x65B9;&#x6CD5;&#x8F6C;&#x6362;&#x5E8F;&#x5217;" class="headerlink" title="&#x8003;&#x8651;&#x4F7F;&#x7528;&#x9AD8;&#x9636;&#x65B9;&#x6CD5;&#x8F6C;&#x6362;&#x5E8F;&#x5217;"></a>&#x8003;&#x8651;&#x4F7F;&#x7528;&#x9AD8;&#x9636;&#x65B9;&#x6CD5;&#x8F6C;&#x6362;&#x5E8F;&#x5217;</h4><p>&#x5982;&#x679C;&#x6709;&#x4E00;&#x4E2A;&#x96C6;&#x5408;&#xFF0C;&#x5E76;&#x4E14;&#x5E0C;&#x671B;&#x4ECE;&#x4E2D;&#x751F;&#x6210;&#x4E00;&#x4E2A;&#x65B0;&#x7684;&#x4FEE;&#x6539;&#x540E;&#x7684;&#x96C6;&#x5408;&#xFF0C;&#x90A3;&#x4E48;&#x4F7F;&#x7528;.map()&#x3001;.where()&#x548C; Iterable &#x4E0A;&#x7684;&#x5176;&#x4ED6;&#x65B9;&#x4FBF;&#x7684;&#x65B9;&#x6CD5;&#x901A;&#x5E38;&#x66F4;&#x77ED;&#xFF0C;&#x4E5F;&#x66F4;&#x5177;&#x6709;&#x58F0;&#x660E;&#x6027;</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> aquaticNames = animals</span><br><span class="line">    .where((animal) =&gt; animal.isAquatic)</span><br><span class="line">    .map((animal) =&gt; animal.name);</span><br></pre></td></tr></table></figure>
+
+<h4 id="&#x907F;&#x514D;&#x4F7F;&#x7528;&#x5E26;&#x6709;&#x51FD;&#x6570;&#x5B57;&#x9762;&#x91CF;&#x7684;-Iterable-forEach"><a href="#&#x907F;&#x514D;&#x4F7F;&#x7528;&#x5E26;&#x6709;&#x51FD;&#x6570;&#x5B57;&#x9762;&#x91CF;&#x7684;-Iterable-forEach" class="headerlink" title="&#x907F;&#x514D;&#x4F7F;&#x7528;&#x5E26;&#x6709;&#x51FD;&#x6570;&#x5B57;&#x9762;&#x91CF;&#x7684; Iterable.forEach()"></a>&#x907F;&#x514D;&#x4F7F;&#x7528;&#x5E26;&#x6709;&#x51FD;&#x6570;&#x5B57;&#x9762;&#x91CF;&#x7684; Iterable.forEach()</h4><p>&#x5728; Dart &#x4E2D;&#xFF0C;&#x5982;&#x679C;&#x4F60;&#x60F3;&#x904D;&#x5386;&#x4E00;&#x4E2A;&#x5E8F;&#x5217;&#xFF0C;&#x60EF;&#x7528;&#x7684;&#x65B9;&#x6CD5;&#x662F;&#x4F7F;&#x7528;&#x5FAA;&#x73AF;&#x3002;</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="keyword">var</span> person <span class="keyword">in</span> people) {</span><br><span class="line">  ...</span><br><span class="line">}</span><br></pre></td></tr></table></figure>
+
+<p>&#x4E0D;&#x63A8;&#x8350;&#x5982;&#x4E0B;&#x5199;&#x6CD5;&#xFF1A;</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">people.forEach((person) {</span><br><span class="line">  ...</span><br><span class="line">});</span><br></pre></td></tr></table></figure>
+
+<h4 id="&#x4E0D;&#x8981;&#x4F7F;&#x7528;-List-from-&#xFF0C;&#x9664;&#x975E;&#x6253;&#x7B97;&#x66F4;&#x6539;&#x7ED3;&#x679C;&#x7684;&#x7C7B;&#x578B;"><a href="#&#x4E0D;&#x8981;&#x4F7F;&#x7528;-List-from-&#xFF0C;&#x9664;&#x975E;&#x6253;&#x7B97;&#x66F4;&#x6539;&#x7ED3;&#x679C;&#x7684;&#x7C7B;&#x578B;" class="headerlink" title="&#x4E0D;&#x8981;&#x4F7F;&#x7528; List.from()&#xFF0C;&#x9664;&#x975E;&#x6253;&#x7B97;&#x66F4;&#x6539;&#x7ED3;&#x679C;&#x7684;&#x7C7B;&#x578B;"></a>&#x4E0D;&#x8981;&#x4F7F;&#x7528; List.from()&#xFF0C;&#x9664;&#x975E;&#x6253;&#x7B97;&#x66F4;&#x6539;&#x7ED3;&#x679C;&#x7684;&#x7C7B;&#x578B;</h4><p>&#x7ED9;&#x5B9A;&#x4E00;&#x4E2A;&#x8FED;&#x4EE3;&#xFF0C;&#x6709;&#x4E24;&#x79CD;&#x660E;&#x663E;&#x7684;&#x65B9;&#x6CD5;&#x53EF;&#x4EE5;&#x751F;&#x6210;&#x5305;&#x542B;&#x76F8;&#x540C;&#x5143;&#x7D20;&#x7684;&#x65B0;&#x5217;&#x8868;</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> copy1 = iterable.toList();</span><br><span class="line"><span class="keyword">var</span> copy2 = <span class="built_in">List</span>.from(iterable);</span><br></pre></td></tr></table></figure>
+
+<p>&#x660E;&#x663E;&#x7684;&#x533A;&#x522B;&#x662F;&#x7B2C;&#x4E00;&#x4E2A;&#x6BD4;&#x8F83;&#x77ED;&#x3002;&#x91CD;&#x8981;&#x7684;&#x533A;&#x522B;&#x662F;&#x7B2C;&#x4E00;&#x4E2A;&#x4FDD;&#x7559;&#x4E86;&#x539F;&#x59CB;&#x5BF9;&#x8C61;&#x7684;&#x7C7B;&#x578B;&#x53C2;&#x6570;</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Creates a List&lt;int&gt;:</span></span><br><span class="line"><span class="keyword">var</span> iterable = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>];</span><br><span class="line"></span><br><span class="line"><span class="comment">// Prints &quot;List&lt;int&gt;&quot;:</span></span><br><span class="line"><span class="built_in">print</span>(iterable.toList().runtimeType);</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Creates a List&lt;int&gt;:</span></span><br><span class="line"><span class="keyword">var</span> iterable = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>];</span><br><span class="line"></span><br><span class="line"><span class="comment">// Prints &quot;List&lt;dynamic&gt;&quot;:</span></span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">List</span>.from(iterable).runtimeType);</span><br></pre></td></tr></table></figure>
+
+<h3 id="&#x53C2;&#x6570;&#x7684;&#x4F7F;&#x7528;"><a href="#&#x53C2;&#x6570;&#x7684;&#x4F7F;&#x7528;" class="headerlink" title="&#x53C2;&#x6570;&#x7684;&#x4F7F;&#x7528;"></a>&#x53C2;&#x6570;&#x7684;&#x4F7F;&#x7528;</h3><h4 id="&#x4F7F;&#x7528;-&#x5C06;&#x547D;&#x540D;&#x53C2;&#x6570;&#x4E0E;&#x5176;&#x9ED8;&#x8BA4;&#x503C;&#x5206;&#x5272;&#x5F00;"><a href="#&#x4F7F;&#x7528;-&#x5C06;&#x547D;&#x540D;&#x53C2;&#x6570;&#x4E0E;&#x5176;&#x9ED8;&#x8BA4;&#x503C;&#x5206;&#x5272;&#x5F00;" class="headerlink" title="&#x4F7F;&#x7528;=&#x5C06;&#x547D;&#x540D;&#x53C2;&#x6570;&#x4E0E;&#x5176;&#x9ED8;&#x8BA4;&#x503C;&#x5206;&#x5272;&#x5F00;"></a>&#x4F7F;&#x7528;=&#x5C06;&#x547D;&#x540D;&#x53C2;&#x6570;&#x4E0E;&#x5176;&#x9ED8;&#x8BA4;&#x503C;&#x5206;&#x5272;&#x5F00;</h4><p>&#x7531;&#x4E8E;&#x9057;&#x7559;&#x539F;&#x56E0;&#xFF0C;Dart &#x5747;&#x5141;&#x8BB8;&#x201C;:&#x201D;&#x548C;&#x201C;=&#x201D;&#x4F5C;&#x4E3A;&#x6307;&#x5B9A;&#x53C2;&#x6570;&#x7684;&#x9ED8;&#x8BA4;&#x503C;&#x5206;&#x9694;&#x7B26;&#x3002;&#x4E3A;&#x4E86;&#x4E0E;&#x53EF;&#x9009;&#x7684;&#x4F4D;&#x7F6E;&#x53C2;&#x6570;&#x4FDD;&#x6301;&#x4E00;&#x81F4;&#xFF0C;&#x4F7F;&#x7528;&#x201C;=&#x201D;&#x3002;</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">void</span> insert(<span class="built_in">Object</span> item, {<span class="built_in">int</span> at = <span class="number">0</span>}) { ... }</span><br></pre></td></tr></table></figure>
+
+<p>&#x4E0D;&#x63A8;&#x8350;&#x5982;&#x4E0B;&#x5199;&#x6CD5;&#xFF1A;</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">void</span> insert(<span class="built_in">Object</span> item, {<span class="built_in">int</span> at: <span class="number">0</span>}) { ... }</span><br></pre></td></tr></table></figure>
+
+<h4 id="&#x4E0D;&#x8981;&#x4F7F;&#x7528;&#x663E;&#x5F0F;&#x9ED8;&#x8BA4;&#x503C;-null"><a href="#&#x4E0D;&#x8981;&#x4F7F;&#x7528;&#x663E;&#x5F0F;&#x9ED8;&#x8BA4;&#x503C;-null" class="headerlink" title="&#x4E0D;&#x8981;&#x4F7F;&#x7528;&#x663E;&#x5F0F;&#x9ED8;&#x8BA4;&#x503C; null"></a>&#x4E0D;&#x8981;&#x4F7F;&#x7528;&#x663E;&#x5F0F;&#x9ED8;&#x8BA4;&#x503C; null</h4><p>&#x5982;&#x679C;&#x53C2;&#x6570;&#x662F;&#x53EF;&#x9009;&#x7684;&#xFF0C;&#x4F46;&#x6CA1;&#x6709;&#x7ED9;&#x5B83;&#x4E00;&#x4E2A;&#x9ED8;&#x8BA4;&#x503C;&#xFF0C;&#x5219;&#x8BED;&#x8A00;&#x9690;&#x5F0F;&#x5730;&#x4F7F;&#x7528; null &#x4F5C;&#x4E3A;&#x9ED8;&#x8BA4;&#x503C;&#xFF0C;&#x56E0;&#x6B64;&#x4E0D;&#x9700;&#x8981;&#x7F16;&#x5199;&#x5B83;</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">void</span> error([<span class="built_in">String</span> message]) {</span><br><span class="line">  stderr.write(message ?? <span class="string">&apos;\n&apos;</span>);</span><br><span class="line">}</span><br></pre></td></tr></table></figure>
+
+<p>&#x4E0D;&#x63A8;&#x8350;&#x5982;&#x4E0B;&#x5199;&#x6CD5;:</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">void</span> error([<span class="built_in">String</span> message = <span class="keyword">null</span>]) {</span><br><span class="line">  stderr.write(message ?? <span class="string">&apos;\n&apos;</span>);</span><br><span class="line">}</span><br></pre></td></tr></table></figure>
+
+<h3 id="&#x53D8;&#x91CF;"><a href="#&#x53D8;&#x91CF;" class="headerlink" title="&#x53D8;&#x91CF;"></a>&#x53D8;&#x91CF;</h3><h4 id="&#x4E0D;&#x8981;&#x663E;&#x5F0F;&#x5730;&#x5C06;&#x53D8;&#x91CF;&#x521D;&#x59CB;&#x5316;&#x4E3A;&#x7A7A;"><a href="#&#x4E0D;&#x8981;&#x663E;&#x5F0F;&#x5730;&#x5C06;&#x53D8;&#x91CF;&#x521D;&#x59CB;&#x5316;&#x4E3A;&#x7A7A;" class="headerlink" title="&#x4E0D;&#x8981;&#x663E;&#x5F0F;&#x5730;&#x5C06;&#x53D8;&#x91CF;&#x521D;&#x59CB;&#x5316;&#x4E3A;&#x7A7A;"></a>&#x4E0D;&#x8981;&#x663E;&#x5F0F;&#x5730;&#x5C06;&#x53D8;&#x91CF;&#x521D;&#x59CB;&#x5316;&#x4E3A;&#x7A7A;</h4><p>&#x5728; Dart &#x4E2D;&#xFF0C;&#x672A;&#x663E;&#x5F0F;&#x521D;&#x59CB;&#x5316;&#x7684;&#x53D8;&#x91CF;&#x6216;&#x5B57;&#x6BB5;&#x81EA;&#x52A8;&#x88AB;&#x521D;&#x59CB;&#x5316;&#x4E3A; null&#x3002;&#x4E0D;&#x8981;&#x591A;&#x4F59;&#x8D4B;&#x503C; null</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">int</span> _nextId;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">LazyId</span> </span>{</span><br><span class="line">  <span class="built_in">int</span> _id;</span><br><span class="line"></span><br><span class="line">  <span class="built_in">int</span> <span class="keyword">get</span> id {</span><br><span class="line">    <span class="keyword">if</span> (_nextId == <span class="keyword">null</span>) _nextId = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">if</span> (_id == <span class="keyword">null</span>) _id = _nextId++;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> _id;</span><br><span class="line">  }</span><br><span class="line">}</span><br></pre></td></tr></table></figure>
+
+<p>&#x4E0D;&#x63A8;&#x8350;&#x5982;&#x4E0B;&#x5199;&#x6CD5;&#xFF1A;</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">int</span> _nextId = <span class="keyword">null</span>;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">LazyId</span> </span>{</span><br><span class="line">  <span class="built_in">int</span> _id = <span class="keyword">null</span>;</span><br><span class="line"></span><br><span class="line">  <span class="built_in">int</span> <span class="keyword">get</span> id {</span><br><span class="line">    <span class="keyword">if</span> (_nextId == <span class="keyword">null</span>) _nextId = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">if</span> (_id == <span class="keyword">null</span>) _id = _nextId++;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> _id;</span><br><span class="line">  }</span><br><span class="line">}</span><br></pre></td></tr></table></figure>
+
+<h4 id="&#x907F;&#x514D;&#x50A8;&#x5B58;&#x4F60;&#x80FD;&#x8BA1;&#x7B97;&#x7684;&#x4E1C;&#x897F;"><a href="#&#x907F;&#x514D;&#x50A8;&#x5B58;&#x4F60;&#x80FD;&#x8BA1;&#x7B97;&#x7684;&#x4E1C;&#x897F;" class="headerlink" title="&#x907F;&#x514D;&#x50A8;&#x5B58;&#x4F60;&#x80FD;&#x8BA1;&#x7B97;&#x7684;&#x4E1C;&#x897F;"></a>&#x907F;&#x514D;&#x50A8;&#x5B58;&#x4F60;&#x80FD;&#x8BA1;&#x7B97;&#x7684;&#x4E1C;&#x897F;</h4><p>&#x5728;&#x8BBE;&#x8BA1;&#x7C7B;&#x65F6;&#xFF0C;&#x60A8;&#x901A;&#x5E38;&#x5E0C;&#x671B;&#x5C06;&#x591A;&#x4E2A;&#x89C6;&#x56FE;&#x516C;&#x5F00;&#x5230;&#x76F8;&#x540C;&#x7684;&#x5E95;&#x5C42;&#x72B6;&#x6001;&#x3002;&#x901A;&#x5E38;&#x4F60;&#x4F1A;&#x770B;&#x5230;&#x5728;&#x6784;&#x9020;&#x51FD;&#x6570;&#x4E2D;&#x8BA1;&#x7B97;&#x6240;&#x6709;&#x89C6;&#x56FE;&#x7684;&#x4EE3;&#x7801;&#xFF0C;&#x7136;&#x540E;&#x5B58;&#x50A8;&#x5B83;&#x4EEC;:</p>
+<p>&#x5E94;&#x8BE5;&#x907F;&#x514D;&#x7684;&#x5199;&#x6CD5;&#xFF1A;</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Circle</span> </span>{</span><br><span class="line">  <span class="built_in">num</span> radius;</span><br><span class="line">  <span class="built_in">num</span> area;</span><br><span class="line">  <span class="built_in">num</span> circumference;</span><br><span class="line"></span><br><span class="line">  Circle(<span class="built_in">num</span> radius)</span><br><span class="line">      : radius = radius,</span><br><span class="line">        area = pi * radius * radius,</span><br><span class="line">        circumference = pi * <span class="number">2.0</span> * radius;</span><br><span class="line">}</span><br></pre></td></tr></table></figure>
+
+<p>&#x5982;&#x4E0A;&#x4EE3;&#x7801;&#x95EE;&#x9898;&#xFF1A;</p>
+<ul>
+<li>&#x6D6A;&#x8D39;&#x5185;&#x5B58;</li>
+<li>&#x7F13;&#x5B58;&#x7684;&#x95EE;&#x9898;&#x662F;&#x65E0;&#x6548;&#x2014;&#x2014;&#x5982;&#x4F55;&#x77E5;&#x9053;&#x4F55;&#x65F6;&#x7F13;&#x5B58;&#x8FC7;&#x671F;&#x9700;&#x8981;&#x91CD;&#x65B0;&#x8BA1;&#x7B97;&#xFF1F;</li>
+</ul>
+<p>&#x63A8;&#x8350;&#x7684;&#x5199;&#x6CD5;&#x5982;&#x4E0B;&#xFF1A;</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Circle</span> </span>{</span><br><span class="line">  <span class="built_in">num</span> radius;</span><br><span class="line"></span><br><span class="line">  Circle(<span class="keyword">this</span>.radius);</span><br><span class="line"></span><br><span class="line">  <span class="built_in">num</span> <span class="keyword">get</span> area =&gt; pi * radius * radius;</span><br><span class="line">  <span class="built_in">num</span> <span class="keyword">get</span> circumference =&gt; pi * <span class="number">2.0</span> * radius;</span><br><span class="line">}</span><br></pre></td></tr></table></figure>
+
+<h3 id="&#x7C7B;&#x6210;&#x5458;"><a href="#&#x7C7B;&#x6210;&#x5458;" class="headerlink" title="&#x7C7B;&#x6210;&#x5458;"></a>&#x7C7B;&#x6210;&#x5458;</h3><h4 id="&#x4E0D;&#x8981;&#x628A;&#x4E0D;&#x5FC5;&#x8981;&#x5730;&#x5C06;&#x5B57;&#x6BB5;&#x5305;&#x88C5;&#x5728;-getter-&#x548C;-setter-&#x4E2D;"><a href="#&#x4E0D;&#x8981;&#x628A;&#x4E0D;&#x5FC5;&#x8981;&#x5730;&#x5C06;&#x5B57;&#x6BB5;&#x5305;&#x88C5;&#x5728;-getter-&#x548C;-setter-&#x4E2D;" class="headerlink" title="&#x4E0D;&#x8981;&#x628A;&#x4E0D;&#x5FC5;&#x8981;&#x5730;&#x5C06;&#x5B57;&#x6BB5;&#x5305;&#x88C5;&#x5728; getter &#x548C; setter &#x4E2D;"></a>&#x4E0D;&#x8981;&#x628A;&#x4E0D;&#x5FC5;&#x8981;&#x5730;&#x5C06;&#x5B57;&#x6BB5;&#x5305;&#x88C5;&#x5728; getter &#x548C; setter &#x4E2D;</h4><p>&#x4E0D;&#x63A8;&#x8350;&#x5982;&#x4E0B;&#x5199;&#x6CD5;&#xFF1A;</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Box</span> </span>{</span><br><span class="line">  <span class="keyword">var</span> _contents;</span><br><span class="line">  <span class="keyword">get</span> contents =&gt; _contents;</span><br><span class="line">  <span class="keyword">set</span> contents(value) {</span><br><span class="line">    _contents = value;</span><br><span class="line">  }</span><br><span class="line">}</span><br></pre></td></tr></table></figure>
+
+<h4 id="&#x4F18;&#x5148;&#x4F7F;&#x7528;-final-&#x5B57;&#x6BB5;&#x6765;&#x521B;&#x5EFA;&#x53EA;&#x8BFB;&#x5C5E;&#x6027;"><a href="#&#x4F18;&#x5148;&#x4F7F;&#x7528;-final-&#x5B57;&#x6BB5;&#x6765;&#x521B;&#x5EFA;&#x53EA;&#x8BFB;&#x5C5E;&#x6027;" class="headerlink" title="&#x4F18;&#x5148;&#x4F7F;&#x7528; final &#x5B57;&#x6BB5;&#x6765;&#x521B;&#x5EFA;&#x53EA;&#x8BFB;&#x5C5E;&#x6027;"></a>&#x4F18;&#x5148;&#x4F7F;&#x7528; final &#x5B57;&#x6BB5;&#x6765;&#x521B;&#x5EFA;&#x53EA;&#x8BFB;&#x5C5E;&#x6027;</h4><p>&#x5C24;&#x5176;&#x5BF9;&#x4E8E; <code>StatelessWidget</code></p>
+<h4 id="&#x5728;&#x4E0D;&#x9700;&#x8981;&#x7684;&#x65F6;&#x5019;&#x4E0D;&#x8981;&#x7528;-this"><a href="#&#x5728;&#x4E0D;&#x9700;&#x8981;&#x7684;&#x65F6;&#x5019;&#x4E0D;&#x8981;&#x7528;-this" class="headerlink" title="&#x5728;&#x4E0D;&#x9700;&#x8981;&#x7684;&#x65F6;&#x5019;&#x4E0D;&#x8981;&#x7528; this"></a>&#x5728;&#x4E0D;&#x9700;&#x8981;&#x7684;&#x65F6;&#x5019;&#x4E0D;&#x8981;&#x7528; this</h4><p>&#x4E0D;&#x63A8;&#x8350;&#x5982;&#x4E0B;&#x5199;&#x6CD5;&#xFF1A;</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Box</span> </span>{</span><br><span class="line">  <span class="keyword">var</span> value;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">void</span> clear() {</span><br><span class="line">    <span class="keyword">this</span>.update(<span class="keyword">null</span>);</span><br><span class="line">  }</span><br><span class="line"></span><br><span class="line">  <span class="keyword">void</span> update(value) {</span><br><span class="line">    <span class="keyword">this</span>.value = value;</span><br><span class="line">  }</span><br><span class="line">}</span><br></pre></td></tr></table></figure>
+
+<p>&#x63A8;&#x8350;&#x5982;&#x4E0B;&#x5199;&#x6CD5;&#xFF1A;</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Box</span> </span>{</span><br><span class="line">  <span class="keyword">var</span> value;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">void</span> clear() {</span><br><span class="line">    update(<span class="keyword">null</span>);</span><br><span class="line">  }</span><br><span class="line"></span><br><span class="line">  <span class="keyword">void</span> update(value) {</span><br><span class="line">    <span class="keyword">this</span>.value = value;</span><br><span class="line">  }</span><br><span class="line">}</span><br></pre></td></tr></table></figure>
+
+<h3 id="&#x6784;&#x9020;&#x51FD;&#x6570;"><a href="#&#x6784;&#x9020;&#x51FD;&#x6570;" class="headerlink" title="&#x6784;&#x9020;&#x51FD;&#x6570;"></a>&#x6784;&#x9020;&#x51FD;&#x6570;</h3><h4 id="&#x5C3D;&#x53EF;&#x80FD;&#x4F7F;&#x7528;&#x521D;&#x59CB;&#x5316;&#x7684;&#x5F62;&#x5F0F;"><a href="#&#x5C3D;&#x53EF;&#x80FD;&#x4F7F;&#x7528;&#x521D;&#x59CB;&#x5316;&#x7684;&#x5F62;&#x5F0F;" class="headerlink" title="&#x5C3D;&#x53EF;&#x80FD;&#x4F7F;&#x7528;&#x521D;&#x59CB;&#x5316;&#x7684;&#x5F62;&#x5F0F;"></a>&#x5C3D;&#x53EF;&#x80FD;&#x4F7F;&#x7528;&#x521D;&#x59CB;&#x5316;&#x7684;&#x5F62;&#x5F0F;</h4><p>&#x4E0D;&#x63A8;&#x8350;&#x5982;&#x4E0B;&#x5199;&#x6CD5;&#xFF1A;</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Point</span> </span>{</span><br><span class="line">  <span class="built_in">num</span> x, y;</span><br><span class="line">  Point(<span class="built_in">num</span> x, <span class="built_in">num</span> y) {</span><br><span class="line">    <span class="keyword">this</span>.x = x;</span><br><span class="line">    <span class="keyword">this</span>.y = y;</span><br><span class="line">  }</span><br><span class="line">}</span><br></pre></td></tr></table></figure>
+
+<p>&#x63A8;&#x8350;&#x5982;&#x4E0B;&#x5199;&#x6CD5;&#xFF1A;</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Point</span> </span>{</span><br><span class="line">  <span class="built_in">num</span> x, y;</span><br><span class="line">  Point(<span class="keyword">this</span>.x, <span class="keyword">this</span>.y);</span><br><span class="line">}</span><br></pre></td></tr></table></figure>
+
+<h4 id="&#x4E0D;&#x8981;&#x4F7F;&#x7528;-new"><a href="#&#x4E0D;&#x8981;&#x4F7F;&#x7528;-new" class="headerlink" title="&#x4E0D;&#x8981;&#x4F7F;&#x7528; new"></a>&#x4E0D;&#x8981;&#x4F7F;&#x7528; new</h4><p>Dart2 &#x4F7F; new &#x5173;&#x952E;&#x5B57;&#x53EF;&#x9009;</p>
+<p>&#x63A8;&#x8350;&#x5199;&#x6CD5;&#xFF1A;</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">Widget build(BuildContext context) {</span><br><span class="line">  <span class="keyword">return</span> Row(</span><br><span class="line">    children: [</span><br><span class="line">      RaisedButton(</span><br><span class="line">        child: Text(<span class="string">&apos;Increment&apos;</span>),</span><br><span class="line">      ),</span><br><span class="line">      Text(<span class="string">&apos;Click!&apos;</span>),</span><br><span class="line">    ],</span><br><span class="line">  );</span><br><span class="line">}</span><br></pre></td></tr></table></figure>
+
+<p>&#x4E0D;&#x63A8;&#x8350;&#x5982;&#x4E0B;&#x5199;&#x6CD5;&#xFF1A;</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">Widget build(BuildContext context) {</span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">new</span> Row(</span><br><span class="line">    children: [</span><br><span class="line">      <span class="keyword">new</span> RaisedButton(</span><br><span class="line">        child: <span class="keyword">new</span> Text(<span class="string">&apos;Increment&apos;</span>),</span><br><span class="line">      ),</span><br><span class="line">      <span class="keyword">new</span> Text(<span class="string">&apos;Click!&apos;</span>),</span><br><span class="line">    ],</span><br><span class="line">  );</span><br><span class="line">}</span><br></pre></td></tr></table></figure>
+
+<h3 id="&#x5F02;&#x6B65;"><a href="#&#x5F02;&#x6B65;" class="headerlink" title="&#x5F02;&#x6B65;"></a>&#x5F02;&#x6B65;</h3><h4 id="&#x4F18;&#x5148;&#x4F7F;&#x7528;-async-await-&#x4EE3;&#x66FF;&#x539F;&#x59CB;&#x7684;-futures"><a href="#&#x4F18;&#x5148;&#x4F7F;&#x7528;-async-await-&#x4EE3;&#x66FF;&#x539F;&#x59CB;&#x7684;-futures" class="headerlink" title="&#x4F18;&#x5148;&#x4F7F;&#x7528; async/await &#x4EE3;&#x66FF;&#x539F;&#x59CB;&#x7684; futures"></a>&#x4F18;&#x5148;&#x4F7F;&#x7528; async/await &#x4EE3;&#x66FF;&#x539F;&#x59CB;&#x7684; futures</h4><p>async/await &#x8BED;&#x6CD5;&#x63D0;&#x9AD8;&#x4E86;&#x53EF;&#x8BFB;&#x6027;&#xFF0C;&#x5141;&#x8BB8;&#x4F60;&#x5728;&#x5F02;&#x6B65;&#x4EE3;&#x7801;&#x4E2D;&#x4F7F;&#x7528;&#x6240;&#x6709; Dart &#x63A7;&#x5236;&#x6D41;&#x7ED3;&#x6784;&#x3002;</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">Future&lt;<span class="built_in">int</span>&gt; countActivePlayers(<span class="built_in">String</span> teamName) <span class="keyword">async</span> {</span><br><span class="line">  <span class="keyword">try</span> {</span><br><span class="line">    <span class="keyword">var</span> team = <span class="keyword">await</span> downloadTeam(teamName);</span><br><span class="line">    <span class="keyword">if</span> (team == <span class="keyword">null</span>) <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">var</span> players = <span class="keyword">await</span> team.roster;</span><br><span class="line">    <span class="keyword">return</span> players.where((player) =&gt; player.isActive).length;</span><br><span class="line">  } <span class="keyword">catch</span> (e) {</span><br><span class="line">    log.error(e);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">  }</span><br><span class="line">}</span><br></pre></td></tr></table></figure>
+
+<h4 id="&#x5F53;&#x5F02;&#x6B65;&#x6CA1;&#x6709;&#x4EFB;&#x4F55;&#x7528;&#x5904;&#x65F6;&#xFF0C;&#x4E0D;&#x8981;&#x4F7F;&#x7528;&#x5B83;"><a href="#&#x5F53;&#x5F02;&#x6B65;&#x6CA1;&#x6709;&#x4EFB;&#x4F55;&#x7528;&#x5904;&#x65F6;&#xFF0C;&#x4E0D;&#x8981;&#x4F7F;&#x7528;&#x5B83;" class="headerlink" title="&#x5F53;&#x5F02;&#x6B65;&#x6CA1;&#x6709;&#x4EFB;&#x4F55;&#x7528;&#x5904;&#x65F6;&#xFF0C;&#x4E0D;&#x8981;&#x4F7F;&#x7528;&#x5B83;"></a>&#x5F53;&#x5F02;&#x6B65;&#x6CA1;&#x6709;&#x4EFB;&#x4F55;&#x7528;&#x5904;&#x65F6;&#xFF0C;&#x4E0D;&#x8981;&#x4F7F;&#x7528;&#x5B83;</h4><p>&#x5982;&#x679C;&#x53EF;&#x4EE5;&#x5728;&#x4E0D;&#x6539;&#x53D8;&#x51FD;&#x6570;&#x884C;&#x4E3A;&#x7684;&#x60C5;&#x51B5;&#x4E0B;&#x7701;&#x7565;&#x5F02;&#x6B65;&#xFF0C;&#x90A3;&#x4E48;&#x5C31;&#x8FD9;&#x6837;&#x505A;&#x3002;&#x3001;</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Future afterTwoThings(Future first, Future second) {</span><br><span class="line">  <span class="keyword">return</span> Future.wait([first, second]);</span><br><span class="line">}</span><br></pre></td></tr></table></figure>
+
+<p>&#x4E0D;&#x63A8;&#x8350;&#x5199;&#x6CD5;&#xFF1A;</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Future afterTwoThings(Future first, Future second) <span class="keyword">async</span> {</span><br><span class="line">  <span class="keyword">return</span> Future.wait([first, second]);</span><br><span class="line">}</span><br></pre></td></tr></table></figure>
+
+<p><a href="https://www.dartlang.org/guides/language/effective-dart/style" target="_blank" rel="noopener">&#x9644; Dart &#x5B98;&#x65B9; Style &#x6307;&#x5357;</a></p>
+
+      
+    </div>
+    <div class="article-footer">
+      <blockquote class="mt-2x">
+  <ul class="post-copyright list-unstyled">
+    
+    <li class="post-copyright-link hidden-xs">
+      <strong>本文链接：</strong>
+      <a href="https://major9506.github.io/2018/03/22/dart/" title="Dart &amp; flutter 编码风格指南" target="_blank" rel="external">https://major9506.github.io/2018/03/22/dart/</a>
+    </li>
+    
+    <li class="post-copyright-license">
+      <strong>版权声明： </strong> 本博客所有文章除特别声明外，均采用 <a href="http://creativecommons.org/licenses/by/4.0/deed.zh" target="_blank" rel="external">CC BY 4.0 CN协议</a> 许可协议。转载请注明出处！
+    </li>
+  </ul>
+</blockquote>
+
+
+<div class="panel panel-default panel-badger">
+  <div class="panel-body">
+    <figure class="media">
+      <div class="media-left">
+        <a href="https://github.com/Major9506" target="_blank" class="img-burn thumb-sm visible-lg">
+          <img src="/images/avatar.png" class="img-rounded w-full" alt="">
+        </a>
+      </div>
+      <div class="media-body">
+        <h3 class="media-heading"><a href="https://github.com/Major9506" target="_blank"><span class="text-dark">Major_</span><small class="ml-1x">前端/Node/Python</small></a></h3>
+        <div>年轻无为，卖马为生</div>
+      </div>
+    </figure>
+  </div>
+</div>
+
+
+    </div>
+  </article>
+  
+    
+  <section id="comments">
+  	
+      <div id="vcomments"></div>
+    
+  </section>
+
+
+  
+</div>
+
+  <nav class="bar bar-footer clearfix" data-stick-bottom>
+  <div class="bar-inner">
+  
+  <ul class="pager pull-left">
+    
+    <li class="prev">
+      <a href="/2018/03/22/javascript/" title="JavaScript &amp; TS 编码风格指南"><i class="icon icon-angle-left" aria-hidden="true"></i><span>&nbsp;&nbsp;上一篇</span></a>
+    </li>
+    
+    
+    <li class="next">
+      <a href="/2018/03/20/git/" title="Git使用流程规范"><span>下一篇&nbsp;&nbsp;</span><i class="icon icon-angle-right" aria-hidden="true"></i></a>
+    </li>
+    
+    
+  </ul>
+  
+  
+  <!-- Button trigger modal -->
+  <button type="button" class="btn btn-fancy btn-donate pop-onhover bg-gradient-warning" data-toggle="modal" data-target="#donateModal"><span>赏</span></button>
+  <!-- <div class="wave-icon wave-icon-danger btn-donate" data-toggle="modal" data-target="#donateModal">
+    <div class="wave-circle"><span class="icon"><i class="icon icon-bill"></i></span></div>
+  </div> -->
+  
+  
+  <div class="bar-right">
+    
+    <div class="share-component" data-sites="weibo,qq,wechat,facebook,twitter" data-mobile-sites="weibo,qq,qzone"></div>
+    
+  </div>
+  </div>
+</nav>
+  
+<!-- Modal -->
+<div class="modal modal-center modal-small modal-xs-full fade" id="donateModal" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content donate">
+      <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+      <div class="modal-body">
+        <div class="donate-box">
+          <div class="donate-head">
+            <p>感谢您的支持，我会继续努力的!</p>
+          </div>
+          <div class="tab-content">
+            <div role="tabpanel" class="tab-pane fade active in" id="alipay">
+              <div class="donate-payimg">
+                <img src="/images/donate/alipayimg.jpg" alt="扫码支持" title="扫一扫" />
+              </div>
+              <p class="text-muted mv">扫码打赏，你说多少就多少</p>
+              <p class="text-grey">打开支付宝扫一扫，即可进行扫码打赏哦</p>
+            </div>
+            <div role="tabpanel" class="tab-pane fade" id="wechatpay">
+              <div class="donate-payimg">
+                <img src="/images/donate/wechatpayimg.jpg" alt="扫码支持" title="扫一扫" />
+              </div>
+              <p class="text-muted mv">扫码打赏，你说多少就多少</p>
+              <p class="text-grey">打开微信扫一扫，即可进行扫码打赏哦</p>
+            </div>
+          </div>
+          <div class="donate-footer">
+            <ul class="nav nav-tabs nav-justified" role="tablist">
+              <li role="presentation" class="active">
+                <a href="#alipay" id="alipay-tab" role="tab" data-toggle="tab" aria-controls="alipay" aria-expanded="true"><i class="icon icon-alipay"></i> 支付宝</a>
+              </li>
+              <li role="presentation" class="">
+                <a href="#wechatpay" role="tab" id="wechatpay-tab" data-toggle="tab" aria-controls="wechatpay" aria-expanded="false"><i class="icon icon-wepay"></i> 微信支付</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+</main>
+
+  <footer class="footer" itemscope itemtype="http://schema.org/WPFooter">
+	
+	
+    <ul class="social-links">
+    	
+        <li><a href="https://github.com/Major9506" target="_blank" title="Github" data-toggle=tooltip data-placement=top><i class="icon icon-github"></i></a></li>
+        
+        <li><a href="https://weibo.com/youguke63347" target="_blank" title="Weibo" data-toggle=tooltip data-placement=top><i class="icon icon-weibo"></i></a></li>
+        
+        <li><a href="https://twitter.com/iwebued" target="_blank" title="Twitter" data-toggle=tooltip data-placement=top><i class="icon icon-twitter"></i></a></li>
+        
+        <li><a href="#" target="_blank" title="Behance" data-toggle=tooltip data-placement=top><i class="icon icon-behance"></i></a></li>
+        
+        <li><a href="#" target="_blank" title="Rss" data-toggle=tooltip data-placement=top><i class="icon icon-rss"></i></a></li>
+        
+    </ul>
+
+    <div class="copyright">
+    	
+        <div class="publishby">
+        	Theme by <a href="https://github.com/cofess" target="_blank"> cofess </a>base on <a href="https://github.com/cofess/hexo-theme-pure" target="_blank">pure</a>.
+        </div>
+    </div>
+</footer>
+  <script src="//cdn.jsdelivr.net/npm/jquery@1.12.4/dist/jquery.min.js"></script>
+<script>
+window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>')
+</script>
+<script src="/js/plugin.min.js"></script>
+<script src="/js/application.js"></script>
+
+    <script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: '文章',
+            PAGES: '页面',
+            CATEGORIES: '分类',
+            TAGS: '标签',
+            UNTITLED: '(未命名)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+<script src="/js/insight.js"></script>
+
+
+
+
+
+   
+
+
+
+
+   
+    
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/valine"></script>
+  <script type="text/javascript">
+  var GUEST = ['nick', 'mail', 'link'];
+  var meta = 'nick,mail,link';
+  meta = meta.split(',').filter(function(item) {
+    return GUEST.indexOf(item) > -1;
+  });
+  new Valine({
+    el: '#vcomments',
+    verify: false,
+    notify: false,
+    appId: '',
+    appKey: '',
+    placeholder: 'Just go go',
+    avatar: 'mm',
+    meta: meta,
+    pageSize: '10' || 10,
+    visitor: false
+  });
+  </script>
+
+     
+
+
+
+  <script src="//cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.3.5/dist/jquery.fancybox.min.js"></script>
+  <script>
+  //利用 FancyBox 实现点击图片放大
+  $(document).ready(function() {
+    $('article img').not('[hidden]').not('.panel-body img').each(function() {
+      var $image = $(this);
+      var imageCaption = $image.attr('alt');
+      var $imageWrapLink = $image.parent('a');
+      if ($imageWrapLink.length < 1) {
+        var src = this.getAttribute('src');
+        var idx = src.lastIndexOf('?');
+        if (idx != -1) {
+          src = src.substring(0, idx);
+        }
+        $imageWrapLink = $image.wrap('<a href="' + src + '"></a>').parent('a');
+      }
+      $imageWrapLink.attr('data-fancybox', 'images');
+      if (imageCaption) {
+        $imageWrapLink.attr('data-caption', imageCaption);
+      }
+    });
+    $().fancybox({
+      selector: '[data-fancybox="images"]',
+      hash: false,
+      loop: false,
+    });
+  });
+  </script>
+
+
+
+
+
+</body>
+</html>
