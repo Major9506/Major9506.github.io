@@ -17,16 +17,19 @@
   <meta http-equiv="window-target" content="_top" />
   
   
-  <title>404 Not Found：该页无法显示 | Hexo</title>
-  <meta property="og:type" content="website">
-<meta property="og:title" content="404 Not Found：该页无法显示">
-<meta property="og:url" content="https://major9506.github.io/404.html">
+  <title>JavaScript 性能优化 | Hexo</title>
+  <meta name="description" content="&amp;#x52A0;&amp;#x8F7D;&amp;#x4E0E;&amp;#x6267;&amp;#x884C; &amp;#x5C06;&amp;lt;script&amp;gt;&amp;#x6807;&amp;#x7B7E;&amp;#x653E;&amp;#x5728;&amp;lt;&#x2F;body&amp;gt;&amp;#x524D;&amp;#x9762;&amp;#xFF0C;&amp;#x4E0D;&amp;#x8981;&amp;#x653E;&amp;#x5728;&amp;lt;head&amp;gt;&amp;#x4E2D;&amp;#xFF0C;&amp;#x9632;">
+<meta name="keywords" content="javascript">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JavaScript 性能优化">
+<meta property="og:url" content="https://major9506.github.io/2022/08/16/javascript-optimization/index.html">
 <meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="&amp;#x52A0;&amp;#x8F7D;&amp;#x4E0E;&amp;#x6267;&amp;#x884C; &amp;#x5C06;&amp;lt;script&amp;gt;&amp;#x6807;&amp;#x7B7E;&amp;#x653E;&amp;#x5728;&amp;lt;&#x2F;body&amp;gt;&amp;#x524D;&amp;#x9762;&amp;#xFF0C;&amp;#x4E0D;&amp;#x8981;&amp;#x653E;&amp;#x5728;&amp;lt;head&amp;gt;&amp;#x4E2D;&amp;#xFF0C;&amp;#x9632;">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2022-08-11T07:24:22.395Z">
+<meta property="og:updated_time" content="2022-08-16T06:23:40.580Z">
 <meta name="twitter:card" content="summary">
   <!-- Canonical links -->
-  <link rel="canonical" href="https://major9506.github.io/404.html">
+  <link rel="canonical" href="https://major9506.github.io/2022/08/16/javascript-optimization/index.html">
   
     <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
   
@@ -343,14 +346,14 @@
   
 <main class="main" role="main">
   <div class="content">
-  <article id="page-" class="article article-type-page" itemscope itemtype="http://schema.org/BlogPosting">
+  <article id="post-javascript-optimization" class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
     
     <div class="article-header">
       
         
   
     <h1 class="article-title" itemprop="name">
-      404 Not Found：该页无法显示
+      JavaScript 性能优化
     </h1>
   
 
@@ -358,22 +361,98 @@
       <div class="article-meta">
         <span class="article-date">
     <i class="icon icon-calendar-check"></i>
-	<a href="/404.html" class="article-date">
-	  <time datetime="2022-08-11T07:24:22.395Z" itemprop="datePublished">2022-08-11</time>
+	<a href="/2022/08/16/javascript-optimization/" class="article-date">
+	  <time datetime="2022-08-15T16:00:00.000Z" itemprop="datePublished">2022-08-16</time>
 	</a>
 </span>
         
+  <span class="article-category">
+    <i class="icon icon-folder"></i>
+    <a class="article-category-link" href="/categories/%E5%89%8D%E7%AB%AF/">前端</a>
+  </span>
+
         
+  <span class="article-tag">
+    <i class="icon icon-tags"></i>
+	<a class="article-tag-link" href="/tags/javascript/" rel="tag">javascript</a>
+  </span>
+
 
         
 
-        <span class="post-comment"><i class="icon icon-comment"></i> <a href="/404.html#comments" class="article-comment-link">评论</a></span>
+        <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2022/08/16/javascript-optimization/#comments" class="article-comment-link">评论</a></span>
         
       </div>
     </div>
     <div class="article-entry marked-body" itemprop="articleBody">
       
-        <script type="text/javascript" src="//www.qq.com/404/search_children.js" charset="utf-8" homepageurl="&lt;%- config.url %&gt;" homepagename="&#x56DE;&#x5230;&#x6211;&#x7684;&#x4E3B;&#x9875;"></script>
+        <h2 id="&#x52A0;&#x8F7D;&#x4E0E;&#x6267;&#x884C;"><a href="#&#x52A0;&#x8F7D;&#x4E0E;&#x6267;&#x884C;" class="headerlink" title="&#x52A0;&#x8F7D;&#x4E0E;&#x6267;&#x884C;"></a>&#x52A0;&#x8F7D;&#x4E0E;&#x6267;&#x884C;</h2><ul>
+<li>&#x5C06;<code>&lt;script&gt;</code>&#x6807;&#x7B7E;&#x653E;&#x5728;<code>&lt;/body&gt;</code>&#x524D;&#x9762;&#xFF0C;&#x4E0D;&#x8981;&#x653E;&#x5728;<code>&lt;head&gt;</code>&#x4E2D;&#xFF0C;&#x9632;&#x6B62;&#x9020;&#x6210;&#x5835;&#x585E;</li>
+<li>&#x5C3D;&#x91CF;&#x51CF;&#x5C11;&#x8BF7;&#x6C42;&#xFF0C;&#x5355;&#x4E2A;100KB&#x7684;&#x6587;&#x4EF6;&#x6BD4;4&#x4E2A;25KB&#x7684;&#x6587;&#x4EF6;&#x66F4;&#x5FEB;&#xFF0C;&#x4E5F;&#x5C31;&#x662F;&#x8BF4;&#x51CF;&#x5C11;&#x9875;&#x9762;&#x4E2D;&#x5916;&#x94FE;&#x7684;&#x6587;&#x4EF6;&#x4F1A;&#x6539;&#x5584;&#x6027;&#x80FD;</li>
+<li>&#x5C3D;&#x91CF;&#x4F7F;&#x7528;&#x538B;&#x7F29;&#x8FC7;&#x7684;JS&#x6587;&#x4EF6;&#xFF0C;&#x4F53;&#x79EF;&#x66F4;&#x5C0F;&#xFF0C;&#x52A0;&#x8F7D;&#x66F4;&#x5FEB;</li>
+</ul>
+<h2 id="&#x6570;&#x636E;&#x5B58;&#x53D6;"><a href="#&#x6570;&#x636E;&#x5B58;&#x53D6;" class="headerlink" title="&#x6570;&#x636E;&#x5B58;&#x53D6;"></a>&#x6570;&#x636E;&#x5B58;&#x53D6;</h2><ul>
+<li>&#x4F7F;&#x7528;&#x5C40;&#x90E8;&#x53D8;&#x91CF;&#x548C;&#x5B57;&#x9762;&#x91CF;&#x6BD4;&#x4F7F;&#x7528;&#x6570;&#x7EC4;&#x548C;&#x5BF9;&#x8C61;&#x6709;&#x66F4;&#x5C11;&#x7684;&#x8BFB;&#x5199;&#x6D88;&#x8017;</li>
+<li>&#x5C3D;&#x53EF;&#x80FD;&#x4F7F;&#x7528;&#x5C40;&#x90E8;&#x53D8;&#x91CF;&#x4EE3;&#x66FF;&#x5168;&#x5C40;&#x53D8;&#x91CF;</li>
+<li>&#x5982;&#x65E0;&#x5FC5;&#x8981;&#xFF0C;&#x4E0D;&#x8981;&#x4F7F;&#x7528;&#x95ED;&#x5305;&#xFF1B;&#x95ED;&#x5305;&#x5F15;&#x7528;&#x7740;&#x5176;&#x4ED6;&#x4F5C;&#x7528;&#x57DF;&#x7684;&#x53D8;&#x91CF;&#xFF0C;&#x4F1A;&#x9020;&#x6210;&#x66F4;&#x5927;&#x7684;&#x5185;&#x5B58;&#x5F00;&#x9500;</li>
+<li>&#x539F;&#x578B;&#x94FE;&#x4E0D;&#x8981;&#x8FC7;&#x6DF1;&#x3001;&#x5BF9;&#x8C61;&#x5D4C;&#x5957;&#x4E0D;&#x8981;&#x592A;&#x591A;</li>
+<li>&#x5BF9;&#x4E8E;&#x591A;&#x6B21;&#x8BBF;&#x95EE;&#x7684;&#x5D4C;&#x5957;&#x5BF9;&#x8C61;&#xFF0C;&#x5E94;&#x8BE5;&#x7528;&#x53D8;&#x91CF;&#x7F13;&#x5B58;&#x8D77;&#x6765;</li>
+</ul>
+<h2 id="DOM&#x7F16;&#x7A0B;"><a href="#DOM&#x7F16;&#x7A0B;" class="headerlink" title="DOM&#x7F16;&#x7A0B;"></a>DOM&#x7F16;&#x7A0B;</h2><ul>
+<li>&#x4E0D;&#x8981;&#x9891;&#x7E41;&#x4FEE;&#x6539;DOM&#xFF0C;&#x56E0;&#x4E3A;&#x4FEE;&#x6539;DOM&#x6837;&#x5F0F;&#x4F1A;&#x5BFC;&#x81F4;&#x91CD;&#x7ED8;(repaint)&#x548C;&#x91CD;&#x6392;(reflow)</li>
+<li>&#x5982;&#x679C;&#x8981;&#x4FEE;&#x6539;DOM&#x7684;&#x591A;&#x4E2A;&#x6837;&#x5F0F;&#x53EF;&#x4EE5;&#x7528;cssText&#x4E00;&#x6B21;&#x6027;&#x5C06;&#x8981;&#x6539;&#x7684;&#x6837;&#x5F0F;&#x5199;&#x5165;&#xFF0C;&#x6216;&#x5C06;&#x6837;&#x5F0F;&#x5199;&#x5230;class&#x91CC;&#xFF0C;&#x518D;&#x4FEE;&#x6539;DOM&#x7684;class&#x540D;&#x79F0;<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">const el = document.querySelector(&apos;.myDiv&apos;)</span><br><span class="line">el.style.borderLeft = &apos;1px&apos;</span><br><span class="line">el.style.borderRight = &apos;2px&apos;</span><br><span class="line">el.style.padding = &apos;5px&apos;</span><br></pre></td></tr></table></figure>
+&#x53EF;&#x4EE5;&#x4F7F;&#x7528;&#x5982;&#x4E0B;&#x8BED;&#x53E5;&#x4EE3;&#x66FF;<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">const el = document.querySelector(&apos;.myDiv&apos;)</span><br><span class="line">el.style.cssText = &apos;border-left: 1px; border-right: 2px; padding: 5px;&apos;</span><br></pre></td></tr></table></figure>
+cssText&#x4F1A;&#x8986;&#x76D6;&#x5DF2;&#x5B58;&#x5728;&#x7684;&#x6837;&#x5F0F;&#xFF0C;&#x5982;&#x679C;&#x4E0D;&#x60F3;&#x8986;&#x76D6;&#x5DF2;&#x6709;&#x6837;&#x5F0F;&#xFF0C;&#x53EF;&#x4EE5;&#x8FD9;&#x6837;<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">el.style.cssText += &apos;;border-left: 1px; border-right: 2px; padding: 5px;&apos;</span><br></pre></td></tr></table></figure></li>
+<li>&#x907F;&#x514D;&#x5927;&#x91CF;&#x4F7F;&#x7528;<code>:hover</code></li>
+<li>&#x4F7F;&#x7528;&#x4E8B;&#x4EF6;&#x59D4;&#x6258;<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">&lt;ul&gt;</span><br><span class="line">  &lt;li&gt;&#x82F9;&#x679C;&lt;/li&gt;</span><br><span class="line">  &lt;li&gt;&#x9999;&#x8549;&lt;/li&gt;</span><br><span class="line">  &lt;li&gt;&#x51E4;&#x68A8;&lt;/li&gt;</span><br><span class="line">&lt;/ul&gt;</span><br><span class="line">// good</span><br><span class="line">document.querySelector(&apos;ul&apos;).onclick = (event) =&gt; {</span><br><span class="line">  let target = event.target</span><br><span class="line">  if (target.nodeName === &apos;LI&apos;) {</span><br><span class="line">    console.log(target.innerHTML)</span><br><span class="line">  }</span><br><span class="line">}</span><br><span class="line">// bad</span><br><span class="line">document.querySelectorAll(&apos;li&apos;).forEach((e) =&gt; {</span><br><span class="line">  e.onclick = function() {</span><br><span class="line">    console.log(this.innerHTML)</span><br><span class="line">  }</span><br><span class="line">})</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<h4 id="&#x6279;&#x91CF;&#x4FEE;&#x6539;DOM"><a href="#&#x6279;&#x91CF;&#x4FEE;&#x6539;DOM" class="headerlink" title="&#x6279;&#x91CF;&#x4FEE;&#x6539;DOM"></a>&#x6279;&#x91CF;&#x4FEE;&#x6539;DOM</h4><p>&#x5F53;&#x4F60;&#x9700;&#x8981;&#x6279;&#x91CF;&#x4FEE;&#x6539;DOM&#x65F6;&#xFF0C;&#x53EF;&#x4EE5;&#x901A;&#x8FC7;&#x4EE5;&#x4E0B;&#x6B65;&#x9AA4;&#x51CF;&#x5C11;&#x91CD;&#x7ED8;&#x548C;&#x91CD;&#x6392;&#x6B21;&#x6570;&#xFF1A;</p>
+<ol>
+<li>&#x4F7F;&#x5143;&#x7D20;&#x8131;&#x79BB;&#x6587;&#x6863;&#x6D41;</li>
+<li>&#x5BF9;&#x5176;&#x5E94;&#x7528;&#x591A;&#x91CD;&#x6539;&#x53D8;</li>
+<li>&#x628A;&#x5143;&#x7D20;&#x5E26;&#x56DE;&#x6587;&#x6863;&#x4E2D;</li>
+</ol>
+<p>&#x8BE5;&#x8FC7;&#x7A0B;&#x4F1A;&#x89E6;&#x53D1;&#x4E24;&#x6B21;&#x91CD;&#x6392;&#x2014;&#x2014;&#x7B2C;&#x4E00;&#x6B65;&#x548C;&#x7B2C;&#x4E09;&#x6B65;&#x3002;&#x5982;&#x679C;&#x4F60;&#x5FFD;&#x7565;&#x8FD9;&#x4E24;&#x4E2A;&#x6B65;&#x9AA4;&#xFF0C;&#x90A3;&#x4E48;&#x5728;&#x7B2C;&#x4E8C;&#x6B65;&#x6240;&#x4EA7;&#x751F;&#x7684;&#x4EFB;&#x4F55;&#x4FEE;&#x6539;&#x90FD;&#x4F1A;&#x89E6;&#x53D1;&#x4E00;&#x6B21;&#x91CD;&#x6392;&#x3002;<br><br>&#x6709;&#x4E09;&#x79CD;&#x65B9;&#x6CD5;&#x53EF;&#x4EE5;&#x4F7F;DOM&#x8131;&#x79BB;&#x6587;&#x6863;&#xFF1A;</p>
+<ul>
+<li>&#x9690;&#x85CF;&#x5143;&#x7D20;&#xFF0C;&#x5E94;&#x7528;&#x4FEE;&#x6539;&#xFF0C;&#x91CD;&#x65B0;&#x663E;&#x793A;</li>
+<li>&#x4F7F;&#x7528;&#x6587;&#x6863;&#x7247;&#x65AD;&#xFF08;document.fragment&#xFF09;&#x5728;&#x5F53;&#x524D;DOM&#x4E4B;&#x5916;&#x6784;&#x5EFA;&#x4E00;&#x4E2A;&#x5B50;&#x6811;&#xFF0C;&#x518D;&#x628A;&#x5B83;&#x62F7;&#x56DE;&#x6587;&#x6863;</li>
+<li>&#x5C06;&#x539F;&#x59CB;&#x5143;&#x7D20;&#x62F7;&#x8D1D;&#x5230;&#x4E00;&#x4E2A;&#x8131;&#x79BB;&#x6587;&#x6863;&#x7684;&#x8282;&#x70B9;&#x4E2D;&#xFF0C;&#x4FEE;&#x6539;&#x526F;&#x672C;&#xFF0C;&#x5B8C;&#x6210;&#x540E;&#x518D;&#x66FF;&#x6362;&#x539F;&#x59CB;&#x5143;&#x7D20;</li>
+</ul>
+<h2 id="&#x7B97;&#x6CD5;&#x548C;&#x6D41;&#x7A0B;&#x63A7;&#x5236;"><a href="#&#x7B97;&#x6CD5;&#x548C;&#x6D41;&#x7A0B;&#x63A7;&#x5236;" class="headerlink" title="&#x7B97;&#x6CD5;&#x548C;&#x6D41;&#x7A0B;&#x63A7;&#x5236;"></a>&#x7B97;&#x6CD5;&#x548C;&#x6D41;&#x7A0B;&#x63A7;&#x5236;</h2><ul>
+<li>&#x6539;&#x5584;&#x6027;&#x80FD;&#x6700;&#x4F73;&#x7684;&#x65B9;&#x5F0F;&#x662F;&#x51CF;&#x5C11;&#x6BCF;&#x6B21;&#x8FED;&#x4EE3;&#x7684;&#x8FD0;&#x7B97;&#x91CF;&#x548C;&#x51CF;&#x5C11;&#x5FAA;&#x73AF;&#x8FED;&#x4EE3;&#x6B21;&#x6570;</li>
+<li>JavaScript&#x56DB;&#x79CD;&#x5FAA;&#x73AF;&#x4E2D;<code>for</code> <code>while</code> <code>do-while</code> <code>for-in</code>&#xFF0C;&#x53EA;&#x6709;<code>for-in</code>&#x5FAA;&#x73AF;&#x6BD4;&#x5176;&#x4ED6;&#x5176;&#x4E2D;&#x660E;&#x663E;&#x8981;&#x6162;&#xFF0C;&#x56E0;&#x4E3A;<code>for-in</code>&#x5FAA;&#x73AF;&#x8981;&#x641C;&#x7D22;&#x539F;&#x578B;&#x5C5E;&#x6027;</li>
+<li>&#x9650;&#x5236;&#x5FAA;&#x73AF;&#x4E2D;&#x8017;&#x65F6;&#x64CD;&#x4F5C;&#x7684;&#x6570;&#x91CF;</li>
+<li>&#x57FA;&#x4E8E;&#x51FD;&#x6570;&#x7684;&#x8FED;&#x4EE3;<code>forEach</code>&#x6BD4;&#x4E00;&#x822C;&#x7684;&#x5FAA;&#x73AF;&#x8981;&#x6162;&#xFF0C;&#x5982;&#x679C;&#x5BF9;&#x8FD0;&#x884C;&#x901F;&#x5EA6;&#x8981;&#x6C42;&#x5F88;&#x4E25;&#x683C;&#xFF0C;&#x4E0D;&#x8981;&#x4F7F;&#x7528;</li>
+<li><code>if-else</code> <code>switch</code>&#xFF0C;&#x6761;&#x4EF6;&#x6570;&#x91CF;&#x8D8A;&#x5927;&#xFF0C;&#x8D8A;&#x503E;&#x5411;&#x4E8E;&#x4F7F;&#x7528;<code>switch</code></li>
+<li>&#x5728;&#x5224;&#x65AD;&#x6761;&#x4EF6;&#x591A;&#x65F6;&#xFF0C;&#x53EF;&#x4EE5;&#x4F7F;&#x7528;&#x67E5;&#x627E;&#x8868;&#x6765;&#x4EE3;&#x66FF;<code>if-else</code> <code>switch</code>&#xFF0C;&#x901F;&#x5EA6;&#x66F4;&#x5FEB;<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">switch(value) {</span><br><span class="line">  case 0:</span><br><span class="line">    return result0</span><br><span class="line">    break</span><br><span class="line">  case 1:</span><br><span class="line">    return result1</span><br><span class="line">    break</span><br><span class="line">  case 2:</span><br><span class="line">    return result2</span><br><span class="line">    break</span><br><span class="line">  case 3:</span><br><span class="line">    return result3</span><br><span class="line">    break</span><br><span class="line">}</span><br><span class="line">// &#x53EF;&#x4EE5;&#x4F7F;&#x7528;&#x67E5;&#x627E;&#x8868;&#x4EE3;&#x66FF;</span><br><span class="line">const results = [result0, result1, result2, result3]</span><br></pre></td></tr></table></figure></li>
+<li>&#x5982;&#x679C;&#x9047;&#x5230;&#x6808;&#x6EA2;&#x51FA;&#x9519;&#x8BEF;&#xFF0C;&#x53EF;&#x4EE5;&#x4F7F;&#x7528;&#x8FED;&#x4EE3;&#x6765;&#x4EE3;&#x66FF;&#x9012;&#x5F52;</li>
+</ul>
+<h2 id="&#x5B57;&#x7B26;&#x4E32;"><a href="#&#x5B57;&#x7B26;&#x4E32;" class="headerlink" title="&#x5B57;&#x7B26;&#x4E32;"></a>&#x5B57;&#x7B26;&#x4E32;</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">str += &apos;one&apos; + &apos;two&apos;</span><br></pre></td></tr></table></figure>
+<p>&#x6B64;&#x4EE3;&#x7801;&#x8FD0;&#x884C;&#x65F6;&#xFF0C;&#x4F1A;&#x7ECF;&#x5386;&#x56DB;&#x4E2A;&#x6B65;&#x9AA4;&#xFF1A;</p>
+<ol>
+<li>&#x5728;&#x5185;&#x5B58;&#x4E2D;&#x521B;&#x5EFA;&#x4E00;&#x4E2A;&#x4E34;&#x65F6;&#x5B57;&#x7B26;&#x4E32;</li>
+<li>&#x8FDE;&#x63A5;&#x540E;&#x7684;&#x5B57;&#x7B26;&#x4E32; <code>onetwo</code> &#x88AB;&#x8D4B;&#x503C;&#x7ED9;&#x8BE5;&#x4E34;&#x65F6;&#x5B57;&#x7B26;&#x4E32;</li>
+<li>&#x4E34;&#x65F6;&#x5B57;&#x7B26;&#x4E32;&#x4E0E;str&#x5F53;&#x524D;&#x7684;&#x503C;&#x8FDE;&#x63A5;</li>
+<li>&#x7ED3;&#x679C;&#x8D4B;&#x503C;&#x7ED9;str</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">str += &apos;one&apos; </span><br><span class="line">str += &apos;two&apos;</span><br></pre></td></tr></table></figure>
+<p>&#x7B2C;&#x4E8C;&#x79CD;&#x65B9;&#x5F0F;&#x6BD4;&#x7B2C;&#x4E00;&#x79CD;&#x65B9;&#x5F0F;&#x8981;&#x66F4;&#x5FEB;&#xFF0C;&#x56E0;&#x4E3A;&#x5B83;&#x907F;&#x514D;&#x4E86;&#x4E34;&#x65F6;&#x5B57;&#x7B26;&#x4E32;&#x7684;&#x4EA7;&#x751F;<br></p>
+<p>&#x4F60;&#x4E5F;&#x53EF;&#x4EE5;&#x7528;&#x4E00;&#x4E2A;&#x8BED;&#x53E5;&#x5C31;&#x80FD;&#x8FBE;&#x5230;&#x540C;&#x6837;&#x7684;&#x6027;&#x80FD;&#x63D0;&#x5347;</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">str = str + &apos;one&apos; + &apos;two&apos;</span><br></pre></td></tr></table></figure>
+
+<h2 id="&#x5FEB;&#x901F;&#x54CD;&#x5E94;&#x7528;&#x6237;&#x754C;&#x9762;"><a href="#&#x5FEB;&#x901F;&#x54CD;&#x5E94;&#x7528;&#x6237;&#x754C;&#x9762;" class="headerlink" title="&#x5FEB;&#x901F;&#x54CD;&#x5E94;&#x7528;&#x6237;&#x754C;&#x9762;"></a>&#x5FEB;&#x901F;&#x54CD;&#x5E94;&#x7528;&#x6237;&#x754C;&#x9762;</h2><ul>
+<li>&#x5BF9;&#x4E8E;&#x6267;&#x884C;&#x65F6;&#x95F4;&#x8FC7;&#x957F;&#x7684;&#x5927;&#x6BB5;&#x4EE3;&#x7801;&#xFF0C;&#x53EF;&#x4EE5;&#x4F7F;&#x7528;<code>setTimeout</code>&#x548C;<code>setInterval</code>&#x6765;&#x5BF9;&#x4EE3;&#x7801;&#x8FDB;&#x884C;&#x5206;&#x5272;&#xFF0C;&#x907F;&#x514D;&#x5BF9;&#x9875;&#x9762;&#x9020;&#x6210;&#x5835;&#x585E;</li>
+<li>&#x5BF9;&#x4E8E;&#x6570;&#x636E;&#x5904;&#x7406;&#x5DE5;&#x4F5C;&#x53EF;&#x4EE5;&#x4EA4;&#x7531;<code>Web Workers</code>&#x6765;&#x5904;&#x7406;&#xFF0C;&#x56E0;&#x4E3A;<code>Web Workers</code>&#x4E0D;&#x5360;&#x7528;&#x6D4F;&#x89C8;&#x5668;UI&#x7EBF;&#x7A0B;&#x7684;&#x65F6;&#x95F4;</li>
+</ul>
+<h2 id="&#x7F16;&#x7A0B;&#x5B9E;&#x8DF5;"><a href="#&#x7F16;&#x7A0B;&#x5B9E;&#x8DF5;" class="headerlink" title="&#x7F16;&#x7A0B;&#x5B9E;&#x8DF5;"></a>&#x7F16;&#x7A0B;&#x5B9E;&#x8DF5;</h2><ul>
+<li>&#x4F7F;&#x7528;Object/Array&#x5B57;&#x9762;&#x91CF;<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">const obj = new Object()</span><br><span class="line">const newObj = {}</span><br><span class="line">const arry = new Array()</span><br><span class="line">const newArry = []</span><br></pre></td></tr></table></figure>
+&#x4F7F;&#x7528;&#x5B57;&#x9762;&#x91CF;&#x4F1A;&#x8FD0;&#x884C;&#x5F97;&#x66F4;&#x5FEB;&#xFF0C;&#x5E76;&#x4E14;&#x8282;&#x7701;&#x4EE3;&#x7801;&#x91CF;</li>
+<li>&#x4F4D;&#x64CD;&#x4F5C;&#x5728;JavaScript&#x4E2D;&#x6027;&#x80FD;&#x975E;&#x5E38;&#x5FEB;&#xFF0C;&#x53EF;&#x4EE5;&#x4F7F;&#x7528;&#x4F4D;&#x8FD0;&#x7B97;&#x6765;&#x4EE3;&#x66FF;&#x7EAF;&#x6570;&#x5B66;&#x64CD;&#x4F5C;<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">x =* x</span><br><span class="line">// &#x7528;&#x4F4D;&#x8FD0;&#x7B97;&#x4EE3;&#x66FF; </span><br><span class="line">x &lt;&lt;= 1</span><br></pre></td></tr></table></figure></li>
+<li>&#x5982;&#x65E0;&#x5FC5;&#x8981;&#xFF0C;&#x4E0D;&#x8981;&#x91CD;&#x5199;&#x539F;&#x751F;&#x65B9;&#x6CD5;&#xFF0C;&#x56E0;&#x4E3A;&#x539F;&#x751F;&#x65B9;&#x6CD5;&#x5E95;&#x5C42;&#x662F;&#x7528;C/C++&#x5B9E;&#x73B0;&#x7684;&#xFF0C;&#x901F;&#x5EA6;&#x66F4;&#x5FEB;</li>
+</ul>
+<h3 id="&#x53C2;&#x8003;&#x8D44;&#x6599;"><a href="#&#x53C2;&#x8003;&#x8D44;&#x6599;" class="headerlink" title="&#x53C2;&#x8003;&#x8D44;&#x6599;"></a>&#x53C2;&#x8003;&#x8D44;&#x6599;</h3><p><a href="https://book.douban.com/subject/26599677/" target="_blank" rel="noopener">&#x9AD8;&#x6027;&#x80FD;JavaScript</a></p>
 
       
     </div>
@@ -383,7 +462,7 @@
     
     <li class="post-copyright-link hidden-xs">
       <strong>本文链接：</strong>
-      <a href="https://major9506.github.io/404.html" title="404 Not Found：该页无法显示" target="_blank" rel="external">https://major9506.github.io/404.html</a>
+      <a href="https://major9506.github.io/2022/08/16/javascript-optimization/" title="JavaScript 性能优化" target="_blank" rel="external">https://major9506.github.io/2022/08/16/javascript-optimization/</a>
     </li>
     
     <li class="post-copyright-license">
@@ -414,12 +493,28 @@
   </article>
   
     
+  <section id="comments">
+  	
+      <div id="vcomments"></div>
+    
+  </section>
+
 
   
 </div>
 
   <nav class="bar bar-footer clearfix" data-stick-bottom>
   <div class="bar-inner">
+  
+  <ul class="pager pull-left">
+    
+    
+    <li class="next">
+      <a href="/2022/08/11/high_quality_code/" title="如何编写高质量代码"><span>下一篇&nbsp;&nbsp;</span><i class="icon icon-angle-right" aria-hidden="true"></i></a>
+    </li>
+    
+    
+  </ul>
   
   
   <!-- Button trigger modal -->
@@ -535,6 +630,37 @@ window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>')
 
 
 
+
+   
+
+
+
+
+   
+    
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/valine"></script>
+  <script type="text/javascript">
+  var GUEST = ['nick', 'mail', 'link'];
+  var meta = 'nick,mail,link';
+  meta = meta.split(',').filter(function(item) {
+    return GUEST.indexOf(item) > -1;
+  });
+  new Valine({
+    el: '#vcomments',
+    verify: false,
+    notify: false,
+    appId: '',
+    appKey: '',
+    placeholder: 'Just go go',
+    avatar: 'mm',
+    meta: meta,
+    pageSize: '10' || 10,
+    visitor: false
+  });
+  </script>
+
+     
 
 
 
