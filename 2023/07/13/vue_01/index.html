@@ -1,0 +1,645 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head>
+  <meta charset="utf-8">
+  
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="Cache-Control" content="no-transform" />
+  <meta http-equiv="Cache-Control" content="no-siteapp" />
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="format-detection" content="telephone=no,email=no,adress=no">
+  <!-- Color theme for statusbar -->
+  <meta name="theme-color" content="#000000" />
+  <!-- 强制页面在当前窗口以独立页面显示,防止别人在框架里调用页面 -->
+  <meta http-equiv="window-target" content="_top" />
+  
+  
+  <title>vue3与vue2对比学习 | Hexo</title>
+  <meta name="description" content="1 &amp;#x524D;&amp;#x8A00;Vue2 &amp;#x662F;&amp;#x9009;&amp;#x9879;API&amp;#xFF08;Options API&amp;#xFF09;&amp;#xFF0C;&amp;#x4E00;&amp;#x4E2A;&amp;#x903B;&amp;#x8F91;&amp;#x4F1A;&amp;#x6563;&amp;#x4E71;&amp;#x5728;&amp;#x6587;&amp;#x4EF6;&amp;#x4E0D;&amp;#x540C;&amp;#x4F4D;&amp;#x7F6E;&amp;#x">
+<meta name="keywords" content="node">
+<meta property="og:type" content="article">
+<meta property="og:title" content="vue3与vue2对比学习">
+<meta property="og:url" content="https://major9506.github.io/2023/07/13/vue_01/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="1 &amp;#x524D;&amp;#x8A00;Vue2 &amp;#x662F;&amp;#x9009;&amp;#x9879;API&amp;#xFF08;Options API&amp;#xFF09;&amp;#xFF0C;&amp;#x4E00;&amp;#x4E2A;&amp;#x903B;&amp;#x8F91;&amp;#x4F1A;&amp;#x6563;&amp;#x4E71;&amp;#x5728;&amp;#x6587;&amp;#x4EF6;&amp;#x4E0D;&amp;#x540C;&amp;#x4F4D;&amp;#x7F6E;&amp;#x">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2023-07-13T02:11:00.462Z">
+<meta name="twitter:card" content="summary">
+  <!-- Canonical links -->
+  <link rel="canonical" href="https://major9506.github.io/2023/07/13/vue_01/index.html">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png" type="image/x-icon">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+  
+  
+    <link href="//cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.3.5/dist/jquery.fancybox.min.css" rel="stylesheet">
+  
+  
+</head>
+
+
+<body class="main-center" itemscope itemtype="http://schema.org/WebPage">
+  <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+  <div class="slimContent">
+    <div class="navbar-header">
+      
+      
+      <div class="profile-block text-center">
+        <a id="avatar" href="https://github.com/Major9506" target="_blank">
+          <img class="img-circle img-rotate" src="/images/avatar.png" width="200" height="200">
+        </a>
+        <h2 id="name" class="hidden-xs hidden-sm">Major_</h2>
+        <h3 id="title" class="hidden-xs hidden-sm hidden-md">前端/Node/Python</h3>
+        <small id="location" class="text-muted hidden-xs hidden-sm"><i class="icon icon-map-marker"></i> ChongQing, China</small>
+      </div>
+      
+      <div class="search" id="search-form-wrap">
+
+    <form class="search-form sidebar-form">
+        <div class="input-group">
+            <input type="text" class="search-form-input form-control" placeholder="搜索" />
+            <span class="input-group-btn">
+                <button type="submit" class="search-form-submit btn btn-flat" onclick="return false;"><i class="icon icon-search"></i></button>
+            </span>
+        </div>
+    </form>
+    <div class="ins-search">
+  <div class="ins-search-mask"></div>
+  <div class="ins-search-container">
+    <div class="ins-input-wrapper">
+      <input type="text" class="ins-search-input" placeholder="想要查找什么..." x-webkit-speech />
+      <button type="button" class="close ins-close ins-selectable" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+    </div>
+    <div class="ins-section-wrapper">
+      <div class="ins-section-container"></div>
+    </div>
+  </div>
+</div>
+
+
+</div>
+      <button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target="#main-navbar" aria-controls="main-navbar" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+    </div>
+    <nav id="main-navbar" class="collapse navbar-collapse" itemscope itemtype="http://schema.org/SiteNavigationElement" role="navigation">
+      <ul class="nav navbar-nav main-nav ">
+        
+        
+        <li class="menu-item menu-item-home">
+          <a href="/.">
+            
+            <i class="icon icon-home-fill"></i>
+            
+            <span class="menu-title">首页</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives">
+            
+            <i class="icon icon-archives-fill"></i>
+            
+            <span class="menu-title">归档</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories">
+            
+            <i class="icon icon-folder"></i>
+            
+            <span class="menu-title">分类</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags">
+            
+            <i class="icon icon-tags"></i>
+            
+            <span class="menu-title">标签</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-repository">
+          <a href="/repository">
+            
+            <i class="icon icon-project"></i>
+            
+            <span class="menu-title">项目</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-books">
+          <a href="/books">
+            
+            <i class="icon icon-book-fill"></i>
+            
+            <span class="menu-title">书单</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-links">
+          <a href="/links">
+            
+            <i class="icon icon-friendship"></i>
+            
+            <span class="menu-title">友链</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about">
+            
+            <i class="icon icon-cup-fill"></i>
+            
+            <span class="menu-title">关于</span>
+          </a>
+        </li>
+        
+      </ul>
+      
+	
+    <ul class="social-links">
+    	
+        <li><a href="https://github.com/Major9506" target="_blank" title="Github" data-toggle=tooltip data-placement=top><i class="icon icon-github"></i></a></li>
+        
+        <li><a href="https://weibo.com/youguke63347" target="_blank" title="Weibo" data-toggle=tooltip data-placement=top><i class="icon icon-weibo"></i></a></li>
+        
+        <li><a href="https://twitter.com/iwebued" target="_blank" title="Twitter" data-toggle=tooltip data-placement=top><i class="icon icon-twitter"></i></a></li>
+        
+        <li><a href="#" target="_blank" title="Behance" data-toggle=tooltip data-placement=top><i class="icon icon-behance"></i></a></li>
+        
+        <li><a href="#" target="_blank" title="Rss" data-toggle=tooltip data-placement=top><i class="icon icon-rss"></i></a></li>
+        
+    </ul>
+
+    </nav>
+  </div>
+</header>
+
+  
+    <aside class="sidebar" itemscope itemtype="http://schema.org/WPSideBar">
+  <div class="slimContent">
+    
+      <div class="widget">
+    <h3 class="widget-title">公告</h3>
+    <div class="widget-body">
+        <div id="board">
+            <div class="content">
+                <p>欢迎交流与分享经验!</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">分类</h3>
+    <div class="widget-body">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/">前端</a><span class="category-list-count">10</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%BC%96%E7%A8%8B%E8%A7%84%E8%8C%83/">编程规范</a><span class="category-list-count">6</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget-body">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/" rel="tag">git</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/javascript/" rel="tag">javascript</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/node/" rel="tag">node</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%BC%96%E7%A0%81%E9%A3%8E%E6%A0%BC%E6%8C%87%E5%8D%97/" rel="tag">编码风格指南</a><span class="tag-list-count">5</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget-body tagcloud">
+      <a href="/tags/git/" style="font-size: 13px;">git</a> <a href="/tags/javascript/" style="font-size: 14px;">javascript</a> <a href="/tags/node/" style="font-size: 13.33px;">node</a> <a href="/tags/%E7%BC%96%E7%A0%81%E9%A3%8E%E6%A0%BC%E6%8C%87%E5%8D%97/" style="font-size: 13.67px;">编码风格指南</a>
+    </div>
+  </div>
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget-body">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/07/">七月 2023</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/04/">四月 2023</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/08/">八月 2022</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/10/">十月 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/08/">八月 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/05/">五月 2019</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/03/">三月 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/">十月 2018</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/08/">八月 2018</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/05/">五月 2018</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">三月 2018</a><span class="archive-list-count">3</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget-body">
+      <ul class="recent-post-list list-unstyled no-thumbnail">
+        
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/%E5%89%8D%E7%AB%AF/">前端</a>
+              </p>
+              <p class="item-title">
+                <a href="/2023/07/13/vue_01/" class="title">vue3与vue2对比学习</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2023-07-12T16:00:00.000Z" itemprop="datePublished">2023-07-13</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/%E5%89%8D%E7%AB%AF/">前端</a>
+              </p>
+              <p class="item-title">
+                <a href="/2023/04/25/storage/" class="title">如何更优雅的使用localstorage和sessionstorage</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2023-04-24T16:00:00.000Z" itemprop="datePublished">2023-04-25</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/%E5%89%8D%E7%AB%AF/">前端</a>
+              </p>
+              <p class="item-title">
+                <a href="/2022/08/16/javascript-optimization/" class="title">JavaScript 性能优化</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2022-08-15T16:00:00.000Z" itemprop="datePublished">2022-08-16</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/%E7%BC%96%E7%A8%8B%E8%A7%84%E8%8C%83/">编程规范</a>
+              </p>
+              <p class="item-title">
+                <a href="/2022/08/11/high_quality_code/" class="title">如何编写高质量代码</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2022-08-10T16:00:00.000Z" itemprop="datePublished">2022-08-11</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/%E5%89%8D%E7%AB%AF/">前端</a>
+              </p>
+              <p class="item-title">
+                <a href="/2019/10/15/mj_cli/" class="title">打造自己的项目脚手架工具(@major_/cli)</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2019-10-14T16:00:00.000Z" itemprop="datePublished">2019-10-15</time>
+              </p>
+            </div>
+          </li>
+          
+      </ul>
+    </div>
+  </div>
+  
+
+    
+  </div>
+</aside>
+
+  
+  
+<main class="main" role="main">
+  <div class="content">
+  <article id="post-vue_01" class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
+    
+    <div class="article-header">
+      
+        
+  
+    <h1 class="article-title" itemprop="name">
+      vue3与vue2对比学习
+    </h1>
+  
+
+      
+      <div class="article-meta">
+        <span class="article-date">
+    <i class="icon icon-calendar-check"></i>
+	<a href="/2023/07/13/vue_01/" class="article-date">
+	  <time datetime="2023-07-12T16:00:00.000Z" itemprop="datePublished">2023-07-13</time>
+	</a>
+</span>
+        
+  <span class="article-category">
+    <i class="icon icon-folder"></i>
+    <a class="article-category-link" href="/categories/%E5%89%8D%E7%AB%AF/">前端</a>
+  </span>
+
+        
+  <span class="article-tag">
+    <i class="icon icon-tags"></i>
+	<a class="article-tag-link" href="/tags/node/" rel="tag">node</a>
+  </span>
+
+
+        
+
+        <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2023/07/13/vue_01/#comments" class="article-comment-link">评论</a></span>
+        
+      </div>
+    </div>
+    <div class="article-entry marked-body" itemprop="articleBody">
+      
+        <h2 id="1-&#x524D;&#x8A00;"><a href="#1-&#x524D;&#x8A00;" class="headerlink" title="1 &#x524D;&#x8A00;"></a>1 &#x524D;&#x8A00;</h2><p>Vue2 &#x662F;&#x9009;&#x9879;API&#xFF08;Options API&#xFF09;&#xFF0C;&#x4E00;&#x4E2A;&#x903B;&#x8F91;&#x4F1A;&#x6563;&#x4E71;&#x5728;&#x6587;&#x4EF6;&#x4E0D;&#x540C;&#x4F4D;&#x7F6E;&#xFF08;data&#x3001;props&#x3001;computed&#x3001;watch&#x3001;&#x751F;&#x547D;&#x5468;&#x671F;&#x94A9;&#x5B50;&#x7B49;&#xFF09;&#xFF0C;&#x5BFC;&#x81F4;&#x4EE3;&#x7801;&#x7684;&#x53EF;&#x8BFB;&#x6027;&#x53D8;&#x5DEE;&#x3002;&#x5F53;&#x9700;&#x8981;&#x4FEE;&#x6539;&#x67D0;&#x4E2A;&#x903B;&#x8F91;&#x65F6;&#xFF0C;&#x9700;&#x8981;&#x4E0A;&#x4E0B;&#x6765;&#x56DE;&#x8DF3;&#x8F6C;&#x6587;&#x4EF6;&#x4F4D;&#x7F6E;&#x3002;   </p>
+<p>Vue3 &#x7EC4;&#x5408;&#x5F0F;API&#xFF08;Composition API&#xFF09;&#x5219;&#x5F88;&#x597D;&#x5730;&#x89E3;&#x51B3;&#x4E86;&#x8FD9;&#x4E2A;&#x95EE;&#x9898;&#xFF0C;&#x53EF;&#x5C06;&#x540C;&#x4E00;&#x903B;&#x8F91;&#x7684;&#x5185;&#x5BB9;&#x5199;&#x5230;&#x4E00;&#x8D77;&#xFF0C;&#x589E;&#x5F3A;&#x4E86;&#x4EE3;&#x7801;&#x7684;&#x53EF;&#x8BFB;&#x6027;&#x3001;&#x5185;&#x805A;&#x6027;&#xFF0C;&#x5176;&#x8FD8;&#x63D0;&#x4F9B;&#x4E86;&#x8F83;&#x4E3A;&#x5B8C;&#x7F8E;&#x7684;&#x903B;&#x8F91;&#x590D;&#x7528;&#x6027;&#x65B9;&#x6848;&#x3002;   </p>
+<h3 id="&#x4E00;&#x3001;vue2&#x4E0E;vue3&#x8BED;&#x6CD5;&#x7CD6;&#x5BF9;&#x6BD4;&#x5B66;&#x4E60;"><a href="#&#x4E00;&#x3001;vue2&#x4E0E;vue3&#x8BED;&#x6CD5;&#x7CD6;&#x5BF9;&#x6BD4;&#x5B66;&#x4E60;" class="headerlink" title="&#x4E00;&#x3001;vue2&#x4E0E;vue3&#x8BED;&#x6CD5;&#x7CD6;&#x5BF9;&#x6BD4;&#x5B66;&#x4E60;"></a>&#x4E00;&#x3001;vue2&#x4E0E;vue3&#x8BED;&#x6CD5;&#x7CD6;&#x5BF9;&#x6BD4;&#x5B66;&#x4E60;</h3><p>1&#x3001;&#x6A21;&#x677F;&#x8BED;&#x6CD5;<br>Vue3&#x7684;&#x6A21;&#x677F;&#x8BED;&#x6CD5;&#x548C;Vue2&#x7684;&#x7C7B;&#x4F3C;&#xFF0C;&#x4F46;&#x6709;&#x4E00;&#x4E9B;&#x65B0;&#x7684;&#x8BED;&#x6CD5;&#x7CD6;&#xFF0C;&#x5982;Teleport&#x548C;Suspense&#x3002;&#x4EE5;&#x4E0B;&#x662F;Vue2&#x548C;Vue3&#x7684;&#x6A21;&#x677F;&#x8BED;&#x6CD5;&#x5BF9;&#x6BD4;&#xFF1A;   </p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line">&lt;!-- Vue2 --&gt;</span><br><span class="line">&lt;div v-<span class="keyword">if</span>=<span class="string">&quot;isVisible&quot;</span>&gt;{{ message }}&lt;<span class="regexp">/div&gt;</span></span><br><span class="line"><span class="regexp"></span></span><br><span class="line"><span class="regexp">&lt;!-- Vue3 --&gt;</span></span><br><span class="line"><span class="regexp">&lt;template v-if=&quot;isVisible&quot;&gt;</span></span><br><span class="line"><span class="regexp">  &lt;div&gt;{{ message }}&lt;/</span>div&gt;</span><br><span class="line">&lt;<span class="regexp">/template&gt;</span></span><br><span class="line"><span class="regexp"></span></span><br><span class="line"><span class="regexp">&lt;!-- Vue2 --&gt;</span></span><br><span class="line"><span class="regexp">&lt;div v-for=&quot;item in list&quot; :key=&quot;item.id&quot;&gt;{{ item.name }}&lt;/</span>div&gt;</span><br><span class="line"></span><br><span class="line">&lt;!-- Vue3 --&gt;</span><br><span class="line">&lt;div v-<span class="keyword">for</span>=<span class="string">&quot;item in list&quot;</span> :key=<span class="string">&quot;item.id&quot;</span>&gt;{{ item.name }}&lt;<span class="regexp">/div&gt;</span></span><br><span class="line"><span class="regexp"></span></span><br><span class="line"><span class="regexp">&lt;!-- Vue2 --&gt;</span></span><br><span class="line"><span class="regexp">&lt;div v-bind:class=&quot;{ active: isActive }&quot;&gt;&lt;/</span>div&gt;</span><br><span class="line"></span><br><span class="line">&lt;!-- Vue3 --&gt;</span><br><span class="line">&lt;div :<span class="class"><span class="keyword">class</span></span>=<span class="string">&quot;{ active: isActive }&quot;</span>&gt;&lt;<span class="regexp">/div&gt;</span></span><br><span class="line"><span class="regexp"></span></span><br><span class="line"><span class="regexp">&lt;!-- Vue3 --&gt;</span></span><br><span class="line"><span class="regexp">&lt;teleport to=&quot;body&quot;&gt;</span></span><br><span class="line"><span class="regexp">  &lt;div&gt;Teleport to body&lt;/</span>div&gt;</span><br><span class="line">&lt;<span class="regexp">/teleport&gt;</span></span><br><span class="line"><span class="regexp"></span></span><br><span class="line"><span class="regexp">&lt;!-- Vue3 --&gt;</span></span><br><span class="line"><span class="regexp">&lt;suspense&gt;</span></span><br><span class="line"><span class="regexp">  &lt;template #default&gt;</span></span><br><span class="line"><span class="regexp">    &lt;div&gt;{{ message }}&lt;/</span>div&gt;</span><br><span class="line">  &lt;<span class="regexp">/template&gt;</span></span><br><span class="line"><span class="regexp">  &lt;template #fallback&gt;</span></span><br><span class="line"><span class="regexp">    &lt;div&gt;Loading...&lt;/</span>div&gt;</span><br><span class="line">  &lt;<span class="regexp">/template&gt;</span></span><br><span class="line"><span class="regexp">&lt;/</span>suspense&gt;</span><br></pre></td></tr></table></figure>
+<p>2&#x3001;Composition API<br>Vue3&#x5F15;&#x5165;&#x4E86;Composition API&#xFF0C;&#x5B83;&#x662F;&#x4E00;&#x79CD;&#x65B0;&#x7684;&#x65B9;&#x5F0F;&#x6765;&#x7EC4;&#x7EC7;&#x548C;&#x91CD;&#x7528;&#x7EC4;&#x4EF6;&#x903B;&#x8F91;&#x3002;&#x4EE5;&#x4E0B;&#x662F;Vue2&#x548C;Vue3&#x7684;&#x7EC4;&#x4EF6;&#x5B9A;&#x4E49;&#x65B9;&#x5F0F;&#x5BF9;&#x6BD4;&#xFF1A;</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Vue2 Options API</span></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> {</span><br><span class="line">  data() {</span><br><span class="line">    <span class="keyword">return</span> {</span><br><span class="line">      message: <span class="string">&apos;Hello, Vue2&apos;</span></span><br><span class="line">    };</span><br><span class="line">  },</span><br><span class="line">  computed: {</span><br><span class="line">    reversedMessage() {</span><br><span class="line">      <span class="keyword">return</span> <span class="keyword">this</span>.message.split(<span class="string">&apos;&apos;</span>).reverse().join(<span class="string">&apos;&apos;</span>);</span><br><span class="line">    }</span><br><span class="line">  },</span><br><span class="line">  methods: {</span><br><span class="line">    greet() {</span><br><span class="line">      alert(<span class="keyword">this</span>.message);</span><br><span class="line">    }</span><br><span class="line">  }</span><br><span class="line">};</span><br><span class="line"></span><br><span class="line"><span class="comment">// Vue3 Composition API</span></span><br><span class="line"><span class="keyword">import</span> { reactive, computed } <span class="keyword">from</span> <span class="string">&apos;vue&apos;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> {</span><br><span class="line">  setup() {</span><br><span class="line">    <span class="keyword">const</span> state = reactive({</span><br><span class="line">      message: <span class="string">&apos;Hello, Vue3&apos;</span></span><br><span class="line">    });</span><br><span class="line"></span><br><span class="line">    <span class="keyword">const</span> reversedMessage = computed(<span class="function"><span class="params">()</span> =&gt;</span> {</span><br><span class="line">      <span class="keyword">return</span> state.message.split(<span class="string">&apos;&apos;</span>).reverse().join(<span class="string">&apos;&apos;</span>);</span><br><span class="line">    });</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">greet</span>(<span class="params"></span>) </span>{</span><br><span class="line">      alert(state.message);</span><br><span class="line">    }</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> { state, reversedMessage, greet };</span><br><span class="line">  }</span><br><span class="line">};</span><br></pre></td></tr></table></figure>
+<p>3&#x3001;Slots<br>Vue3&#x4E2D;&#x7684;Slots&#x6709;&#x4E00;&#x4E9B;&#x65B0;&#x7684;&#x8BED;&#x6CD5;&#x7CD6;&#xFF0C;&#x5982;&#x9ED8;&#x8BA4;&#x63D2;&#x69FD;&#x548C;&#x5177;&#x540D;&#x63D2;&#x69FD;&#x7684;&#x65B0;&#x5199;&#x6CD5;&#x3002;&#x4EE5;&#x4E0B;&#x662F;Vue2&#x548C;Vue3&#x7684;Slots&#x5BF9;&#x6BD4;&#xFF1A;</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">&lt;!-- Vue2 --&gt;</span><br><span class="line">&lt;template&gt;</span><br><span class="line">  &lt;div&gt;</span><br><span class="line">    &lt;slot&gt;&lt;<span class="regexp">/slot&gt;</span></span><br><span class="line"><span class="regexp">  &lt;/</span>div&gt;</span><br><span class="line">&lt;<span class="regexp">/template&gt;</span></span><br><span class="line"><span class="regexp"></span></span><br><span class="line"><span class="regexp">&lt;!-- Vue3 --&gt;</span></span><br><span class="line"><span class="regexp">&lt;template&gt;</span></span><br><span class="line"><span class="regexp">  &lt;div&gt;</span></span><br><span class="line"><span class="regexp">    &lt;slot&gt;&lt;/</span>slot&gt;</span><br><span class="line">  &lt;<span class="regexp">/div&gt;</span></span><br><span class="line"><span class="regexp">&lt;/</span>template&gt;</span><br><span class="line"></span><br><span class="line">&lt;!-- Vue2 --&gt;</span><br><span class="line">&lt;template&gt;</span><br><span class="line">  &lt;div&gt;</span><br><span class="line">    &lt;slot name=<span class="string">&quot;header&quot;</span>&gt;&lt;<span class="regexp">/slot&gt;</span></span><br><span class="line"><span class="regexp">    &lt;slot&gt;&lt;/</span>slot&gt;</span><br><span class="line">    &lt;slot name=<span class="string">&quot;footer&quot;</span>&gt;&lt;<span class="regexp">/slot&gt;</span></span><br><span class="line"><span class="regexp">  &lt;/</span>div&gt;</span><br><span class="line">&lt;<span class="regexp">/template&gt;</span></span><br><span class="line"><span class="regexp"></span></span><br><span class="line"><span class="regexp">&lt;!-- Vue3 --&gt;</span></span><br><span class="line"><span class="regexp">&lt;template&gt;</span></span><br><span class="line"><span class="regexp">  &lt;div&gt;</span></span><br><span class="line"><span class="regexp">    &lt;slot name=&quot;header&quot; /</span>&gt;</span><br><span class="line">    &lt;slot /&gt;</span><br><span class="line">    &lt;slot name=<span class="string">&quot;footer&quot;</span> /&gt;</span><br><span class="line">  &lt;<span class="regexp">/div&gt;</span></span><br><span class="line"><span class="regexp">&lt;/</span>template&gt;</span><br></pre></td></tr></table></figure>
+<h3 id="&#x4E00;&#x3001;vue2&#x4E0E;vue3&#x5206;&#x522B;&#x5B9E;&#x73B0;&#x4E00;&#x4E2A;todolist"><a href="#&#x4E00;&#x3001;vue2&#x4E0E;vue3&#x5206;&#x522B;&#x5B9E;&#x73B0;&#x4E00;&#x4E2A;todolist" class="headerlink" title="&#x4E00;&#x3001;vue2&#x4E0E;vue3&#x5206;&#x522B;&#x5B9E;&#x73B0;&#x4E00;&#x4E2A;todolist"></a>&#x4E00;&#x3001;vue2&#x4E0E;vue3&#x5206;&#x522B;&#x5B9E;&#x73B0;&#x4E00;&#x4E2A;todolist</h3><p>Vue2&#x5B9E;&#x73B0;todolist</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line">&lt;template&gt;</span><br><span class="line">  &lt;div&gt;</span><br><span class="line">    &lt;h2&gt;Vue2 Todo List&lt;<span class="regexp">/h2&gt;</span></span><br><span class="line"><span class="regexp">    &lt;form @submit.prevent=&quot;addTodo&quot;&gt;</span></span><br><span class="line"><span class="regexp">      &lt;input type=&quot;text&quot; v-model=&quot;newTodo&quot; placeholder=&quot;Enter a new todo&quot;&gt;</span></span><br><span class="line"><span class="regexp">      &lt;button type=&quot;submit&quot;&gt;Add&lt;/</span>button&gt;</span><br><span class="line">    &lt;<span class="regexp">/form&gt;</span></span><br><span class="line"><span class="regexp">    &lt;ul&gt;</span></span><br><span class="line"><span class="regexp">      &lt;li v-for=&quot;(todo, index) in todos&quot; :key=&quot;index&quot;&gt;</span></span><br><span class="line"><span class="regexp">        {{ todo }}</span></span><br><span class="line"><span class="regexp">        &lt;button @click=&quot;deleteTodo(index)&quot;&gt;Delete&lt;/</span>button&gt;</span><br><span class="line">      &lt;<span class="regexp">/li&gt;</span></span><br><span class="line"><span class="regexp">    &lt;/u</span>l&gt;</span><br><span class="line">  &lt;<span class="regexp">/div&gt;</span></span><br><span class="line"><span class="regexp">&lt;/</span>template&gt;</span><br><span class="line"></span><br><span class="line">&lt;script&gt;</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> {</span><br><span class="line">  data() {</span><br><span class="line">    <span class="keyword">return</span> {</span><br><span class="line">      todos: [],</span><br><span class="line">      newTodo: <span class="string">&apos;&apos;</span></span><br><span class="line">    };</span><br><span class="line">  },</span><br><span class="line">  methods: {</span><br><span class="line">    addTodo() {</span><br><span class="line">      <span class="keyword">if</span> (<span class="keyword">this</span>.newTodo.trim() !== <span class="string">&apos;&apos;</span>) {</span><br><span class="line">        <span class="keyword">this</span>.todos.push(<span class="keyword">this</span>.newTodo.trim());</span><br><span class="line">        <span class="keyword">this</span>.newTodo = <span class="string">&apos;&apos;</span>;</span><br><span class="line">      }</span><br><span class="line">    },</span><br><span class="line">    deleteTodo(index) {</span><br><span class="line">      <span class="keyword">this</span>.todos.splice(index, <span class="number">1</span>);</span><br><span class="line">    }</span><br><span class="line">  }</span><br><span class="line">};</span><br><span class="line">&lt;<span class="regexp">/script&gt;</span></span><br></pre></td></tr></table></figure>
+<p>Vue3&#x5B9E;&#x73B0;todolist   </p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line">&lt;template&gt;</span><br><span class="line">  &lt;div&gt;</span><br><span class="line">    &lt;h2&gt;Vue3 Todo List&lt;<span class="regexp">/h2&gt;</span></span><br><span class="line"><span class="regexp">    &lt;form @submit.prevent=&quot;addTodo&quot;&gt;</span></span><br><span class="line"><span class="regexp">      &lt;input type=&quot;text&quot; v-model=&quot;newTodo&quot; placeholder=&quot;Enter a new todo&quot;&gt;</span></span><br><span class="line"><span class="regexp">      &lt;button type=&quot;submit&quot;&gt;Add&lt;/</span>button&gt;</span><br><span class="line">    &lt;<span class="regexp">/form&gt;</span></span><br><span class="line"><span class="regexp">    &lt;ul&gt;</span></span><br><span class="line"><span class="regexp">      &lt;li v-for=&quot;(todo, index) in todos&quot; :key=&quot;index&quot;&gt;</span></span><br><span class="line"><span class="regexp">        {{ todo }}</span></span><br><span class="line"><span class="regexp">        &lt;button @click=&quot;deleteTodo(index)&quot;&gt;Delete&lt;/</span>button&gt;</span><br><span class="line">      &lt;<span class="regexp">/li&gt;</span></span><br><span class="line"><span class="regexp">    &lt;/u</span>l&gt;</span><br><span class="line">  &lt;<span class="regexp">/div&gt;</span></span><br><span class="line"><span class="regexp">&lt;/</span>template&gt;</span><br><span class="line"></span><br><span class="line">&lt;script&gt;</span><br><span class="line"><span class="keyword">import</span> { reactive } <span class="keyword">from</span> <span class="string">&apos;vue&apos;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> {</span><br><span class="line">  setup() {</span><br><span class="line">    <span class="keyword">const</span> state = reactive({</span><br><span class="line">      todos: [],</span><br><span class="line">      newTodo: <span class="string">&apos;&apos;</span></span><br><span class="line">    });</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">addTodo</span>(<span class="params"></span>) </span>{</span><br><span class="line">      <span class="keyword">if</span> (state.newTodo.trim() !== <span class="string">&apos;&apos;</span>) {</span><br><span class="line">        state.todos.push(state.newTodo.trim());</span><br><span class="line">        state.newTodo = <span class="string">&apos;&apos;</span>;</span><br><span class="line">      }</span><br><span class="line">    }</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">deleteTodo</span>(<span class="params">index</span>) </span>{</span><br><span class="line">      state.todos.splice(index, <span class="number">1</span>);</span><br><span class="line">    }</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> { state, addTodo, deleteTodo };</span><br><span class="line">  }</span><br><span class="line">};</span><br><span class="line">&lt;<span class="regexp">/script&gt;</span></span><br></pre></td></tr></table></figure>
+      
+    </div>
+    <div class="article-footer">
+      <blockquote class="mt-2x">
+  <ul class="post-copyright list-unstyled">
+    
+    <li class="post-copyright-link hidden-xs">
+      <strong>本文链接：</strong>
+      <a href="https://major9506.github.io/2023/07/13/vue_01/" title="vue3与vue2对比学习" target="_blank" rel="external">https://major9506.github.io/2023/07/13/vue_01/</a>
+    </li>
+    
+    <li class="post-copyright-license">
+      <strong>版权声明： </strong> 本博客所有文章除特别声明外，均采用 <a href="http://creativecommons.org/licenses/by/4.0/deed.zh" target="_blank" rel="external">CC BY 4.0 CN协议</a> 许可协议。转载请注明出处！
+    </li>
+  </ul>
+</blockquote>
+
+
+<div class="panel panel-default panel-badger">
+  <div class="panel-body">
+    <figure class="media">
+      <div class="media-left">
+        <a href="https://github.com/Major9506" target="_blank" class="img-burn thumb-sm visible-lg">
+          <img src="/images/avatar.png" class="img-rounded w-full" alt="">
+        </a>
+      </div>
+      <div class="media-body">
+        <h3 class="media-heading"><a href="https://github.com/Major9506" target="_blank"><span class="text-dark">Major_</span><small class="ml-1x">前端/Node/Python</small></a></h3>
+        <div>年轻无为，卖马为生</div>
+      </div>
+    </figure>
+  </div>
+</div>
+
+
+    </div>
+  </article>
+  
+    
+  <section id="comments">
+  	
+      <div id="vcomments"></div>
+    
+  </section>
+
+
+  
+</div>
+
+  <nav class="bar bar-footer clearfix" data-stick-bottom>
+  <div class="bar-inner">
+  
+  <ul class="pager pull-left">
+    
+    
+    <li class="next">
+      <a href="/2023/04/25/storage/" title="如何更优雅的使用localstorage和sessionstorage"><span>下一篇&nbsp;&nbsp;</span><i class="icon icon-angle-right" aria-hidden="true"></i></a>
+    </li>
+    
+    
+  </ul>
+  
+  
+  <!-- Button trigger modal -->
+  <button type="button" class="btn btn-fancy btn-donate pop-onhover bg-gradient-warning" data-toggle="modal" data-target="#donateModal"><span>赏</span></button>
+  <!-- <div class="wave-icon wave-icon-danger btn-donate" data-toggle="modal" data-target="#donateModal">
+    <div class="wave-circle"><span class="icon"><i class="icon icon-bill"></i></span></div>
+  </div> -->
+  
+  
+  <div class="bar-right">
+    
+    <div class="share-component" data-sites="weibo,qq,wechat,facebook,twitter" data-mobile-sites="weibo,qq,qzone"></div>
+    
+  </div>
+  </div>
+</nav>
+  
+<!-- Modal -->
+<div class="modal modal-center modal-small modal-xs-full fade" id="donateModal" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content donate">
+      <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+      <div class="modal-body">
+        <div class="donate-box">
+          <div class="donate-head">
+            <p>感谢您的支持，我会继续努力的!</p>
+          </div>
+          <div class="tab-content">
+            <div role="tabpanel" class="tab-pane fade active in" id="alipay">
+              <div class="donate-payimg">
+                <img src="/images/donate/alipayimg.jpg" alt="扫码支持" title="扫一扫" />
+              </div>
+              <p class="text-muted mv">扫码打赏，你说多少就多少</p>
+              <p class="text-grey">打开支付宝扫一扫，即可进行扫码打赏哦</p>
+            </div>
+            <div role="tabpanel" class="tab-pane fade" id="wechatpay">
+              <div class="donate-payimg">
+                <img src="/images/donate/wechatpayimg.jpg" alt="扫码支持" title="扫一扫" />
+              </div>
+              <p class="text-muted mv">扫码打赏，你说多少就多少</p>
+              <p class="text-grey">打开微信扫一扫，即可进行扫码打赏哦</p>
+            </div>
+          </div>
+          <div class="donate-footer">
+            <ul class="nav nav-tabs nav-justified" role="tablist">
+              <li role="presentation" class="active">
+                <a href="#alipay" id="alipay-tab" role="tab" data-toggle="tab" aria-controls="alipay" aria-expanded="true"><i class="icon icon-alipay"></i> 支付宝</a>
+              </li>
+              <li role="presentation" class="">
+                <a href="#wechatpay" role="tab" id="wechatpay-tab" data-toggle="tab" aria-controls="wechatpay" aria-expanded="false"><i class="icon icon-wepay"></i> 微信支付</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+</main>
+
+  <footer class="footer" itemscope itemtype="http://schema.org/WPFooter">
+	
+	
+    <ul class="social-links">
+    	
+        <li><a href="https://github.com/Major9506" target="_blank" title="Github" data-toggle=tooltip data-placement=top><i class="icon icon-github"></i></a></li>
+        
+        <li><a href="https://weibo.com/youguke63347" target="_blank" title="Weibo" data-toggle=tooltip data-placement=top><i class="icon icon-weibo"></i></a></li>
+        
+        <li><a href="https://twitter.com/iwebued" target="_blank" title="Twitter" data-toggle=tooltip data-placement=top><i class="icon icon-twitter"></i></a></li>
+        
+        <li><a href="#" target="_blank" title="Behance" data-toggle=tooltip data-placement=top><i class="icon icon-behance"></i></a></li>
+        
+        <li><a href="#" target="_blank" title="Rss" data-toggle=tooltip data-placement=top><i class="icon icon-rss"></i></a></li>
+        
+    </ul>
+
+    <div class="copyright">
+    	
+        <div class="publishby">
+        	Theme by <a href="https://github.com/cofess" target="_blank"> cofess </a>base on <a href="https://github.com/cofess/hexo-theme-pure" target="_blank">pure</a>.
+        </div>
+    </div>
+</footer>
+  <script src="//cdn.jsdelivr.net/npm/jquery@1.12.4/dist/jquery.min.js"></script>
+<script>
+window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>')
+</script>
+<script src="/js/plugin.min.js"></script>
+<script src="/js/application.js"></script>
+
+    <script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: '文章',
+            PAGES: '页面',
+            CATEGORIES: '分类',
+            TAGS: '标签',
+            UNTITLED: '(未命名)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+<script src="/js/insight.js"></script>
+
+
+
+
+
+   
+
+
+
+
+   
+    
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/valine"></script>
+  <script type="text/javascript">
+  var GUEST = ['nick', 'mail', 'link'];
+  var meta = 'nick,mail,link';
+  meta = meta.split(',').filter(function(item) {
+    return GUEST.indexOf(item) > -1;
+  });
+  new Valine({
+    el: '#vcomments',
+    verify: false,
+    notify: false,
+    appId: '',
+    appKey: '',
+    placeholder: 'Just go go',
+    avatar: 'mm',
+    meta: meta,
+    pageSize: '10' || 10,
+    visitor: false
+  });
+  </script>
+
+     
+
+
+
+  <script src="//cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.3.5/dist/jquery.fancybox.min.js"></script>
+  <script>
+  //利用 FancyBox 实现点击图片放大
+  $(document).ready(function() {
+    $('article img').not('[hidden]').not('.panel-body img').each(function() {
+      var $image = $(this);
+      var imageCaption = $image.attr('alt');
+      var $imageWrapLink = $image.parent('a');
+      if ($imageWrapLink.length < 1) {
+        var src = this.getAttribute('src');
+        var idx = src.lastIndexOf('?');
+        if (idx != -1) {
+          src = src.substring(0, idx);
+        }
+        $imageWrapLink = $image.wrap('<a href="' + src + '"></a>').parent('a');
+      }
+      $imageWrapLink.attr('data-fancybox', 'images');
+      if (imageCaption) {
+        $imageWrapLink.attr('data-caption', imageCaption);
+      }
+    });
+    $().fancybox({
+      selector: '[data-fancybox="images"]',
+      hash: false,
+      loop: false,
+    });
+  });
+  </script>
+
+
+
+
+
+</body>
+</html>
