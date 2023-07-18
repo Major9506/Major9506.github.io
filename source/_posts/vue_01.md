@@ -1,7 +1,7 @@
 ---
 title: vue3与vue2对比学习
 categories: 前端
-tags: node
+tags: 前端
 date: 2023-7-13
 ---
 
