@@ -29,7 +29,7 @@ JSR 针对 TypeScript 进行了优化，仅支持 ES 模块。它可与 Deno 和
  - 跨运行时支持：JSR 并非专为 Node 或 Deno 量身定制，而是旨在支持所有 JavaScript 运行时。
  - npm 兼容性：JSR 提供了一个 npm 兼容层，方便在 Node 项目中使用。
 
- ## JSR 快速体验
+## JSR 快速体验
 
 你可以像这样安装软件包：
 
